@@ -1,0 +1,22 @@
+@mixin button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+
+}
+
+.primary-button {
+  @include button;
+  background-color: $primary-color;
+  color: $white;
+  box-shadow: inset 4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  height: 55px;
+  font-size: 28px;
+
+}
