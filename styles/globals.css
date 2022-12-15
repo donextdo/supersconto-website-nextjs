@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap'); */
+
+@layer base {
+    body {
+        @apply bg-[#EBEBEB];
+    }
+
+    header {
+        @apply fixed px-2 py-4 top-0 w-full z-50 bg-white shadow-md;
+    }
+}
