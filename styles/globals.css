@@ -10,6 +10,7 @@
     }
 
     header {
-        @apply fixed px-2 py-4 top-0 w-full z-50 bg-white shadow-md;
+        @apply fixed py-4 h-20 flex items-center top-0 w-full z-50 bg-white shadow-md;
     }
+
 }

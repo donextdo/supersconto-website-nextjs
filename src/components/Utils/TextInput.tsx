@@ -13,7 +13,7 @@ interface Props {
     onChange: React.ChangeEventHandler<HTMLInputElement>
 }
 
-export const TextField: React.FC<Props> = ({
+const TextInput: React.FC<Props> = ({
         label, 
         error, 
         errorMessage, 
@@ -53,26 +53,4 @@ export const TextField: React.FC<Props> = ({
 }
 
 
-export const DropDown: React.FC<Props> = ({label, onChange, error, errorMessage, value}) => {
-    return (
-        <div className='flex flex-col gap-2 items-start'>
-
-            {label && 
-                <label className={`text-sm font-medium ${error ? 'text-red-600' : 'text-gray-900'}`}>
-                    {label}
-                </label>
-            }
-
-            <div className='w-full h-max relative'>
-                <select 
-                name="dropdown" 
-                id="dropdown"
-                value={value}
-                >
-
-                </select>
-            </div>
-
-        </div>
-    )
-}
+export default TextInput
