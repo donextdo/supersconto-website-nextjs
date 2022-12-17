@@ -11,7 +11,7 @@ interface Props {
 
 const FlyerCard: React.FC<Props> = ({flyer}) => {
   return (
-    <div className='w-full h-64 rounded-sm relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer'>
+    <div className='w-full max-w-[12.5rem] min-w-[12.5rem] h-64 rounded-sm relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer'>
         <Image 
             src={flyer.flyer}
             layout='fill'
