@@ -1,6 +1,6 @@
 import React from 'react'
 import Slider from '../Utils/Slider'
-import FlyerCard from '../Flyer/FlyerCard'
+import FlyerCard from '../Cards/FlyerCard'
 import { Flyer } from '../../../typings'
 import flyer1 from '../../../assets/flyers/flyer_1.jpg'
 import flyer2 from '../../../assets/flyers/flyer_2.jpg'
@@ -171,8 +171,8 @@ const LatestFlyers = () => {
 
         <Slider >
 
-            {flyers.map((flyer) => (
-                <FlyerCard flyer={flyer} />
+            {flyers.map((flyer, index) => (
+                <FlyerCard flyer={flyer} key={index} />
             ))}
 
         </Slider>
