@@ -2,7 +2,7 @@ import React from 'react'
 import Card from '../Utils/Card'
 import Button from '../Utils/Button'
 import FlyerCard from '../Cards/FlyerCard'
-import { Flyer } from '../../../typings'
+import { Catelog, Flyer } from '../../../typings'
 import flyer1 from '../../../assets/flyers/flyer_1.jpg'
 import flyer2 from '../../../assets/flyers/flyer_2.jpg'
 import flyer3 from '../../../assets/flyers/flyer_3.jpg'
@@ -11,7 +11,11 @@ import flyer5 from '../../../assets/flyers/flyer_5.jpg'
 import flyer6 from '../../../assets/flyers/flyer_6.jpg'
 import flyer7 from '../../../assets/flyers/flyer_7.jpg'
 
-const NearestFlyers = () => {
+interface Props {
+    catelogs: Catelog[]
+}
+
+const NearestFlyers: React.FC<Props> = ({ catelogs }) => {
 
     const flyers: Flyer[] = [
         {
@@ -74,8 +78,8 @@ const NearestFlyers = () => {
         !scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-gray-400
         xxl:grid-cols-5'>
 
-            {flyers.map((flyer, index) => (
-                <FlyerCard flyer={flyer} key={index} />
+            {catelogs.map((catelog, index) => (
+                <FlyerCard flyer={catelog} key={index} />
             ))}
 
         </div>

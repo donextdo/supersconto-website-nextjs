@@ -8,17 +8,24 @@ import Shops from '../src/components/Shops/Shops';
 import LatestItems from '../src/components/LatestItems/LatestItems';
 import Cities from '../src/components/Cities/Cities';
 import Footer from '../src/components/Footer/Footer';
+import requests from '../utils/request';
+import { Catelog } from '../typings';
+import React from 'react';
 
-export default function Home() {
+interface Props {
+    catelogs: Catelog[]
+}
+
+const Home: React.FC<Props> = ({ catelogs }) => {
     return (
 
         <div>
             <Header/>
-            <Main />
+            <Main catelogs={catelogs}/>
 
             <section className='container mx-auto px-8 flex flex-col gap-10 my-10'>
                 <Category />
-                <LatestFlyers />
+                <LatestFlyers catelogs={catelogs}/>
                 <Shops />
                 <LatestItems />
                 <News />
@@ -31,3 +38,20 @@ export default function Home() {
     )
 }
 
+export default Home
+
+export const getServerSideProps = async () => {
+
+    const [catelogs] = await Promise.all([
+        fetch(requests.fetchCatelogs).then((res) => res.json())
+    ])
+
+    console.log(catelogs)
+
+    return {
+        props: {
+            catelogs: catelogs
+        }
+    }
+
+}

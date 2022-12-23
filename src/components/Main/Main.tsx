@@ -2,9 +2,13 @@ import React, { useState } from 'react'
 import Card from '../Utils/Card'
 import Button from '../Utils/Button'
 import NearestFlyers from '../NearestFylers/NearestFlyers'
+import { Catelog } from '../../../typings'
 
+interface Props {
+  catelogs: Catelog[]
+}
 
-const Main = () => {
+const Main: React.FC<Props> = ({catelogs}) => {
 
   return (
     <main className="pt-24 container px-2 mx-auto">
@@ -13,7 +17,7 @@ const Main = () => {
 
             <section className='w-full h-max col-span-5'>
                 {/* Nearest Fylers Area  */}
-                <NearestFlyers />
+                <NearestFlyers catelogs={catelogs}/>
             </section>
 
             <aside className='w-full h-full col-span-2'>
