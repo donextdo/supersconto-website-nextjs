@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Card from '../Utils/Card'
 import Button from '../Utils/Button'
 import FlyerCard from '../Cards/FlyerCard'
@@ -10,12 +10,14 @@ import flyer4 from '../../../assets/flyers/flyer_4.jpg'
 import flyer5 from '../../../assets/flyers/flyer_5.jpg'
 import flyer6 from '../../../assets/flyers/flyer_6.jpg'
 import flyer7 from '../../../assets/flyers/flyer_7.jpg'
+import Link from "next/link";
 
 interface Props {
     catelogs: Catelog[]
 }
 
 const NearestFlyers: React.FC<Props> = ({ catelogs }) => {
+    const [selectedCatalog, setSelectedCatalog] = useState<Catelog>()
 
     const flyers: Flyer[] = [
         {
@@ -79,7 +81,9 @@ const NearestFlyers: React.FC<Props> = ({ catelogs }) => {
         xxl:grid-cols-5'>
 
             {catelogs.map((catelog, index) => (
-                <FlyerCard flyer={catelog} key={index} />
+                <Link href={`/catalog-preview/${catelog._id}`} key={index}>
+                    <FlyerCard flyer={catelog} />
+                </Link>
             ))}
 
         </div>

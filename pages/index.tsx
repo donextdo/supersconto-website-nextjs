@@ -11,6 +11,7 @@ import Footer from '../src/components/Footer/Footer';
 import requests from '../utils/request';
 import { Catelog } from '../typings';
 import React from 'react';
+import Cart from "../src/components/Cart/cart";
 
 interface Props {
     catelogs: Catelog[]
@@ -30,6 +31,7 @@ const Home: React.FC<Props> = ({ catelogs }) => {
                 <LatestItems />
                 <News />
                 <Cities />
+
             </section>
 
             <Footer />

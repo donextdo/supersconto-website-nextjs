@@ -47,4 +47,14 @@
   padding: 1rem;
 }
 
+.selection-div {
+  position: absolute;
+  background: rgba(0, 0, 255, 0.24);
+  top: 0rem;
+}
+
+.selection-div:hover {
+  background: rgba(0, 0, 255, 0.79);
+}
+
 /*# sourceMappingURL=app.css.map */

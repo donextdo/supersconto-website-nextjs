@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React from 'react'
+import React, {MouseEventHandler} from 'react'
 import { FaCalendar } from 'react-icons/fa'
 import { RiPinDistanceFill } from 'react-icons/ri'
 import { Catelog, Flyer } from '../../../typings'
@@ -7,12 +7,14 @@ import { dateParser } from '../../../utils/dateParser'
 
 
 interface Props {
-    flyer: Catelog
+    flyer: Catelog,
+    onClick?: MouseEventHandler<HTMLDivElement>
+
 }
 
-const FlyerCard: React.FC<Props> = ({flyer}) => {
+const FlyerCard: React.FC<Props> = ({flyer,onClick}) => {
   return (
-    <div className='w-full max-w-[12.5rem] min-w-[12.5rem] h-64 rounded-md relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer'>
+    <div className='w-full max-w-[12.5rem] min-w-[12.5rem] h-64 rounded-md relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer' onClick={onClick}>
         <Image 
             src={flyer.pages ? flyer.pages[0].page_image : ''}
             fill

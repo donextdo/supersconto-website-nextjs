@@ -3,6 +3,7 @@ import Card from '../Utils/Card'
 import Button from '../Utils/Button'
 import NearestFlyers from '../NearestFylers/NearestFlyers'
 import { Catelog } from '../../../typings'
+import Cart from "../Cart/cart";
 
 interface Props {
   catelogs: Catelog[]
@@ -22,7 +23,9 @@ const Main: React.FC<Props> = ({catelogs}) => {
 
             <aside className='w-full h-full col-span-2'>
                 {/* Login Area  */}
-                <Card styleClass='rounded-md h-full' bgColor='bg-black'/>
+                <Card styleClass='rounded-md h-full'>
+                    <Cart/>
+                </Card>
             </aside>
 
         </div>
