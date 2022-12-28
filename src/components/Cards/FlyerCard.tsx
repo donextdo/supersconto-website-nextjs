@@ -16,7 +16,7 @@ const FlyerCard: React.FC<Props> = ({flyer,onClick}) => {
   return (
     <div className='w-full max-w-[12.5rem] min-w-[12.5rem] h-64 rounded-md relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer' onClick={onClick}>
         <Image 
-            src={flyer.pages ? flyer.pages[0].page_image : ''}
+            src={flyer.pages?.length && flyer.pages?.length > 0 ? flyer.pages[0]?.page_image : ''}
             fill
             alt='flyer'
             sizes='width: 100%'

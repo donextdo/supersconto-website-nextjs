@@ -31,8 +31,12 @@ const CatalogCarousel: React.FC<Props> = ({catalog}) => {
                 {
                     pages.length > 0 && pages.map((item: any, index) => (
                         <div key={`page-slider-${index}`}>
-                            <SingleItemPreview
-                                coordinates={item.items.map((it: any) => ({...it.coordinates, id: it._id, name: it.product_name})).flatMap((a: any) => a)}
+                            {item.items && item.items.length > 0 && <SingleItemPreview
+                                coordinates={item.items.map((it: any) => ({
+                                    ...it.coordinates,
+                                    id: it._id,
+                                    name: it.product_name
+                                })).flatMap((a: any) => a)}
                                 strokeImageUrl={item.page_image}
                                 height={600} width={400}
                                 handleSelection={({itemId, itemName}) => {
@@ -42,7 +46,7 @@ const CatalogCarousel: React.FC<Props> = ({catalog}) => {
                                     localStorage.setItem('cartItems', JSON.stringify(cartItems))
                                 }}
                                 imageHeight={item?.items[0]?.coordinates?.imageHeight}
-                                imageWidth={item?.items[0]?.coordinates?.imageWidth}/>
+                                imageWidth={item?.items[0]?.coordinates?.imageWidth}/>}
                         </div>
                     ))
                 }
