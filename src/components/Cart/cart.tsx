@@ -80,7 +80,7 @@ const Cart = () => {
         <>
             <div className="text-2xl border-b-2 pb-2">Your Cart</div>
             <div className="flex justify-between items-end pb-3 pt-3 border-b-2">
-                <div className="text-1xl">Grand Total</div>
+                <div className="text-1xl">Grand Total $</div>
                 <div>{getTotalAmount()}</div>
             </div>
             {Object.keys(cartObj).map((shop) => (
@@ -91,7 +91,7 @@ const Cart = () => {
                             <Image src={cartObj[shop][0]?.shop_id?.logo_img} alt="cart" fill/>
                         </div>
                         <h6>{shop}</h6>
-                        <div>Amount: {getShopAmount(cartObj[shop])}</div>
+                        <div>Amount $: {getShopAmount(cartObj[shop])}</div>
                     </div>
 
 
