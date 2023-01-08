@@ -13,7 +13,7 @@ const CategoryCard: React.FC<Props> = ({ category }) => {
     <div className="h-24 w-40 flex items-center justify-left gap-3 select-none">
    
         <Image src={category.image} alt={category.name} className='w-5 h-5 object-contain' />
-        <Link href={"/"} className='text-base font-medium'>{category.name} </Link>
+        <Link href={"/category"} className='text-base font-medium'>{category.name} </Link>
 
     </div>
       

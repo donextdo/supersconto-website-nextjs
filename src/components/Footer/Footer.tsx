@@ -3,7 +3,7 @@ import { FaFacebookSquare, FaInstagram, FaLinkedin, FaTwitter } from "react-icon
 const Footer = () => {
   return (
     <footer className="bg-gray-200 py-4">
-      <div className="container mx-auto px-2">
+      <div className="container mx-auto px-16">
         {/* create four column  */}
         <div className="grid grid-cols-4 gap-4">
           {/* 1st column  */}
