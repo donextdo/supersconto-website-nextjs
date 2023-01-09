@@ -18,6 +18,7 @@ interface Props {
 }
 
 const Home: React.FC<Props> = ({ catelogs }) => {
+    console.log({catelogs})
     return (
 
         <div>

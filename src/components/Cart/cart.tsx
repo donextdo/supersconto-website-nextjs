@@ -99,9 +99,9 @@ const Cart = () => {
                         <div key={`item${shop + index}`}
                              className="flex flex-raw gap-4 my-4 mx-4 py-2 item-center w-full">
 
-                            {/* <div className="relative w-6 h-6">
+                             <div className="relative w-6 h-6">
                                 <Image src={item.product_image} alt="fly" fill />
-                            </div>*/}
+                            </div>
 
 
                             <div>
