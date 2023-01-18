@@ -2,12 +2,17 @@ import React, {useEffect, useState} from 'react';
 import requests from "../../utils/request";
 import SingleItemPreview from "../../src/components/Catalog/SingleItemPreview";
 import Slider from "react-slick";
+import nextArrow from "../../public/arrow-next.svg";
+import prevArrow from "../../public/arrow-prev.svg";
+import Image from "next/image";
+import AddToCartModal from "../../src/components/Cart/AddCartModal";
 interface Props {
     catalog?: any
 }
 
 const CatalogCarousel: React.FC<Props> = ({catalog}) => {
     const [pages, setPages] = useState([])
+    const [showModal, setShowModal] = useState({show: false, item: null})
 
     useEffect(() => {
         console.log(catalog);
@@ -21,11 +26,13 @@ const CatalogCarousel: React.FC<Props> = ({catalog}) => {
         infinite: true,
         speed: 500,
         slidesToShow: 2,
-        slidesToScroll: 2
+        slidesToScroll: 2,
+        nextArrow: <CheplanNextArrowCircle/>,
+        prevArrow: <CheplanPrevArrowCircle/>,
     };
 
     return (
-        <div>
+        <div style={{margin: "0 auto", maxWidth: "1440px"}}>
             <Slider {...settings}>
                 {
                     pages.length > 0 && pages.map((item: any, index) => (
@@ -40,10 +47,12 @@ const CatalogCarousel: React.FC<Props> = ({catalog}) => {
                                     strokeImageUrl={item.page_image}
                                     height={item?.items[0]?.coordinates?.imageHeight * 1.2} width={item?.items[0]?.coordinates?.imageWidth * 1.2}
                                     handleSelection={({itemId, itemName}) => {
-                                        const cartItems: [any] = JSON.parse(localStorage.getItem("cartItems")!) ?? []
-                                        cartItems.push(itemId)
-                                        window.alert(`${itemName} added to your cart!`)
-                                        localStorage.setItem('cartItems', JSON.stringify(cartItems))
+                                        // const cartItems: [any] = JSON.parse(localStorage.getItem("cartItems")!) ?? []
+                                        // cartItems.push(itemId)
+                                        // window.alert(`${itemName} added to your cart!`)
+                                        // localStorage.setItem('cartItems', JSON.stringify(cartItems))
+                                        const selectedProduct = item.items.find((it: { _id: string; }) => it._id === itemId)
+                                        setShowModal({show: true, item: selectedProduct})
                                     }}
                                     imageHeight={item?.items[0]?.coordinates?.imageHeight}
                                     imageWidth={item?.items[0]?.coordinates?.imageWidth}
@@ -52,32 +61,9 @@ const CatalogCarousel: React.FC<Props> = ({catalog}) => {
                     ))
                 }
             </Slider>
-       {/*     <div>
-                <h2> Single Item</h2>
-                <div>
-                    <h3>1</h3>
-                </div>
-                <Slider {...settings}>
-                    <div>
-                        <h3>1</h3>
-                    </div>
-                    <div>
-                        <h3>2</h3>
-                    </div>
-                    <div>
-                        <h3>3</h3>
-                    </div>
-                    <div>
-                        <h3>4</h3>
-                    </div>
-                    <div>
-                        <h3>5</h3>
-                    </div>
-                    <div>
-                        <h3>6</h3>
-                    </div>
-                </Slider>
-            </div>*/}
+
+            {showModal.show && showModal.item && <AddToCartModal item={showModal.item} handler={() => setShowModal(prevState => ({...prevState, show: false})) }/>}
+
         </div>
     );
 }
@@ -98,4 +84,30 @@ export const getServerSideProps = async (context: any) => {
         }
     }
 
+}
+
+export function CheplanNextArrowCircle(props: any) {
+    const {className, style, onClick} = props;
+    return (
+        <div
+            className={`${className}`}
+            style={style}
+            onClick={onClick}
+        >
+            <Image src={nextArrow} alt={""}/>
+        </div>
+    );
+}
+
+export function CheplanPrevArrowCircle(props: any) {
+    const {className, style, onClick} = props;
+    return (
+        <div
+            className={`${className}`}
+            style={style}
+            onClick={onClick}
+        >
+            <Image src={prevArrow} alt={""}/>
+        </div>
+    );
 }

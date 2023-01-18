@@ -13,18 +13,20 @@ const Cart = () => {
 
     useEffect(() => {
         const items: [string] = JSON.parse(localStorage.getItem("cartItems")!) ?? []
+        console.log(items)
         if (items.length > 0) {
             fetch(requests.getCatalogBookPageItemByIds, {
                 method: 'post',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    items
+                    items: items.map((i:any) => i._id)
                 }),
             }).then((response) => response.json())
                 .then((responseJson) => {
                     const cloneResponse = [...responseJson]
                     cloneResponse.map(item => {
-                        item.cartQuantity = 0
+                        const product: any = items.find((i:any) => i._id === item._id)
+                        item.cartQuantity = product?.quantity ? product?.quantity : 0
                     })
                     setCartObj(groupBy([...cloneResponse], (v => v.shop_id.shop_name)))
                 })
@@ -139,6 +141,12 @@ const Cart = () => {
                 </div>
 
             ))}
+            <div>
+                {Object.keys(cartObj).length > 0 && <button onClick={() => {
+                    localStorage.removeItem("cartItems")
+                    setCartObj({})
+                }}>Clear cart</button>}
+            </div>
             {/* </div> */}
 
         </>

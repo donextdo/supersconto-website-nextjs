@@ -57,4 +57,24 @@
   background: rgba(0, 0, 255, 0.79);
 }
 
+.slick-arrow {
+  width: 30px !important;
+  height: 30px !important;
+}
+.slick-arrow:before {
+  display: none;
+}
+.slick-arrow.slick-prev {
+  left: -40px;
+}
+.slick-arrow.slick-next {
+  right: -40px;
+}
+.slick-arrow img {
+  background-color: #8DC14F;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+
 /*# sourceMappingURL=app.css.map */

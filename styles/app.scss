@@ -13,3 +13,23 @@
 .selection-div:hover {
   background: rgba(0, 0, 255, 0.79);
 }
+
+.slick-arrow {
+  width: 30px !important;
+  height: 30px !important;
+  &:before {
+    display: none;
+  }
+
+  &.slick-prev {
+    left: -40px;
+  }&.slick-next {
+    right: -40px;
+  }
+  img {
+    background-color: #8DC14F;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+  }
+}
