@@ -25,6 +25,7 @@ const Main: React.FC<Props> = ({catelogs}) => {
                 {/* Login Area  */}
                 <Card styleClass='rounded-md h-full'>
                     <Cart/>
+                    
                 </Card>
             </aside>
 

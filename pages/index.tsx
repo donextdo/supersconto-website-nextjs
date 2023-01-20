@@ -12,6 +12,7 @@ import requests from '../utils/request';
 import { Catelog } from '../typings';
 import React from 'react';
 import Cart from "../src/components/Cart/cart";
+import Ad from '../src/components/Ad/Ad';
 
 interface Props {
     catelogs: Catelog[]
@@ -24,6 +25,7 @@ const Home: React.FC<Props> = ({ catelogs }) => {
         <div>
             <Header/>
             <Main catelogs={catelogs}/>
+            <Ad />
 
             <section className='container mx-auto px-8 flex flex-col gap-10 my-10'>
                 <Category />

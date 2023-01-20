@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { FaBars } from 'react-icons/fa'
 import Link from 'next/link'
 import TextInput from '../Utils/TextInput'
+import logo from '../../../assets/logo/logo.png'
+import Image from 'next/image'
 
 const Header = () => {
 
@@ -22,7 +24,7 @@ const Header = () => {
                 <Link href={'/'}
                     className='text-3xl text-[#008C45] font-semibold'
                 >
-                    LOGO
+                    <Image src={logo} alt="LOGO" className='h-16 w-32'></Image>
                 </Link>
 
                 {query}

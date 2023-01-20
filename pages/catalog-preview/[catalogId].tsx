@@ -6,6 +6,8 @@ import nextArrow from "../../public/arrow-next.svg";
 import prevArrow from "../../public/arrow-prev.svg";
 import Image from "next/image";
 import AddToCartModal from "../../src/components/Cart/AddCartModal";
+import Link from 'next/link';
+import { FaAngleLeft } from "react-icons/fa";
 interface Props {
     catalog?: any
 }
@@ -33,6 +35,9 @@ const CatalogCarousel: React.FC<Props> = ({catalog}) => {
 
     return (
         <div style={{margin: "0 auto", maxWidth: "1440px"}}>
+            <Link href="/">
+                    <button className="text-4xl pl-20 fixed z-50 left-80 top-4"><FaAngleLeft /></button>
+            </Link>
             <Slider {...settings}>
                 {
                     pages.length > 0 && pages.map((item: any, index) => (
