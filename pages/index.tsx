@@ -9,16 +9,18 @@ import LatestItems from '../src/components/LatestItems/LatestItems';
 import Cities from '../src/components/Cities/Cities';
 import Footer from '../src/components/Footer/Footer';
 import requests from '../utils/request';
-import { Catelog } from '../typings';
+import { Catelog, Itm } from '../typings';
 import React from 'react';
 import Cart from "../src/components/Cart/cart";
 import Ad from '../src/components/Ad/Ad';
 
 interface Props {
     catelogs: Catelog[]
+    itms : Itm[]
+
 }
 
-const Home: React.FC<Props> = ({ catelogs }) => {
+const Home: React.FC<Props> = ({ catelogs , itms }) => {
     console.log({catelogs})
     return (
 
@@ -31,7 +33,7 @@ const Home: React.FC<Props> = ({ catelogs }) => {
                 <Category />
                 <LatestFlyers catelogs={catelogs}/>
                 <Shops />
-                <LatestItems />
+                <LatestItems itms={itms}/>
                 <News />
                 <Cities />
 
@@ -47,16 +49,19 @@ export default Home
 
 export const getServerSideProps = async () => {
 
-    const [catelogs] = await Promise.all([
-        fetch(requests.fetchCatelogs).then((res) => res.json())
+    const [catelogs,itms] = await Promise.all([
+        fetch(requests.fetchCatelogs).then((res) => res.json()),
+        fetch(requests.getlatestitemid).then((res) => res.json())
     ])
 
     console.log(catelogs)
 
     return {
         props: {
-            catelogs: catelogs
+            catelogs: catelogs,
+            itms : itms
         }
     }
 
 }
+

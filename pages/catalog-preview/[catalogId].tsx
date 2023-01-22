@@ -35,8 +35,8 @@ const CatalogCarousel: React.FC<Props> = ({catalog}) => {
 
     return (
         <div style={{margin: "0 auto", maxWidth: "1440px"}}>
-            <Link href="/">
-                    <button className="text-4xl pl-20 fixed z-50 left-80 top-4"><FaAngleLeft /></button>
+            <Link href="/" className='fixed left-16 top-4'>
+                    <button className="text-4xl  z-50 bg-[#8DC14F] rounded-full "><FaAngleLeft className='text-white'/></button>
             </Link>
             <Slider {...settings}>
                 {

@@ -87,7 +87,7 @@ const AddToCartModal: React.FC<Props> = ({item, handler}) => {
                         </div>
                         <div className="mt-6 text-lg">${item.unit_price * count}</div>
                         <div className="mt-10 flex">
-                            <button disabled={count === 0} className="disabled:opacity-50 bg-green-500 mr-4 px-4 py-4 rounded w-48" onClick={(e) => {
+                            <button disabled={count === 0} className="disabled:opacity-50 bg-[#8DC14F] mr-4 px-4 py-4 rounded w-48" onClick={(e) => {
                                 const cartItems: [any] = JSON.parse(localStorage.getItem("cartItems")!) ?? []
                                 const product = cartItems.find(it => it._id === item._id)
                                 if (product) {
@@ -100,7 +100,7 @@ const AddToCartModal: React.FC<Props> = ({item, handler}) => {
                             }}>
                                 Add to cart
                             </button>
-                            <div className="bg-white shadow-md">
+                            <div className="bg-white shadow-md rounded-full">
                             <button className="bg-red-700 px-6 py-4 rounded-full text-white" onClick={handler}>X</button>
                             </div>
                         </div>

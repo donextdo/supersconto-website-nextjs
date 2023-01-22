@@ -7,7 +7,7 @@ import flyer2 from '../../../assets/flyers/flyer_2.jpg'
 
 const AdCard = () => {
     return (
-        <div className="flex justify-between bg-white px-8 py-4 rounded">
+        <div className="flex justify-between bg-white px-20 py-16 rounded-md ">
             <div className='w-full max-w-[12.5rem] min-w-[12.5rem] h-64 rounded-sm relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer'>
                 <Image
                     src={flyer1}

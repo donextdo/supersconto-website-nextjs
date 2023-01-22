@@ -1,6 +1,6 @@
 import React from 'react'
 import Slider from '../Utils/Slider'
-import { Item } from '../../../typings'
+import { Item ,Itm} from '../../../typings'
 import flyer1 from '../../../assets/flyers/flyer_1.jpg'
 import flyer2 from '../../../assets/flyers/flyer_2.jpg'
 import flyer3 from '../../../assets/flyers/flyer_3.jpg'
@@ -10,7 +10,11 @@ import flyer6 from '../../../assets/flyers/flyer_6.jpg'
 import flyer7 from '../../../assets/flyers/flyer_7.jpg'
 import LatestItemCard from '../Cards/LatestItemCard'
 
-const LatestItems = () => {
+interface Props {
+    itms : Itm []
+}
+
+const LatestItems : React.FC<Props> = ({itms}) => {
 
     const items: Item[] = [
         {
@@ -94,7 +98,7 @@ const LatestItems = () => {
 
         <Slider >
 
-            {items.map((item, index) => (
+            {itms.map((item, index) => (
                 <LatestItemCard item={item} key={index} />
             ))}
 
