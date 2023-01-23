@@ -5,11 +5,13 @@ import flyer1 from "../../../assets/flyers/flyer_1.jpg";
 import React, {useEffect, useState} from "react";
 import requests from "../../../utils/request";
 import {object} from "prop-types";
+import CheckoutPop from "../CheckoutPop/CheckoutPop";
 
 const Cart = () => {
     const [count, setCount] = useState(0);
     const [cartObj, setCartObj] = useState<any>([]);
     const [order, setOrder] = useState<any>([])
+    const [checkout, setCheckout] =useState(false);
 
     useEffect(() => {
         const items: [string] = JSON.parse(localStorage.getItem("cartItems")!) ?? []
@@ -77,6 +79,10 @@ const Cart = () => {
         }, 0)
     }
 
+    const togglepopup = () => {
+        setCheckout(true)
+    }
+
     return (
         // <div mt-2>
         <>
@@ -141,11 +147,20 @@ const Cart = () => {
                 </div>
 
             ))}
-            <div className="mb-4">
+            <div className="mb-4 flex justify-between">
                 {Object.keys(cartObj).length > 0 && <button onClick={() => {
                     localStorage.removeItem("cartItems")
                     setCartObj({})
                 }}>Clear cart</button>}
+                <button onClick={togglepopup}>Checkout</button>
+                {
+                    checkout && (
+                        <div>
+                            <CheckoutPop setCheckout={setCheckout}/>
+                        </div>
+                    )
+                }
+                <button>Print</button>
             </div>
             {/* </div> */}
 

@@ -16,6 +16,7 @@ interface Props {
 const Main: React.FC<Props> = ({ catelogs }) => {
   const [login, setlogin] = useState(true);
   const [showCart, setShowCart] = useState(true);
+  
 
   return (
     <main className="pt-24 container px-2 mx-auto">
