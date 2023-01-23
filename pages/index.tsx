@@ -10,9 +10,9 @@ import Cities from '../src/components/Cities/Cities';
 import Footer from '../src/components/Footer/Footer';
 import requests from '../utils/request';
 import { Catelog, Itm } from '../typings';
-import React from 'react';
-import Cart from "../src/components/Cart/cart";
+import React, {useEffect, useState} from 'react';
 import Ad from '../src/components/Ad/Ad';
+import {useRouter} from "next/router";
 
 interface Props {
     catelogs: Catelog[]
@@ -79,7 +79,7 @@ export const getServerSideProps = async (context: { query: { long: any; lat: any
 
     const [catelogs,itms] = await Promise.all([
         fetch(url).then((res) => res.json()),
-        fetch(requests.getlatestitemid).then((res) => res.json())
+        fetch(requests.getLatestItemId).then((res) => res.json())
     ])
 
     console.log(catelogs)
