@@ -4,6 +4,7 @@ interface SinglePage {
 }
 
 interface SingleShop {
+    distance: number;
     _id: string,
     shop_name: string
 }

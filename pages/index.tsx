@@ -10,15 +10,43 @@ import Cities from '../src/components/Cities/Cities';
 import Footer from '../src/components/Footer/Footer';
 import requests from '../utils/request';
 import { Catelog } from '../typings';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Cart from "../src/components/Cart/cart";
+import {useRouter} from "next/router";
 
 interface Props {
     catelogs: Catelog[]
 }
 
 const Home: React.FC<Props> = ({ catelogs }) => {
-    console.log({catelogs})
+    const [userCoordinates, setUserCoordinates] = useState<any>()
+    const router = useRouter()
+
+    useEffect(() => {
+        getLocation()
+    }, [])
+
+    useEffect(() => {
+        console.log(userCoordinates?.coords)
+        if (userCoordinates?.coords){
+            const query = {
+                lat: userCoordinates.coords.latitude,
+                long: userCoordinates.coords.longitude
+            }
+            router.replace({
+                pathname: `/`, query
+            }, undefined, {shallow: false})
+        }
+
+    }, [userCoordinates])
+
+
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(setUserCoordinates);
+        }
+    }
     return (
 
         <div>
@@ -43,10 +71,11 @@ const Home: React.FC<Props> = ({ catelogs }) => {
 
 export default Home
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context: { query: { long: any; lat: any; }; }) => {
+    const url = context.query.long && context.query.lat ? `${requests.fetchCatelogs}?long=${context.query.long}&lat=${context.query.lat}` : requests.fetchCatelogs
 
     const [catelogs] = await Promise.all([
-        fetch(requests.fetchCatelogs).then((res) => res.json())
+        fetch(url).then((res) => res.json())
     ])
 
     console.log(catelogs)

@@ -32,10 +32,10 @@ const FlyerCard: React.FC<Props> = ({flyer,onClick}) => {
                     { flyer.shop_id?.shop_name }
                 </p>
 
-                <div className='flex items-center gap-1'>
+                {flyer.shop_id?.distance && <div className='flex items-center gap-1'>
                     <RiPinDistanceFill className='w-3 h-3'/>
-                    <span className='text-sm font-medium'> 10KM </span>
-                </div>
+                    <span className='text-sm font-medium'> {(flyer.shop_id?.distance / 1000).toFixed(2)} KM</span>
+                </div>}
             </div>
 
             <div className='flex items-center gap-2 mt-2'>
