@@ -141,7 +141,7 @@ const Cart = () => {
                 </div>
 
             ))}
-            <div>
+            <div className="mb-4">
                 {Object.keys(cartObj).length > 0 && <button onClick={() => {
                     localStorage.removeItem("cartItems")
                     setCartObj({})

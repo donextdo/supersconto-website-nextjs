@@ -20,6 +20,12 @@ export interface Catelog {
     pages?: SinglePage[]
 }
 
+export interface Itm{
+    name:string,
+    price:string
+    pages?: SinglePage[]
+}
+
 // {
 //     "_id": "63a4980419ff4fc78b5f6875",
 //     "shop_id": "63a2c4b83e6401f7ab03c8b8",

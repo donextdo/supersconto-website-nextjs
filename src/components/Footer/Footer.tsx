@@ -73,7 +73,7 @@ const Footer = () => {
                 <a href="#">Marche</a>
               </li>
               <li className="my-2">
-                <a href="">Shpos</a>
+                <a href="">Shops</a>
               </li>
               <li className="my-2">
                 <a href="">Categories</a>
