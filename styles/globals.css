@@ -1,0 +1,133 @@
+@import "app.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap'); */
+
+@layer base {
+    body {
+        @apply bg-[#EBEBEB];
+    }
+
+    header {
+        @apply fixed py-4 h-20 flex items-center top-0 w-full z-50 bg-white shadow-md;
+    }
+
+}
+
+@layer components{
+    .row {
+        display: -ms-flexbox; /* IE10 */
+        display: flex;
+        -ms-flex-wrap: wrap; /* IE10 */
+        flex-wrap: wrap;
+        margin: 0 -16px;
+      }
+      
+      .col-25 {
+        -ms-flex: 25%; /* IE10 */
+        flex: 25%;
+      }
+      
+      .col-50 {
+        -ms-flex: 50%; /* IE10 */
+        flex: 50%;
+      }
+      
+      .col-75 {
+        -ms-flex: 75%; /* IE10 */
+        flex: 75%;
+      }
+      
+      .col-25,
+      .col-50,
+      .col-75 {
+        padding: 0 16px;
+      }
+      
+      .ccontainer {
+        background-color: #f2f2f2;
+        padding: 5px 20px 15px 20px;
+        border: 1px solid lightgrey;
+        border-radius: 3px;
+      }
+      
+      .iinput[type=text] {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+      
+      .llabel {
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      .lbl {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      
+      .icon-container {
+        display: flex;
+        margin-bottom: 20px;
+        padding: 7px 0;
+        font-size: 24px;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .mgn{
+        margin-right: 10px;
+      }
+      
+     .hh{
+      margin-bottom: 10px;
+     }
+      .btn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 12px;
+        margin: 10px 0;
+        border: none;
+        width: 100%;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 17px;
+      }
+      
+      .btn:hover {
+        background-color: #45a049;
+      }
+      
+      .atag {
+        color: #2196F3;
+        
+      }
+      
+      .hhr {
+        border: 1px solid lightgrey;
+      }
+      
+      span.price {
+        float: right;
+        color: grey;
+      }
+
+      .test{
+        display : flex;
+      }
+
+      /* @media (max-width: 800px) {
+        .row {
+          flex-direction: column-reverse;
+        }
+        .col-25 {
+          margin-bottom: 20px;
+        }
+      } */
+}
