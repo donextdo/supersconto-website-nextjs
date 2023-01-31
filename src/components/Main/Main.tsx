@@ -46,15 +46,18 @@ const Main: React.FC<Props> = ({ catelogs }) => {
                     </div>
                   </div>
                   {login ? <Signup /> : <Signin />}
-                  <p className="mx-2 text-[#CD212A] text-sm text-center items-end" onClick={() => setShowCart(true)}><Link href="#">Show Cart</Link></p>
+                  <div className="text-center">
+                      
+                      <button className="bg-[#8DC14F] text-white rounded-lg px-2 " onClick={() => setShowCart(true)} >Show Cart</button>
+                      
+                    </div>
                 </>
                 : <>
                   <Cart />
                   <Link href="#">
-                    <div >
+                    <div className="text-center">
                       
-                      <p className="mx-2 text-[#CD212A] text-sm text-center" onClick={() => setShowCart(false)}>Login/Signup</p>
-                     
+                      <button className="bg-[#8DC14F] text-white rounded-lg px-2 " onClick={() => setShowCart(false)} >Login/Signup</button>
                       
                     </div>
                   </Link>

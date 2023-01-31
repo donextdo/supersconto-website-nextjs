@@ -54,7 +54,7 @@ const Signup = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
 
         <section className="space-y-5 mt-10">
           <div className="flex flex-raw relative items-center mx-2">

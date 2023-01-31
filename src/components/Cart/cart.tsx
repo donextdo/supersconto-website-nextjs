@@ -91,15 +91,17 @@ const Cart = () => {
 
     return (
         // <div mt-2>
-        <div className="overflow-y-auto overflow-x-hidden h-[60vh]">
+        <div>
             <div className="text-2xl border-b-2 pb-2">Your Cart</div>
             <div className="flex justify-between items-end pb-3 pt-3 border-b-2">
                 <div className="text-1xl">Grand Total $</div>
                 <div>{getTotalAmount()}</div>
             </div>
+
+            <div className="overflow-y-auto overflow-x-hidden h-[48vh]">
             {Object.keys(cartObj).map((shop) => (
-                
-                <div key={`shop${shop}`}>
+               
+                <div key={`shop${shop}`} >
                     <div className="flex justify-between px-2 border border-gray-200 bg-gray-200 py-2 items-center ">
                         <div className="flex flex-raw gap-8 items-center relative w-16 h-8">
                             <Image src={cartObj[shop][0]?.shop_id?.logo_img} alt="cart" fill/>
@@ -153,12 +155,13 @@ const Cart = () => {
                 </div>
 
             ))}
-            <div className="mb-4 flex justify-between">
-                {Object.keys(cartObj).length > 0 && <button onClick={() => {
+            </div>
+            <div className="mb-4 flex justify-between mt-2">
+                {Object.keys(cartObj).length > 0 && <button className="bg-[#8DC14F] text-white rounded-lg px-2" onClick={() => {
                     localStorage.removeItem("cartItems")
                     setCartObj({})
                 }}>Clear cart</button>}
-                <button onClick={togglepopup}>Checkout</button>
+                <button onClick={togglepopup} className="bg-[#8DC14F] text-white rounded-lg px-2">Checkout</button>
                 {
                     checkout && (
                         <div>
@@ -166,7 +169,7 @@ const Cart = () => {
                         </div>
                     )
                 }
-                <button onClick={toggleprint}>Print</button>
+                <button onClick={toggleprint} className="bg-[#8DC14F] text-white rounded-lg px-2">Print</button>
                 {
                     print && (
                         <div>
