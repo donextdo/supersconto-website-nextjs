@@ -162,7 +162,7 @@ const Cart = () => {
                 {
                     checkout && (
                         <div>
-                            <CheckoutPop setCheckout={setCheckout}/>
+                            <CheckoutPop setCheckout={setCheckout} cartObj={cartObj} getShopAmount={getShopAmount} getTotalAmount={getTotalAmount} handleCart={handleCart}/>
                         </div>
                     )
                 }
