@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from "next/image";
 
 interface Props {
     strokeImageUrl: string,
@@ -25,7 +26,7 @@ const SingleItemPreview: React.FC<Props> = ({
     return (
         <div style={{position: "relative", maxWidth: width, height}}>
             {strokeImageUrl && <>
-                <img alt="Crop" src={strokeImageUrl} style={{maxWidth: width, height}}/>
+                <Image alt="Crop"  src={strokeImageUrl} width={width} height={height} style={{maxWidth: width, height, width}}/>
                 {coordinates.map((crop: any, index: number) => {
                     const scaleX = width / imageWidth;
                     const scaleY = height / imageHeight;

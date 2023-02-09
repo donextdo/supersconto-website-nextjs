@@ -43,10 +43,10 @@ const Modal: React.FC<Props> = ({modal,setShow}) => {
     return (
         <div className="fixed inset-0 z-50 grid place-items-center bg-slate-900 bg-opacity-10">
             <div className="py-6 px-4 flex gap-6 flex-col relative bg-white shadow-md rounded-md w-2/6">
-                {items.map((item)=> (
+                {items.map((item, index)=> (
 
                 
-                <section className="grid grid-cols-3 gap-4">
+                <section key={`section-${index}`} className="grid grid-cols-3 gap-4">
                     {/* 1st */}
                     <div className="mt-2">
                         <Image src={item.image} alt="banana" className="w-36 h-40 ml-4" />

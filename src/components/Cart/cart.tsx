@@ -157,11 +157,12 @@ const Cart = () => {
             ))}
             </div>
             <div className="mb-4 flex justify-between mt-2">
-                {Object.keys(cartObj).length > 0 && <button className="bg-[#8DC14F] text-white rounded-lg px-2" onClick={() => {
+
+                <button disabled={Object.keys(cartObj).length === 0} className={`bg-[#8DC14F] text-white rounded-lg px-2 py-2 flex-1 mx-1 ${Object.keys(cartObj).length === 0 ? 'bg-opacity-50': ''}`} onClick={() => {
                     localStorage.removeItem("cartItems")
                     setCartObj({})
-                }}>Clear cart</button>}
-                <button onClick={togglepopup} className="bg-[#8DC14F] text-white rounded-lg px-2">Checkout</button>
+                }}>Clear cart</button>
+                <button onClick={togglepopup} disabled={Object.keys(cartObj).length === 0} className={`bg-[#8DC14F] text-white rounded-lg px-2 py-2 flex-1 mx-1 ${Object.keys(cartObj).length === 0 ? 'bg-opacity-50': ''}`}>Checkout</button>
                 {
                     checkout && (
                         <div>
@@ -169,7 +170,8 @@ const Cart = () => {
                         </div>
                     )
                 }
-                <button onClick={toggleprint} className="bg-[#8DC14F] text-white rounded-lg px-2">Print</button>
+                {/*<button onClick={toggleprint} disabled={Object.keys(cartObj).length === 0} className={`bg-[#8DC14F] text-white rounded-lg px-2 py-2 flex-1 mx-1 ${Object.keys(cartObj).length === 0 ? 'bg-opacity-50': ''}`}>Print</button>*/}
+                <button onClick={toggleprint} disabled className={`bg-[#8DC14F] text-white rounded-lg px-2 py-2 flex-1 mx-1 bg-opacity-50`}>Print</button>
                 {
                     print && (
                         <div>

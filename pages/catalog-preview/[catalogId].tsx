@@ -7,7 +7,10 @@ import prevArrow from "../../public/arrow-prev.svg";
 import Image from "next/image";
 import AddToCartModal from "../../src/components/Cart/AddCartModal";
 import Link from 'next/link';
-import { FaAngleLeft } from "react-icons/fa";
+import {FaAngleLeft} from "react-icons/fa";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 interface Props {
     catalog?: any
 }
@@ -15,15 +18,7 @@ interface Props {
 const CatalogCarousel: React.FC<Props> = ({catalog}) => {
     const [pages, setPages] = useState([])
     const [showModal, setShowModal] = useState({show: false, item: null})
-
-    useEffect(() => {
-        console.log(catalog);
-        if (catalog.length > 0) {
-            setPages(catalog[0].pages)
-        }
-    }, [])
-
-    const settings = {
+    const [settings, setSettings] = useState({
         dots: true,
         infinite: true,
         speed: 500,
@@ -31,12 +26,26 @@ const CatalogCarousel: React.FC<Props> = ({catalog}) => {
         slidesToScroll: 2,
         nextArrow: <CheplanNextArrowCircle/>,
         prevArrow: <CheplanPrevArrowCircle/>,
-    };
+    })
+    useEffect(() => {
+        console.log(catalog);
+        if (catalog.length > 0) {
+            setPages(catalog[0].pages)
+            if (catalog[0].pages.length === 1) {
+                setSettings(prevState => ({
+                    ...prevState, slidesToScroll: 1,
+                    slidesToShow: 1
+                }))
+            }
+        }
+    }, [catalog])
+
 
     return (
         <div style={{margin: "0 auto", maxWidth: "1440px"}}>
             <Link href="/" className='fixed left-16 top-4'>
-                    <button className="text-4xl  z-50 bg-[#8DC14F] rounded-full "><FaAngleLeft className='text-white'/></button>
+                <button className="text-4xl  z-50 bg-[#8DC14F] rounded-full "><FaAngleLeft className='text-white'/>
+                </button>
             </Link>
             <Slider {...settings}>
                 {
@@ -50,24 +59,26 @@ const CatalogCarousel: React.FC<Props> = ({catalog}) => {
                                         name: it.product_name
                                     })).flatMap((a: any) => a)}
                                     strokeImageUrl={item.page_image}
-                                    height={item?.items[0]?.coordinates?.imageHeight * 1.2} width={item?.items[0]?.coordinates?.imageWidth * 1.2}
+                                    height={item?.items[0]?.coordinates?.imageHeight * 1.2}
+                                    width={item?.items[0]?.coordinates?.imageWidth * 1.2}
                                     handleSelection={({itemId, itemName}) => {
-                                        // const cartItems: [any] = JSON.parse(localStorage.getItem("cartItems")!) ?? []
-                                        // cartItems.push(itemId)
-                                        // window.alert(`${itemName} added to your cart!`)
-                                        // localStorage.setItem('cartItems', JSON.stringify(cartItems))
                                         const selectedProduct = item.items.find((it: { _id: string; }) => it._id === itemId)
                                         setShowModal({show: true, item: selectedProduct})
                                     }}
                                     imageHeight={item?.items[0]?.coordinates?.imageHeight}
                                     imageWidth={item?.items[0]?.coordinates?.imageWidth}
-                                />}
+                                />
+                            }
                         </div>
                     ))
                 }
             </Slider>
 
-            {showModal.show && showModal.item && <AddToCartModal item={showModal.item} handler={() => setShowModal(prevState => ({...prevState, show: false})) }/>}
+            {showModal.show && showModal.item && <AddToCartModal item={showModal.item}
+                                                                 handler={() => setShowModal(prevState => ({
+                                                                     ...prevState,
+                                                                     show: false
+                                                                 }))}/>}
 
         </div>
     );

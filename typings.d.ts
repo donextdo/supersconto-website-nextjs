@@ -22,6 +22,7 @@ export interface Catelog {
 
 export interface Itm{
     name:string,
+    product_image:string,
     price:string
     pages?: SinglePage[]
 }
@@ -29,6 +30,8 @@ export interface Itm{
 export interface Shps{
     // logo_img: SaticImageData
     shop_name:string,
+    logo_img:any,
+    address:any,
     address_line1:string,
     _id :string
     

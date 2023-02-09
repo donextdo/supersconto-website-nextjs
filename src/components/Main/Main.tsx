@@ -21,7 +21,7 @@ const Main: React.FC<Props> = ({ catelogs }) => {
   return (
     <main className="pt-24 container px-2 mx-auto">
       <div className="grid grid-cols-7 gap-4">
-        <section className="w-full h-max col-span-5">
+        <section className="w-full h-max col-span-5 h-full">
           {/* Nearest Fylers Area  */}
           <NearestFlyers catelogs={catelogs} />
         </section>
@@ -48,7 +48,7 @@ const Main: React.FC<Props> = ({ catelogs }) => {
                   {login ? <Signup /> : <Signin />}
                   <div className="text-center">
                       
-                      <button className="bg-[#8DC14F] text-white rounded-lg px-2 " onClick={() => setShowCart(true)} >Show Cart</button>
+                      <button className="bg-[#8DC14F] text-white rounded-lg px-2 py-2" onClick={() => setShowCart(true)} >Show Cart</button>
                       
                     </div>
                 </>
@@ -57,7 +57,7 @@ const Main: React.FC<Props> = ({ catelogs }) => {
                   <Link href="#">
                     <div className="text-center">
                       
-                      <button className="bg-[#8DC14F] text-white rounded-lg px-2 " onClick={() => setShowCart(false)} >Login/Signup</button>
+                      <button className="bg-[#8DC14F] text-white rounded-lg px-2 py-2" onClick={() => setShowCart(false)} >Login/Signup</button>
                       
                     </div>
                   </Link>
