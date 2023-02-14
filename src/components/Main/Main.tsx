@@ -10,10 +10,10 @@ import Signup from "../Signup/Signup";
 
 
 interface Props {
-  catelogs: Catelog[];
+  catalogs: Catelog[];
 }
 
-const Main: React.FC<Props> = ({ catelogs }) => {
+const Main: React.FC<Props> = ({ catalogs }) => {
   const [login, setlogin] = useState(true);
   const [showCart, setShowCart] = useState(true);
 
@@ -23,7 +23,7 @@ const Main: React.FC<Props> = ({ catelogs }) => {
       <div className="grid grid-cols-7 gap-4">
         <section className="w-full h-max col-span-5 h-full">
           {/* Nearest Fylers Area  */}
-          <NearestFlyers catelogs={catelogs} />
+          <NearestFlyers catalogs={catalogs} />
         </section>
 
         <aside className="w-full h-full col-span-2">

@@ -1,6 +1,7 @@
 import { News } from "../../../typings";
 import Image from "next/image";
 import React from "react";
+import Link from "next/link";
 
 interface Props {
   news: News;
@@ -17,9 +18,11 @@ const NewsCard: React.FC<Props> = ({ news }) => {
         <p className="text-xs">{news.description}</p>
       </div>
       <div className="text-center">
+        <Link href={"/print"} >
         <button className="text-[#CD212A] border border-[#CD212A] px-8 rounded-md">
           View More
         </button>
+        </Link>
       </div>
     </div>
   );

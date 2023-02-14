@@ -9,19 +9,19 @@ import LatestItems from '../src/components/LatestItems/LatestItems';
 import Cities from '../src/components/Cities/Cities';
 import Footer from '../src/components/Footer/Footer';
 import requests from '../utils/request';
-import { Catelog, Itm ,Shps} from '../typings';
+import { Catalog, Item ,Shop} from '../typings';
 import React, {useEffect, useState} from 'react';
 import Ad from '../src/components/Ad/Ad';
 import {useRouter} from "next/router";
 
 interface Props {
-    catelogs: Catelog[]
-    itms : Itm[]
-    shops: Shps[]
+    catalogs: Catalog[]
+    items : Item[]
+    shops: Shop[]
 
 }
 
-const Home: React.FC<Props> = ({ catelogs,shops,itms }) => {
+const Home: React.FC<Props> = ({ catalogs,shops,items }) => {
     const [userCoordinates, setUserCoordinates] = useState<any>()
     const router = useRouter()
 
@@ -56,20 +56,20 @@ const Home: React.FC<Props> = ({ catelogs,shops,itms }) => {
 
         <div>
             <Header/>
-            <Main catelogs={catelogs}/>
+            <Main catalogs={catalogs}/>
             <Ad />
 
             <section className='container mx-auto px-8 flex flex-col gap-10 my-10'>
                 <Category />
-                <LatestFlyers catelogs={catelogs}/>
+                <LatestFlyers catalogs={catalogs}/>
                 <Shops shops={shops}/>
-                <LatestItems itms={itms}/>
+                <LatestItems items={items}/>
                 <News />
                 <Cities />
 
             </section>
 
-            <Footer />
+            {/* <Footer /> */}
         </div>
 
     )
@@ -80,18 +80,18 @@ export default Home
 export const getServerSideProps = async (context: { query: { long: any; lat: any; }; }) => {
     const url = context.query.long && context.query.lat ? `${requests.fetchCatelogs}?long=${context.query.long}&lat=${context.query.lat}` : requests.fetchCatelogs
 
-    const [catelogs,itms,shops] = await Promise.all([
+    const [catalogs,items,shops] = await Promise.all([
         fetch(url).then((res) => res.json()),
         fetch(requests.getLatestItemId).then((res) => res.json()),
         fetch(requests.allShops).then((res) => res.json())
     ])
 
-    console.log(catelogs)
+    console.log(catalogs)
 
     return {
         props: {
-            catelogs: catelogs,
-            itms : itms,
+            catalogs: catalogs,
+            items : items,
             shops : shops
         }
     }

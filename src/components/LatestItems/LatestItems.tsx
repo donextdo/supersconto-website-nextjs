@@ -1,6 +1,6 @@
 import React from 'react'
 import Slider from '../Utils/Slider'
-import { Item ,Itm} from '../../../typings'
+import { Item } from '../../../typings'
 import flyer1 from '../../../assets/flyers/flyer_1.jpg'
 import flyer2 from '../../../assets/flyers/flyer_2.jpg'
 import flyer3 from '../../../assets/flyers/flyer_3.jpg'
@@ -11,83 +11,83 @@ import flyer7 from '../../../assets/flyers/flyer_7.jpg'
 import LatestItemCard from '../Cards/LatestItemCard'
 
 interface Props {
-    itms : Itm []
+    items : Item []
 }
 
-const LatestItems : React.FC<Props> = ({itms}) => {
+const LatestItems : React.FC<Props> = ({items}) => {
 
-    const items: Item[] = [
-        {
-            name: "KREO BRICO AND CASA",
-            price: "100.00",
-            image: flyer1
-        },
-        {
-            name: "MIGROSS SUPERSTORE",
-            price: "12.00",
-            image: flyer2
-        },
-        {
-            name: "COMET",
-            price: "230.00",
-            image: flyer3
-        },
-        {
-            name: "DYSON PROMO",
-            price: "780.00",
-            image: flyer4
-        },
-        {
-            name: "DORECA",
-            price: "23.00",
-            image: flyer5
-        },
-        {
-            name: "KREO BRICO AND CASA",
-            price: "230.00",
-            image: flyer6
-        },
-        {
-            name: "KREO BRICO AND CASA",
-            price: "234.00",
-            image: flyer7
-        },
-        {
-            name: "KREO BRICO AND CASA",
-            price: "100.00",
-            image: flyer1
-        },
-        {
-            name: "MIGROSS SUPERSTORE",
-            price: "12.00",
-            image: flyer2
-        },
-        {
-            name: "COMET",
-            price: "230.00",
-            image: flyer3
-        },
-        {
-            name: "DYSON PROMO",
-            price: "780.00",
-            image: flyer4
-        },
-        {
-            name: "DORECA",
-            price: "23.00",
-            image: flyer5
-        },
-        {
-            name: "KREO BRICO AND CASA",
-            price: "230.00",
-            image: flyer6
-        },
-        {
-            name: "KREO BRICO AND CASA",
-            price: "234.00",
-            image: flyer7
-        },
-    ]
+    // const items: Item[] = [
+    //     {
+    //         name: "KREO BRICO AND CASA",
+    //         price: "100.00",
+    //         image: flyer1
+    //     },
+    //     {
+    //         name: "MIGROSS SUPERSTORE",
+    //         price: "12.00",
+    //         image: flyer2
+    //     },
+    //     {
+    //         name: "COMET",
+    //         price: "230.00",
+    //         image: flyer3
+    //     },
+    //     {
+    //         name: "DYSON PROMO",
+    //         price: "780.00",
+    //         image: flyer4
+    //     },
+    //     {
+    //         name: "DORECA",
+    //         price: "23.00",
+    //         image: flyer5
+    //     },
+    //     {
+    //         name: "KREO BRICO AND CASA",
+    //         price: "230.00",
+    //         image: flyer6
+    //     },
+    //     {
+    //         name: "KREO BRICO AND CASA",
+    //         price: "234.00",
+    //         image: flyer7
+    //     },
+    //     {
+    //         name: "KREO BRICO AND CASA",
+    //         price: "100.00",
+    //         image: flyer1
+    //     },
+    //     {
+    //         name: "MIGROSS SUPERSTORE",
+    //         price: "12.00",
+    //         image: flyer2
+    //     },
+    //     {
+    //         name: "COMET",
+    //         price: "230.00",
+    //         image: flyer3
+    //     },
+    //     {
+    //         name: "DYSON PROMO",
+    //         price: "780.00",
+    //         image: flyer4
+    //     },
+    //     {
+    //         name: "DORECA",
+    //         price: "23.00",
+    //         image: flyer5
+    //     },
+    //     {
+    //         name: "KREO BRICO AND CASA",
+    //         price: "230.00",
+    //         image: flyer6
+    //     },
+    //     {
+    //         name: "KREO BRICO AND CASA",
+    //         price: "234.00",
+    //         image: flyer7
+    //     },
+    // ]
 
   return (
     <div className='w-full flex flex-col gap-6'>
@@ -98,7 +98,7 @@ const LatestItems : React.FC<Props> = ({itms}) => {
 
         <Slider >
 
-            {itms.map((item, index) => (
+            {items.map((item, index) => (
                 <LatestItemCard item={item} key={index} />
             ))}
 

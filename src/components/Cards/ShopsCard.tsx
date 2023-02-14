@@ -1,10 +1,10 @@
-import { Shop , Shps } from "../../../typings";
+import { Shop } from "../../../typings";
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 
 interface Props {
-  shop: Shps;
+  shop: Shop;
 }
 
 const ShopsCard: React.FC<Props> = ({ shop }) => {

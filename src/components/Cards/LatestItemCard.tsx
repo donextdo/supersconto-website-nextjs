@@ -2,11 +2,11 @@ import Image from 'next/image'
 import React from 'react'
 import { FaCalendar } from 'react-icons/fa'
 import { RiPinDistanceFill } from 'react-icons/ri'
-import { Itm } from '../../../typings'
+import { Item } from '../../../typings'
 
 
 interface Props {
-    item: Itm
+    item: Item
 }
 
 const LatestItemCard: React.FC<Props> = ({item}) => {

@@ -28,6 +28,7 @@ const News = () => {
 
       <Slider>
       {newss.map((news, index)=>(
+        
        < NewsCard news={news} key={index}/>
       ))}
       </Slider>

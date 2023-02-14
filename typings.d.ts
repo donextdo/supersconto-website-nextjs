@@ -9,7 +9,7 @@ interface SingleShop {
     shop_name: string
 }
 
-export interface Catelog {
+export interface Catalog {
     _id: string,
     shop_id: SingleShop,
     title: string,
@@ -20,18 +20,18 @@ export interface Catelog {
     pages?: SinglePage[]
 }
 
-export interface Itm{
+export interface Item{
     name:string,
     product_image:string,
     price:string
     pages?: SinglePage[]
 }
 
-export interface Shps{
-    // logo_img: SaticImageData
+export interface Shop{
+    
     shop_name:string,
-    logo_img:any,
-    address:any,
+    logo_img:string,
+    address:string,
     address_line1:string,
     _id :string
     
@@ -53,30 +53,30 @@ export interface Shps{
 //     "__v": 0
 // }
 
-export interface Flyer {
-    title: string,
-    shopName: string,
-    distance?: string,
-    date?: string,
-    flyer: SaticImageData
-}
+// export interface Flyer {
+//     title: string,
+//     shopName: string,
+//     distance?: string,
+//     date?: string,
+//     flyer: SaticImageData
+// }
 
 export interface Category{
     image: StaticImageData,
     name : string,
 }
 
-export interface Shop{
-    image: StaticImageData,
-    name:string,
-    address:string
+export interface OneShop{
+    shop_name:string,
+    address:string,
+    telephone:number,
 }
 
-export interface Item{
-    image: StaticImageData,
-    name:string,
-    price:string
-}
+// export interface Item{
+//     image: StaticImageData,
+//     name:string,
+//     price:string
+// }
 
 export interface News{
     image: StaticImageData,

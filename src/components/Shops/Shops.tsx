@@ -1,4 +1,4 @@
-import { Shop ,Shps} from "../../../typings";
+import { Shop} from "../../../typings";
 import Slider from "../Utils/Slider";
 import ShopsCard from "../Cards/ShopsCard";
 import sp_1 from "../../../assets/shops/sp_1.png";
@@ -6,52 +6,52 @@ import sp_2 from "../../../assets/shops/sp_2.png";
 import Link from "next/link";
 
 interface Props {
-  shops : Shps []
+  shops : Shop []
 }
 
 const Shops: React.FC<Props>= ({shops}) => {
-  const shopss: Shop[] = [
-    {
-      image: sp_1,
-      name: "LIDL",
-      address: "Lorem Lorem",
-    },
-    {
-      image: sp_2,
-      name: "euronics",
-      address: "Lorem Lorem",
-    },
-    {
-      image: sp_1,
-      name: "LIDL",
-      address: "Lorem Lorem",
-    },
-    {
-      image: sp_2,
-      name: "euronics",
-      address: "Lorem Lorem",
-    },
-    {
-      image: sp_1,
-      name: "LIDL",
-      address: "Lorem Lorem",
-    },
-    {
-      image: sp_2,
-      name: "euronics",
-      address: "Lorem Lorem",
-    },
-    {
-      image: sp_1,
-      name: "LIDL",
-      address: "Lorem Lorem",
-    },
-    {
-      image: sp_2,
-      name: "euronics",
-      address: "Lorem Lorem",
-    },
-  ];
+  // const shopss: Shop[] = [
+  //   {
+  //     image: sp_1,
+  //     name: "LIDL",
+  //     address: "Lorem Lorem",
+  //   },
+  //   {
+  //     image: sp_2,
+  //     name: "euronics",
+  //     address: "Lorem Lorem",
+  //   },
+  //   {
+  //     image: sp_1,
+  //     name: "LIDL",
+  //     address: "Lorem Lorem",
+  //   },
+  //   {
+  //     image: sp_2,
+  //     name: "euronics",
+  //     address: "Lorem Lorem",
+  //   },
+  //   {
+  //     image: sp_1,
+  //     name: "LIDL",
+  //     address: "Lorem Lorem",
+  //   },
+  //   {
+  //     image: sp_2,
+  //     name: "euronics",
+  //     address: "Lorem Lorem",
+  //   },
+  //   {
+  //     image: sp_1,
+  //     name: "LIDL",
+  //     address: "Lorem Lorem",
+  //   },
+  //   {
+  //     image: sp_2,
+  //     name: "euronics",
+  //     address: "Lorem Lorem",
+  //   },
+  // ];
 
   return (
     <div className="w-full flex flex-col gap-6">

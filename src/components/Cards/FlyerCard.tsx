@@ -2,12 +2,12 @@ import Image from 'next/image'
 import React, {MouseEventHandler, useEffect} from 'react'
 import { FaCalendar } from 'react-icons/fa'
 import { RiPinDistanceFill } from 'react-icons/ri'
-import { Catelog, Flyer } from '../../../typings'
+import { Catalog } from '../../../typings'
 import { dateParser } from '../../../utils/dateParser'
 
 
 interface Props {
-    flyer: Catelog,
+    flyer: Catalog,
     onClick?: MouseEventHandler<HTMLDivElement>
 
 }
