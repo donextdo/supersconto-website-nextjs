@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Card from "../Utils/Card";
 import Button from "../Utils/Button";
 import NearestFlyers from "../NearestFylers/NearestFlyers";
-import { Catelog } from "../../../typings";
+import { Catalog } from "../../../typings";
 import Cart from "../Cart/cart";
 import Signin from "../Signin/Signin";
 import Link from "next/link";
@@ -11,11 +11,11 @@ import { RiLoginCircleFill, RiShoppingCart2Fill } from "react-icons/ri";
 
 
 interface Props {
-  catalogs: Catelog[];
+  catalogs: Catalog[];
 }
 
 const Main: React.FC<Props> = ({ catalogs }) => {
-  const [login, setlogin] = useState(true);
+  const [login, setLogin] = useState(true);
   const [showCart, setShowCart] = useState(true);
 
 
