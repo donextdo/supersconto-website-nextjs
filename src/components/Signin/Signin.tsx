@@ -37,11 +37,11 @@ const Signin = () => {
     } 
 
     return (
-        <div>
-            <section >
+        <div className="mt-10 flex flex-col gap-3">
+            <section className="px-2">
                 <form onSubmit={handleSubmit}>
-                    <div className="space-y-5 mt-16">
-                        <div className="flex flex-raw relative items-center mx-2">
+                    <div className="space-y-5">
+                        <div className="flex flex-raw relative items-center">
                             <BsFillPersonFill className="fill-[#CD212A] absolute ml-2" />
                             <input
                                 type="text"
@@ -53,7 +53,7 @@ const Signin = () => {
                             />
                         </div>
 
-                        <div className="flex flex-raw relative items-center mx-2">
+                        <div className="flex flex-raw relative items-center">
                             <BsFillLockFill className="fill-[#CD212A] absolute ml-2" />
                             <input
                                 type="text"
@@ -67,28 +67,37 @@ const Signin = () => {
 
                         <p className="mx-2 text-[#CD212A] text-xs"><Link href="#">Forget Password ?</Link></p>
 
-                        <button className="bg-[#8DC14F] text-white w-full rounded-lg ml-1 py-2" type="submit">
+                        <button className="bg-[#8DC14F] text-white w-full rounded-lg py-2" type="submit">
                             Login
                         </button>
                     </div>
                 </form>
             </section>
 
-            <div className="flex flex-raw gap-1 mx-2 mt-10">
+            <div className="flex items-center gap-2 px-2 my-4">
+                <span className="w-full h-[1px] bg-gray-400 flex-1"></span>
+                <span className="text-gray-800 font-semibold text-base">or</span>
+                <span className="w-full h-[1px] bg-gray-400 flex-1"></span>
+            </div>
+
+            {/* <div className="flex flex-raw gap-1 mx-2 mt-10">
                 <hr className=" text-black bg-black h-px w-5/12" />
                 <p className="w-2/12 text-center"> or </p>
                 <hr className=" text-black bg-black h-px w-5/12" />
+            </div> */}
+
+            <div className="flex flex-raw relative items-center mx-auto">
+                <FcGoogle className="fill-blue-500 absolute ml-4 " />
+                <button 
+                className="border border-[#8DC14F] rounded-lg text-[#8DC14F] py-1 w-56 pl-6 hover:bg-[#8DC14F] hover:text-white">
+                    Login with Google
+                </button>
             </div>
 
-            <div className="flex flex-raw relative items-center mx-20 mt-10">
-                <FcGoogle className="fill-blue-500 absolute ml-4  " />
-                <button className="border border-[#8DC14F] rounded-lg text-[#8DC14F] py-1 w-56 pl-6">Login with Google</button>
-            </div>
-
-            <div className="flex flex-raw relative items-center mx-20 mt-7 mb-20">
+            {/* <div className="flex flex-raw relative items-center mx-20 mt-7 mb-20">
                 <FaFacebook className="fill-blue-500 absolute ml-4  " />
                 <button className="border border-[#8DC14F] rounded-lg text-[#8DC14F] py-1 w-56 pl-6">Login with Facebook</button>
-            </div>
+            </div> */}
 
         </div>
     );

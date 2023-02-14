@@ -7,6 +7,7 @@ import Cart from "../Cart/cart";
 import Signin from "../Signin/Signin";
 import Link from "next/link";
 import Signup from "../Signup/Signup";
+import { RiLoginCircleFill, RiShoppingCart2Fill } from "react-icons/ri";
 
 
 interface Props {
@@ -14,7 +15,7 @@ interface Props {
 }
 
 const Main: React.FC<Props> = ({ catelogs }) => {
-  const [login, setlogin] = useState(true);
+  const [login, setLogin] = useState(true);
   const [showCart, setShowCart] = useState(true);
 
 
@@ -28,39 +29,58 @@ const Main: React.FC<Props> = ({ catelogs }) => {
 
         <aside className="w-full h-full col-span-2">
           {/* Login Area  */}
-          <Card styleClass="rounded-md h-full">
-            {/* <Cart/> */}
+          <Card styleClass="rounded-md h-full relative">
+            
+            {
+              showCart ?
+                <>
+                  <button 
+                  onClick={() => setShowCart(false)} 
+                  className="absolute top-4 right-4 z-20">
+                    <RiLoginCircleFill className="w-8 h-8 text-green-800"/> 
+                  </button>
+                </>
+                :
+                <>
+                  <button 
+                  onClick={() => setShowCart(true)} 
+                  className="absolute top-4 right-4 z-20">
+                    <RiShoppingCart2Fill className="w-8 h-8 text-green-800"/> 
+                  </button>
+                </>
+            }
 
             {
               !showCart ?
                 <>
-                  <div className="flex justify-around text-center">
-                    <div className="pt-2">
-                      <button onClick={() => setlogin(false)}>Login </button>
-                    </div>
-                    <div className="h-14 bg-gray-300 text-gray-300 text-xs">
-                      |
-                    </div>
-                    <div className="border-4 border-b-[#FFFFFF] py-2 border-t-0 border-l-0 border-r-0 w-40">
-                      <button onClick={() => setlogin(true)}>Sign up</button>
-                    </div>
+                  <div className="w-full grid grid-cols-2">
+                    <button 
+                    onClick={() => setLogin(true)}
+                    className="w-full py-3 border-r border-gray-600 text-base font-medium text-gray-800 hover:bg-gray-100 relative">
+                      <span>Sign In</span> 
+                      {
+                        login &&
+                        <span className="absolute h-[4px] w-4/5 bottom-0 left-0 right-0 mx-auto bg-[#8DC14F] rounded-full"></span>
+                      }
+                      
+                    </button>
+
+                    <button 
+                    onClick={() => setLogin(false)}
+                    className="w-full py-3 border-l border-gray-600 text-base font-medium text-gray-800 hover:bg-gray-100 relative">
+                      <span>Sign Up</span> 
+                      {
+                        !login &&
+                        <span className="absolute h-[4px] w-4/5 bottom-0 left-0 right-0 mx-auto bg-[#8DC14F] rounded-full"></span>
+                      }
+                    </button>
                   </div>
-                  {login ? <Signup /> : <Signin />}
-                  <div className="text-center">
-                      
-                      <button className="bg-[#8DC14F] text-white rounded-lg px-2 py-2" onClick={() => setShowCart(true)} >Show Cart</button>
-                      
-                    </div>
+                  {login ? <Signin /> : <Signup />}
+                  
                 </>
                 : <>
                   <Cart />
-                  <Link href="#">
-                    <div className="text-center">
-                      
-                      <button className="bg-[#8DC14F] text-white rounded-lg px-2 py-2" onClick={() => setShowCart(false)} >Login/Signup</button>
-                      
-                    </div>
-                  </Link>
+                  
                 </>}
           </Card>
         </aside>
