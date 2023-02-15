@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Card from '../Utils/Card'
 import Button from '../Utils/Button'
 import FlyerCard from '../Cards/FlyerCard'
-import { Catalog, Flyer } from '../../../typings'
+import { Catalog } from '../../../typings'
 import flyer1 from '../../../assets/flyers/flyer_1.jpg'
 import flyer2 from '../../../assets/flyers/flyer_2.jpg'
 import flyer3 from '../../../assets/flyers/flyer_3.jpg'
@@ -17,7 +17,7 @@ interface Props {
 }
 
 const NearestFlyers: React.FC<Props> = ({ catalogs }) => {
-    const [selectedCatalog, setSelectedCatalog] = useState<Catelog>()
+    const [selectedCatalog, setSelectedCatalog] = useState<Catalog>()
 
     // const flyers: Flyer[] = [
     //     {

@@ -31,7 +31,7 @@ export interface Shop{
     
     shop_name:string,
     logo_img:string,
-    address:string,
+    address:any,
     address_line1:string,
     _id :string
     
