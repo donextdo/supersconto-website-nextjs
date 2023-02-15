@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Card from "../Utils/Card";
 import Button from "../Utils/Button";
 import NearestFlyers from "../NearestFylers/NearestFlyers";
-import { Catelog } from "../../../typings";
+import { Catalog } from "../../../typings";
 import Cart from "../Cart/cart";
 import Signin from "../Signin/Signin";
 import Link from "next/link";
@@ -10,7 +10,7 @@ import Signup from "../Signup/Signup";
 
 
 interface Props {
-  catalogs: Catelog[];
+  catalogs: Catalog[];
 }
 
 const Main: React.FC<Props> = ({ catalogs }) => {
