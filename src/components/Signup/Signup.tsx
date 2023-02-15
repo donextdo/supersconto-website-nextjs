@@ -61,7 +61,7 @@ const Signup = () => {
             <BsFillPersonFill className="fill-[#CD212A] absolute ml-2" />
             <input
               type="text"
-              name="enter name"
+              name="fullName"
               placeholder="Full Name"
               className="pl-8 py-2 w-full border border-gray-400 placeholder-gray-600"
               value={fullname}
@@ -73,7 +73,7 @@ const Signup = () => {
             <BsTelephoneFill className="fill-[#CD212A] absolute ml-2" />
             <input
               type="text"
-              name="enter name"
+              name="contactNumber"
               placeholder="Contact Number"
               className="pl-8 py-2 w-full border border-gray-400 placeholder-gray-600"
               value={contactNumber}
@@ -84,8 +84,8 @@ const Signup = () => {
           <div className="flex flex-raw relative items-center mx-2">
             <MdEmail className="fill-[#CD212A] absolute ml-2" />
             <input
-              type="text"
-              name="enter name"
+              type="email"
+              name="email"
               placeholder="Email"
               className="pl-8 py-2 w-full border border-gray-400 placeholder-gray-600"
               value={email}
@@ -108,7 +108,7 @@ const Signup = () => {
           <div className="flex flex-raw relative items-center mx-2">
             <BsFillLockFill className="fill-[#CD212A] absolute ml-2" />
             <input
-              type="text"
+              type="password"
               name="enter name"
               placeholder="Password"
               className="pl-8 py-2 w-full border border-gray-400 placeholder-gray-600"
@@ -120,7 +120,7 @@ const Signup = () => {
           <div className="flex flex-raw relative items-center mx-2">
             <BsFillLockFill className="fill-[#CD212A] absolute ml-2" />
             <input
-              type="text"
+              type="password"
               name="enter name"
               placeholder="Confirm Password"
               className="pl-8 py-2 w-full border border-gray-400 placeholder-gray-600"

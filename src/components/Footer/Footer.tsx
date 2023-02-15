@@ -7,10 +7,10 @@ const Footer = () => {
     <footer className="bg-gray-200 py-4">
       <div className="container mx-auto px-16">
         {/* create four column  */}
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
           {/* 1st column  */}
           <div className="pr-4 ">
-            {/* <h1 className="text-[#008C45] my-2 text-3xl font-semibold">LOGO</h1> */}
+            
             <Image src={logo} alt="logo" className="w-auto h-16" />
             <p  className="my-2">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

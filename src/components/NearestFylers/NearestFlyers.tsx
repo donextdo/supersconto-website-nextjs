@@ -75,9 +75,9 @@ const NearestFlyers: React.FC<Props> = ({ catalogs }) => {
     <Card styleClass='rounded-md flex flex-col gap-4 h-full'>
 
         <div 
-        className='w-full h-[60vh] pr-2 grid grid-cols-4 gap-4 
+        className='w-full h-[60vh] pr-2 grid grid-cols-1 gap-4 justify-items-center
         overflow-y-scroll overflow-x-hidden 
-        !scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-gray-400
+        !scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-gray-400 sm:grid-cols-4
         xxl:grid-cols-5'>
 
             {catalogs.map((catelog, index) => (

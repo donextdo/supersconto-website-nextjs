@@ -21,12 +21,12 @@ const Main: React.FC<Props> = ({ catalogs }) => {
   return (
     <main className="pt-24 container px-2 mx-auto">
       <div className="grid grid-cols-7 gap-4">
-        <section className="w-full h-max col-span-5 h-full">
+        <section className="w-full h-full col-span-7 sm:col-span-5">
           {/* Nearest Fylers Area  */}
           <NearestFlyers catalogs={catalogs} />
         </section>
 
-        <aside className="w-full h-full col-span-2">
+        <aside className="hidden lg:block w-full h-full col-span-2">
           {/* Login Area  */}
           <Card styleClass="rounded-md h-full">
             {/* <Cart/> */}
