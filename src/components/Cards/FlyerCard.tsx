@@ -17,15 +17,15 @@ const FlyerCard: React.FC<Props> = ({flyer,onClick}) => {
         console.log(flyer);
     }, [])
   return (
-    <div className='w-full max-w-[12.5rem] min-w-[12.5rem] h-64 rounded-md relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer' onClick={onClick}>
+    <div className='w-32 h-48 md:w-40 lg:w-56 lg:h-72 xl:w-52 xxl:w-60 xxl:h-80 xxxl:w-[300px] xxxl:h-96 rounded-md relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer' onClick={onClick}>
         <Image 
             src={flyer.pages?.length && flyer.pages?.length > 0 ? flyer.pages[0]?.page_image : ''}
             fill
             alt='flyer'
-            sizes='width: 100%'
+            sizes='width: auto'
         />
 
-        <div className='absolute bottom-0 w-full flex flex-col gap-1 p-2 bg-white bg-opacity-30 backdrop-blur-sm'>
+        <div className='absolute bottom-0 w-full flex flex-col gap-1 p-2  bg-opacity-30 backdrop-blur-sm'>
             <h4 className='text-sm capitalize font-medium'>
                 { flyer.title }
             </h4>

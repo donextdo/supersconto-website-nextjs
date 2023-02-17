@@ -37,7 +37,7 @@ const Signin = () => {
     } 
 
     return (
-        <div className="mt-10 flex flex-col gap-3">
+        <div className="mt-10 flex flex-col gap-3 w-80 xxl:w-[400px] xxxl:w-[480px]">
             <section className="px-2">
                 <form onSubmit={handleSubmit}>
                     <div className="space-y-5">
@@ -45,7 +45,7 @@ const Signin = () => {
                             <BsFillPersonFill className="fill-[#CD212A] absolute ml-2" />
                             <input
                                 type="text"
-                                name="enter name"
+                                name="email"
                                 placeholder="Email and Contact Number"
                                 className="pl-8 py-2 w-full border border-gray-400 placeholder-gray-600"
                                 value={email} 
@@ -56,8 +56,8 @@ const Signin = () => {
                         <div className="flex flex-raw relative items-center">
                             <BsFillLockFill className="fill-[#CD212A] absolute ml-2" />
                             <input
-                                type="text"
-                                name="enter name"
+                                type="password"
+                                name="password"
                                 placeholder="Password"
                                 className="pl-8 py-2 w-full border border-gray-400 placeholder-gray-600"
                                 value={password} 
@@ -65,7 +65,7 @@ const Signin = () => {
                             />
                         </div>
 
-                        <p className="mx-2 text-[#CD212A] text-xs"><Link href="#">Forget Password ?</Link></p>
+                        {/* <p className="mx-2 text-[#CD212A] text-xs"><Link href="#">Forget Password ?</Link></p> */}
 
                         <button className="bg-[#8DC14F] text-white w-full rounded-lg py-2" type="submit">
                             Login
@@ -86,10 +86,10 @@ const Signin = () => {
                 <hr className=" text-black bg-black h-px w-5/12" />
             </div> */}
 
-            <div className="flex flex-raw relative items-center mx-auto">
+            <div className="flex flex-raw relative items-center mx-auto ">
                 <FcGoogle className="fill-blue-500 absolute ml-4 " />
                 <button 
-                className="border border-[#8DC14F] rounded-lg text-[#8DC14F] py-1 w-56 pl-6 hover:bg-[#8DC14F] hover:text-white">
+                className="border border-[#8DC14F] rounded-lg text-[#8DC14F] py-1 w-[300px] xxl:w-[390px] xxxl:w-[460px] pl-6 hover:bg-[#8DC14F] hover:text-white ">
                     Login with Google
                 </button>
             </div>

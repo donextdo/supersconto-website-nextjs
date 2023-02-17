@@ -1,4 +1,4 @@
-import { Shop} from "../../../typings";
+import { Shop } from "../../../typings";
 import Slider from "../Utils/Slider";
 import ShopsCard from "../Cards/ShopsCard";
 import sp_1 from "../../../assets/shops/sp_1.png";
@@ -6,10 +6,10 @@ import sp_2 from "../../../assets/shops/sp_2.png";
 import Link from "next/link";
 
 interface Props {
-  shops : Shop []
+  shops: Shop[]
 }
 
-const Shops: React.FC<Props>= ({shops}) => {
+const Shops: React.FC<Props> = ({ shops }) => {
   // const shopss: Shop[] = [
   //   {
   //     image: sp_1,
@@ -56,13 +56,22 @@ const Shops: React.FC<Props>= ({shops}) => {
   return (
     <div className="w-full flex flex-col gap-6">
       <h2 className="text-lg font-semibold">SHOPS</h2>
-      <Slider padding="px-6 py-10">
-        {shops.map((shop, index) => ( 
-          <Link href={`/shop-preview/${shop._id}`} key={index}> 
-          <ShopsCard shop={shop} key={index}/>
-          </Link>
-        ))}
-      </Slider>
+
+      <div className="grid grid-cols-7 gap-4">
+        <section className="w-full col-span-7  xl:col-span-5">
+          <Slider padding="px-6 py-10">
+            {shops.map((shop, index) => (
+              <Link href={`/shop-preview/${shop._id}`} key={index}>
+                <ShopsCard shop={shop} key={index} />
+              </Link>
+            ))}
+          </Slider>
+        </section>
+
+        <section className="w-full col-span-2"></section>
+
+      </div>
+
     </div>
   );
 };

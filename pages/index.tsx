@@ -59,7 +59,7 @@ const Home: React.FC<Props> = ({ catalogs,shops,items }) => {
             <Main catalogs={catalogs}/>
             <Ad />
 
-            <section className='container mx-auto px-2 flex flex-col gap-10 my-10'>
+            <section className='mx-auto px-10 flex flex-col gap-10 my-10'>
                 <Category />
                 <LatestFlyers catalogs={catalogs}/>
                 <Shops shops={shops}/>
