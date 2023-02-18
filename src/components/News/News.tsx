@@ -26,12 +26,20 @@ const News = () => {
     <div className="w-full flex flex-col gap-6">
       <h2 className="text-lg font-semibold">NEWS</h2>
 
-      <Slider>
-      {newss.map((news, index)=>(
-        
-       < NewsCard news={news} key={index}/>
-      ))}
-      </Slider>
+      <div className="grid grid-cols-7 gap-4">
+
+        <section className="w-full col-span-7 xl:col-span-5">
+          <Slider>
+            {newss.map((news, index) => (
+
+              < NewsCard news={news} key={index} />
+            ))}
+          </Slider>
+        </section>
+        <section className="w-full col-span-2"></section>
+      </div>
+
+
     </div>
   );
 };

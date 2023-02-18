@@ -5,7 +5,7 @@ import AdCard from '../Cards/AdCard';
 const Ad = () => {
 
     const ads = [
-          {
+        {
             title: "KREO BRICO AND CASA",
             shopName: "shopName",
             distance: "10KM",
@@ -21,12 +21,15 @@ const Ad = () => {
         },
     ]
     return (
-        <div className="pt-24 container px-2 mx-auto">
+        <div className=" hidden xl:block pt-24  px-10 mx-auto">
+            <h2 className='text-lg font-semibold mb-6'>
+                SPECIAL FLYERS
+            </h2>
             <div className="grid grid-cols-7 gap-4">
                 {/* <section className="w-full col-span-5">{ads.map((ad) => (
                     <AdCard ad={ad} />
                 ))}</section> */}
-                 <section className="w-full col-span-5">
+                <section className="w-full col-span-5">
                     <AdCard />
                 </section>
                 <section className="w-full col-span-2"></section>

@@ -14,7 +14,7 @@ interface Props {
     catalogs: Catalog[]
 }
 
-const LatestFlyers: React.FC<Props> = ({catalogs}) => {
+const LatestFlyers: React.FC<Props> = ({ catalogs }) => {
 
     // const flyers: Flyer[] = [
     //     {
@@ -166,23 +166,29 @@ const LatestFlyers: React.FC<Props> = ({catalogs}) => {
     //     }
     // ]
 
-  return (
-    <div className='w-full flex flex-col gap-6'>
-        
-        <h2 className='text-lg font-semibold'>
-            LATEST FLYERS
-        </h2>
+    return (
+        <div className='w-full flex flex-col gap-6'>
 
-        <Slider >
+            <h2 className='text-lg font-semibold'>
+                LATEST FLYERS
+            </h2>
+            <div className="grid grid-cols-7 gap-4">
+                <section className="w-full col-span-7 xl:col-span-5">
+                    <Slider >
 
-            {catalogs.map((flyer, index) => (
-                <FlyerCard flyer={flyer} key={index} />
-            ))}
+                        {catalogs.map((flyer, index) => (
+                            <FlyerCard flyer={flyer} key={index} />
+                        ))}
 
-        </Slider>
+                    </Slider>
+                </section>
+                {/* <section className="w-full col-span-2"></section> */}
+            </div>
 
-    </div>
-  )
+
+
+        </div>
+    )
 }
 
 export default LatestFlyers

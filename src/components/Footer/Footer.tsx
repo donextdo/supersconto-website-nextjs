@@ -5,12 +5,12 @@ import logo from '../../../assets/logo/logo.png'
 const Footer = () => {
   return (
     <footer className="bg-gray-200 py-4">
-      <div className="container mx-auto px-16">
+      <div className=" mx-auto px-16 ">
         {/* create four column  */}
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-5 xl:grid-cols-4 ">
           {/* 1st column  */}
-          <div className="pr-4 ">
-            {/* <h1 className="text-[#008C45] my-2 text-3xl font-semibold">LOGO</h1> */}
+          <div className="pr-4 col-span-1 sm:col-span-2 xl:col-span-1">
+            
             <Image src={logo} alt="logo" className="w-auto h-16" />
             <p  className="my-2">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -92,7 +92,7 @@ const Footer = () => {
         </div>
         <hr className="my-8 h-px bg-[#000000] border-0"></hr>
         <div>
-        Copyrights © 2021 All Rights Reserved
+        Copyrights © 2023 All Rights Reserved
         </div>
       </div>
     </footer>

@@ -8,6 +8,7 @@ import {object} from "prop-types";
 import CheckoutPop from "../CheckoutPop/CheckoutPop";
 import Print from "../Print/Print";
 
+
 const Cart = () => {
     const [count, setCount] = useState(0);
     const [cartObj, setCartObj] = useState<any>([]);
@@ -91,7 +92,8 @@ const Cart = () => {
 
     return (
         // <div mt-2>
-        <div>
+        <div className="w-80 xxl:w-[400px] xxxl:w-[480px]" >
+            
             <div className="text-2xl border-b-2 pb-2">Your Cart</div>
             <div className="flex justify-between items-end pb-3 pt-3 border-b-2">
                 <div className="text-1xl">Grand Total $</div>
@@ -156,7 +158,7 @@ const Cart = () => {
 
             ))}
             </div>
-            <div className="mb-4 flex justify-between mt-2">
+            <div className="mb-4 flex justify-between mt-24">
 
                 <button disabled={Object.keys(cartObj).length === 0} className={`bg-[#8DC14F] text-white rounded-lg px-2 py-2 flex-1 mx-1 ${Object.keys(cartObj).length === 0 ? 'bg-opacity-50': ''}`} onClick={() => {
                     localStorage.removeItem("cartItems")

@@ -5,93 +5,98 @@ import Slider from '../Utils/Slider'
 import { Category } from '../../../typings'
 
 const Category = () => {
-    const categorys: Category[] = [
-         {
-            image: cat_1,
-            name:"New Flyers"
-         } ,
-         {
-            image: cat_2,
-            name:"Healthcare"
-         },
-         {
-            image: cat_1,
-            name:"New Flyers"
-         } ,
-         {
-            image: cat_2,
-            name:"Healthcare"
-         }, {
-            image: cat_1,
-            name:"New Flyers"
-         } ,
-         {
-            image: cat_2,
-            name:"Healthcare"
-         },
-         {
-            image: cat_1,
-            name:"New Flyers"
-         } ,
-         {
-            image: cat_2,
-            name:"Healthcare"
-         },
-         {
-            image: cat_1,
-            name:"New Flyers"
-         } ,
-         {
-            image: cat_2,
-            name:"Healthcare"
-         }, {
-            image: cat_1,
-            name:"New Flyers"
-         } ,
-         {
-            image: cat_2,
-            name:"Healthcare"
-         },
-         {
-            image: cat_1,
-            name:"New Flyers"
-         } ,
-         {
-            image: cat_2,
-            name:"Healthcare"
-         },
-         {
-            image: cat_1,
-            name:"New Flyers"
-         } ,
-         {
-            image: cat_2,
-            name:"Healthcare"
-         }, {
-            image: cat_1,
-            name:"New Flyers"
-         } ,
-         {
-            image: cat_2,
-            name:"Healthcare"
-         }
-    ]
+   const categorys: Category[] = [
+      {
+         image: cat_1,
+         name: "New Flyers"
+      },
+      {
+         image: cat_2,
+         name: "Healthcare"
+      },
+      {
+         image: cat_1,
+         name: "New Flyers"
+      },
+      {
+         image: cat_2,
+         name: "Healthcare"
+      }, {
+         image: cat_1,
+         name: "New Flyers"
+      },
+      {
+         image: cat_2,
+         name: "Healthcare"
+      },
+      {
+         image: cat_1,
+         name: "New Flyers"
+      },
+      {
+         image: cat_2,
+         name: "Healthcare"
+      },
+      {
+         image: cat_1,
+         name: "New Flyers"
+      },
+      {
+         image: cat_2,
+         name: "Healthcare"
+      }, {
+         image: cat_1,
+         name: "New Flyers"
+      },
+      {
+         image: cat_2,
+         name: "Healthcare"
+      },
+      {
+         image: cat_1,
+         name: "New Flyers"
+      },
+      {
+         image: cat_2,
+         name: "Healthcare"
+      },
+      {
+         image: cat_1,
+         name: "New Flyers"
+      },
+      {
+         image: cat_2,
+         name: "Healthcare"
+      }, {
+         image: cat_1,
+         name: "New Flyers"
+      },
+      {
+         image: cat_2,
+         name: "Healthcare"
+      }
+   ]
 
-    
-    return (  
-       <div className='flex flex-col gap-6'>
-            <h2 className='text-lg font-semibold'>
+
+   return (
+      <div className='flex flex-col gap-6'>
+         <h2 className='text-lg font-semibold'>
             CATEGORY
-        </h2>
+         </h2>
+         <div className="grid grid-cols-7 gap-4">
+            <section className="w-full col-span-7 xl:col-span-5">
+               <Slider>
+                  {categorys.map((category, index) => (
+                     <CategoryCard category={category} key={index} />
+                  ))}
+               </Slider>
+            </section>
+            {/* <section className="w-full col-span-2"></section> */}
+         </div>
 
-        <Slider>
-            {categorys.map((category, index)=>(
-               <CategoryCard category={category} key={index}/>
-            ))}
-        </Slider>
-        
-       </div>
-    );
+
+      </div>
+   );
 }
- 
+
 export default Category;
