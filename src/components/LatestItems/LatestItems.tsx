@@ -11,10 +11,10 @@ import flyer7 from '../../../assets/flyers/flyer_7.jpg'
 import LatestItemCard from '../Cards/LatestItemCard'
 
 interface Props {
-    items : Item []
+    items: Item[]
 }
 
-const LatestItems : React.FC<Props> = ({items}) => {
+const LatestItems: React.FC<Props> = ({ items }) => {
 
     // const items: Item[] = [
     //     {
@@ -89,23 +89,32 @@ const LatestItems : React.FC<Props> = ({items}) => {
     //     },
     // ]
 
-  return (
-    <div className='w-full flex flex-col gap-6'>
-        
-        <h2 className='text-lg font-semibold'>
-            LATEST ITEMS
-        </h2>
+    return (
+        <div className='w-full flex flex-col gap-6'>
 
-        <Slider >
+            <h2 className='text-lg font-semibold'>
+                LATEST ITEMS
+            </h2>
 
-            {items.map((item, index) => (
-                <LatestItemCard item={item} key={index} />
-            ))}
+            <div className="grid grid-cols-7 gap-4">
+                <section className="w-full col-span-7 xl:col-span-5">
+                    <Slider >
 
-        </Slider>
+                        {items.map((item, index) => (
+                            <LatestItemCard item={item} key={index} />
+                        ))}
 
-    </div>
-  )
+                    </Slider>
+                </section>
+
+                <section className="w-full col-span-2"></section>
+
+            </div>
+
+
+
+        </div>
+    )
 }
 
 export default LatestItems

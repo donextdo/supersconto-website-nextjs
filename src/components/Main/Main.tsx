@@ -8,6 +8,7 @@ import Signin from "../Signin/Signin";
 import Link from "next/link";
 import Signup from "../Signup/Signup";
 import { RiLoginCircleFill, RiShoppingCart2Fill } from "react-icons/ri";
+import MobileCartModal from "../Cart/MobileCartModal";
 
 
 interface Props {
@@ -17,72 +18,97 @@ interface Props {
 const Main: React.FC<Props> = ({ catalogs }) => {
   const [login, setLogin] = useState(true);
   const [showCart, setShowCart] = useState(true);
+  const [mobileShowCart, setMobileShowCart] = useState(false);
 
+
+  const handleCart = () => {
+    setMobileShowCart(!mobileShowCart)
+  }
 
   return (
-    <main className="pt-24 container px-2 mx-auto">
-      <div className="grid grid-cols-7 gap-4">
-        <section className="w-full h-full col-span-7 sm:col-span-5">
+    <main className="pt-24  px-10 mx-auto ">
+
+      {/* mobile cart button */}
+      <button className="fixed right-2 bottom-2  text-4xl p-2 z-50 bg-white hover:bg-gray-200 shadow-lg  rounded-full xl:hidden border border-green-800" onClick={handleCart} ><RiShoppingCart2Fill className='text-green-800' />
+      </button>
+      {
+        mobileShowCart && <div>
+          <MobileCartModal setMobileShowCart={setMobileShowCart} />
+        </div>
+      }
+
+      {/* <div style={{
+  position: "fixed",
+  top: "20", display:"flex" ,width:"520px" , height:"520px",background:"black",right:"10" }} ></div> */}
+
+      <h2 className='text-lg font-semibold mb-6 mt-10'>
+        NEAREST FLYERS
+      </h2>
+      <div className="grid grid-cols-7 gap-4 ">
+        <section className="w-full h-[760px] col-span-7 xl:col-span-5 xxl:col-span-5">
           {/* Nearest Fylers Area  */}
           <NearestFlyers catalogs={catalogs} />
         </section>
 
-        <aside className="hidden lg:block w-full h-full col-span-2">
+        <aside className="hidden xl:block w-full h-[760px] col-span-2 relative">
           {/* Login Area  */}
-          <Card styleClass="rounded-md h-full relative">
-
-            {
-              showCart ?
-                <>
-                  <button
-                  onClick={() => setShowCart(false)}
-                  className="absolute top-4 right-4 z-20">
-                    <RiLoginCircleFill className="w-8 h-8 text-green-800"/>
-                  </button>
-                </>
-                :
-                <>
-                  <button
-                  onClick={() => setShowCart(true)}
-                  className="absolute top-4 right-4 z-20">
-                    <RiShoppingCart2Fill className="w-8 h-8 text-green-800"/>
-                  </button>
-                </>
-            }
-
-            {
-              !showCart ?
-                <>
-                  <div className="w-full grid grid-cols-2">
+          <div className="fixed">
+          <Card styleClass="rounded-md h-[760px] relative ">
+            
+              {
+                showCart ?
+                  <>
                     <button
-                    onClick={() => setLogin(true)}
-                    className="w-full py-3 border-r border-gray-600 text-base font-medium text-gray-800 hover:bg-gray-100 relative">
-                      <span>Sign In</span>
-                      {
-                        login &&
-                        <span className="absolute h-[4px] w-4/5 bottom-0 left-0 right-0 mx-auto bg-[#8DC14F] rounded-full"></span>
-                      }
-
+                      onClick={() => setShowCart(false)}
+                      className="absolute top-4 right-4 z-20">
+                      <RiLoginCircleFill className="w-8 h-8 text-green-800" />
                     </button>
-
+                  </>
+                  :
+                  <>
                     <button
-                    onClick={() => setLogin(false)}
-                    className="w-full py-3 border-l border-gray-600 text-base font-medium text-gray-800 hover:bg-gray-100 relative">
-                      <span>Sign Up</span>
-                      {
-                        !login &&
-                        <span className="absolute h-[4px] w-4/5 bottom-0 left-0 right-0 mx-auto bg-[#8DC14F] rounded-full"></span>
-                      }
+                      onClick={() => setShowCart(true)}
+                      className="absolute top-4 right-4 z-20">
+                      <RiShoppingCart2Fill className="w-8 h-8 text-green-800" />
                     </button>
-                  </div>
-                  {login ? <Signin /> : <Signup />}
+                  </>
+              }
 
-                </>
-                : <>
-                  <Cart />
+              {
+                !showCart ?
+                  <>
+                    <div className="w-full grid grid-cols-2">
+                      <button
+                        onClick={() => setLogin(true)}
+                        className="w-full py-3 border-r border-gray-600 text-base font-medium text-gray-800 hover:bg-gray-100 relative">
+                        <span>Sign In</span>
+                        {
+                          login &&
+                          <span className="absolute h-[4px] w-4/5 bottom-0 left-0 right-0 mx-auto bg-[#8DC14F] rounded-full"></span>
+                        }
 
-                </>}
+                      </button>
+
+                      <button
+                        onClick={() => setLogin(false)}
+                        className="w-full py-3 border-l border-gray-600 text-base font-medium text-gray-800 hover:bg-gray-100 relative">
+                        <span>Sign Up</span>
+                        {
+                          !login &&
+                          <span className="absolute h-[4px] w-4/5 bottom-0 left-0 right-0 mx-auto bg-[#8DC14F] rounded-full"></span>
+                        }
+                      </button>
+                    </div>
+                    {login ? <Signin /> : <Signup />}
+
+                  </>
+                  : <>
+                    <Cart />
+
+                  </>}
+            
           </Card>
+          </div>                
         </aside>
       </div>
     </main>

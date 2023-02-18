@@ -49,7 +49,7 @@ const AddToCartModal: React.FC<Props> = ({item, handler}) => {
     console.log({item})
 
     return (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-slate-900 bg-opacity-10">
+        <div className="fixed inset-0 z-50 grid place-items-center bg-slate-900 bg-opacity-30">
             <div className="py-6 px-4 flex gap-6 flex-col relative bg-white shadow-md rounded-md w-3/6">
                 <section className="grid grid-cols-3 gap-4">
                     {/* 1st */}
