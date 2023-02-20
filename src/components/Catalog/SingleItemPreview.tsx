@@ -22,11 +22,18 @@ const SingleItemPreview: React.FC<Props> = ({
                                                 height
                                             }) => {
 
-    console.log({width, height, imageWidth, imageHeight, coordinates})
+    // console.log({width, height, imageWidth, imageHeight, coordinates})
     return (
-        <div style={{position: "relative", maxWidth: width, height}}>
+        <div style={{position: "relative", maxWidth: width, height, userSelect: "none"}} >
             {strokeImageUrl && <>
-                <Image alt="Crop"  src={strokeImageUrl} width={width} height={height} style={{maxWidth: width, height, width}}/>
+                <div style={{
+                    maxWidth: width,
+                    height,
+                    width,
+                    background: `url(${strokeImageUrl})`,
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat"
+                }}/>
                 {coordinates.map((crop: any, index: number) => {
                     const scaleX = width / imageWidth;
                     const scaleY = height / imageHeight;

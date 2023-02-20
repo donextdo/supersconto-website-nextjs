@@ -1,0 +1,31 @@
+.draggable-container{
+
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  position: relative;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for Firefox */
+  &::-moz-scrollbar {
+    display: none;
+  }
+
+  .counter{
+    color: #f5f5f5;
+    background-color: #333;
+    z-index: 1000;
+    border-radius: 4px;
+    opacity: .7;
+    text-align: center;
+    padding: 3px 10px;
+    font-weight: 600;
+    min-width: 100px;
+    position: fixed;
+    bottom: 6rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

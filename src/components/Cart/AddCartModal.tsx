@@ -49,15 +49,15 @@ const AddToCartModal: React.FC<Props> = ({item, handler}) => {
     console.log({item})
 
     return (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-slate-900 bg-opacity-30">
-            <div className="py-6 px-4 flex gap-6 flex-col relative bg-white shadow-md rounded-md w-3/6">
-                <section className="grid grid-cols-3 gap-4">
+        <div className="fixed inset-0 z-50 grid place-items-center bg-slate-900 bg-opacity-75">
+            <div className="py-6 px-4 flex gap-6 flex-col relative bg-white shadow-md rounded-md w-[60vw]">
+                <section className="flex gap-4">
                     {/* 1st */}
-                    <div className="mt-2 w-54 h-72 ml-4 relative">
-                        <Image src={item.product_image} fill alt={item.product_name}/>
+                    <div className="mt-2 h-[50vh] w-4/6  h ml-4 relative">
+                        <Image src={item.product_image} fill style={{objectFit:"contain"}} alt={item.product_name}/>
                     </div>
                     {/* 2nd */}
-                    <div className="col-span-2 mx-16  mt-8">
+                    <div className="col-span-2 mx-16  mt-8 w-1/4" >
                         <div>
                             <p className="text-2xl font-bold">{item.product_name}</p>
                         </div>
