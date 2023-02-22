@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import Card from "../Utils/Card";
 import Button from "../Utils/Button";
 import NearestFlyers from "../NearestFylers/NearestFlyers";
@@ -9,6 +9,9 @@ import Link from "next/link";
 import Signup from "../Signup/Signup";
 import { RiLoginCircleFill, RiShoppingCart2Fill } from "react-icons/ri";
 import MobileCartModal from "../Cart/MobileCartModal";
+import TextInput from '../Utils/TextInput'
+import { FaSearch, FaLocationArrow ,FaUserCircle} from "react-icons/fa";
+
 
 
 interface Props {
@@ -19,11 +22,33 @@ const Main: React.FC<Props> = ({ catalogs }) => {
   const [login, setLogin] = useState(true);
   const [showCart, setShowCart] = useState(true);
   const [mobileShowCart, setMobileShowCart] = useState(false);
+  // const [isFixed, setIsFixed] = useState(true);
 
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const scrollPosition = window.scrollY;
+  //     const elementPosition = document.getElementById('fixed-element').offsetTop;
+  //     if (scrollPosition >= elementPosition) {
+  //       setIsFixed(true);
+  //     } else {
+  //       setIsFixed(false);
+  //     }
+  //   };
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, []);
 
   const handleCart = () => {
     setMobileShowCart(!mobileShowCart)
   }
+
+  const [query, setQuery] = useState<string>('')
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setQuery(e.target.value)
+    }
 
   return (
     <main className="pt-24  px-10 mx-auto ">
@@ -37,9 +62,20 @@ const Main: React.FC<Props> = ({ catalogs }) => {
         </div>
       }
 
-      {/* <div style={{
-  position: "fixed",
-  top: "20", display:"flex" ,width:"520px" , height:"520px",background:"black",right:"10" }} ></div> */}
+     
+      <div className='w-full flex justify-between  md:hidden'>
+        <input className="w-full text-[#3D3B3B] text-sm font-light rounded-l-md px-5" type="text" placeholder="Search by Category or Items" value={query} onChange={handleChange}/>
+        <button >
+          <FaSearch className=' text-white bg-[#008C45] w-12 h-[40px] px-4  rounded-r-md' />
+        </button> 
+      </div>
+
+      <div className='w-full flex justify-between mt-5 md:hidden'>
+        <input className="w-full text-[#3D3B3B] text-sm font-light rounded-l-md px-5" type="text" placeholder="Search by Location" value={query} onChange={handleChange}/>
+        <button >
+          <FaLocationArrow className=' text-white bg-blue-400 w-12 h-[40px] px-4  rounded-r-md' />
+        </button> 
+      </div>
 
       <h2 className='text-lg font-semibold mb-6 mt-10'>
         NEAREST FLYERS
@@ -52,9 +88,12 @@ const Main: React.FC<Props> = ({ catalogs }) => {
 
         <aside className="hidden xl:block w-full h-[760px] col-span-2 relative">
           {/* Login Area  */}
+          {/* <div id="fixed-element" className={`${
+          isFixed  ? 'fixed' : ''
+        }`}> */}
           <div className="fixed">
-          <Card styleClass="rounded-md h-[760px] relative ">
-            
+            <Card styleClass="rounded-md h-[760px] relative ">
+
               {
                 showCart ?
                   <>
@@ -106,9 +145,9 @@ const Main: React.FC<Props> = ({ catalogs }) => {
                     <Cart />
 
                   </>}
-            
-          </Card>
-          </div>                
+
+            </Card>
+          </div>
         </aside>
       </div>
     </main>

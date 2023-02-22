@@ -13,10 +13,13 @@
     header {
         @apply fixed py-4 h-20 flex items-center top-0 w-full z-50 bg-white shadow-md;
     }
-
+    img {
+      height: 100%;
+    }
 }
 
 @layer components{
+
     .row {
         display: -ms-flexbox; /* IE10 */
         display: flex;

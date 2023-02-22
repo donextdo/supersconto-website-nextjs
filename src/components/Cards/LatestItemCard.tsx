@@ -16,9 +16,12 @@ const LatestItemCard: React.FC<Props> = ({item}) => {
         <Image 
             // src={item.image}
             src={item.product_image}
-            fill
+            // fill
             alt='flyer'
-            sizes='width: 100%'
+            style={{objectFit:"cover"}}
+          sizes='height: 100%'
+          height={600}
+          width={400}
            
         />
 
