@@ -177,7 +177,7 @@ const Cart = () => {
                 {
                     print && (
                         <div>
-                            <Print setPrint={setPrint} />
+                            <Print setPrint={setPrint}/>
                         </div>
                     )
                 }

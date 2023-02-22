@@ -16,7 +16,11 @@ const ShopsCard: React.FC<Props> = ({ shop }) => {
         <Image 
           src={shop.logo_img} 
           alt={shop.shop_name} 
-          fill
+          // fill
+          style={{objectFit:"cover"}}
+          sizes='height: 100%'
+          height={600}
+          width={400}
            />
       </div>
 
