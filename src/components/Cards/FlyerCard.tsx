@@ -17,15 +17,19 @@ const FlyerCard: React.FC<Props> = ({flyer,onClick}) => {
         console.log(flyer);
     }, [])
   return (
-    <div className='w-32 h-48 md:w-40 lg:w-56 lg:h-72 xl:w-52 xxl:w-60 xxl:h-80 xxxl:w-[300px] xxxl:h-96 rounded-md relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer' onClick={onClick}>
+    <div className='w-full h-36  ssm:h-40  lsm:h-56  llsm:h-64  sm:h-44  md:h-52 xmd:h-60  lg:h-72 xlg:h-80  xl:h-64  xxl:h-80  xxxl:h-[360px] rounded-md relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer' onClick={onClick}>
+    
+    {/* <div className='w-[102px] h-36 ssm:w-32 ssm:h-40 lsm:w-[172px] lsm:h-56 llsm:w-52 llsm:h-64 sm:w-32 sm:h-44 md:w-full md:h-52 xmd:w-[182px] xmd:h-60 lg:w-56 lg:h-72 xlg:h-80 xlg:w-64 xl:w-52 xl:h-64 xxl:w-60 xxl:h-80 xxxl:w-[300px] xxxl:h-[360px] rounded-md relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer' onClick={onClick}> */}
         <Image 
             src={flyer.pages?.length && flyer.pages?.length > 0 ? flyer.pages[0]?.page_image : ''}
-            fill
+            style={{objectFit:"cover"}}
             alt='flyer'
-            sizes='width: auto'
+            sizes='height: 100%'
+            height={600}
+            width={400}
         />
 
-        <div className='absolute bottom-0 w-full flex flex-col gap-1 p-2  bg-opacity-30 backdrop-blur-sm'>
+        <div className='absolute bottom-0 w-full flex flex-col gap-1 p-2  bg-opacity-30 backdrop-blur-sm hover:bg-white'>
             <h4 className='text-sm capitalize font-medium'>
                 { flyer.title }
             </h4>

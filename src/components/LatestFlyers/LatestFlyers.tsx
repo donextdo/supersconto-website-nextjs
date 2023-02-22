@@ -9,6 +9,7 @@ import flyer4 from '../../../assets/flyers/flyer_4.jpg'
 import flyer5 from '../../../assets/flyers/flyer_5.jpg'
 import flyer6 from '../../../assets/flyers/flyer_6.jpg'
 import flyer7 from '../../../assets/flyers/flyer_7.jpg'
+import LatestFlyersCard from '../Cards/LatestFlyerCard'
 
 interface Props {
     catalogs: Catalog[]
@@ -177,7 +178,7 @@ const LatestFlyers: React.FC<Props> = ({ catalogs }) => {
                     <Slider >
 
                         {catalogs.map((flyer, index) => (
-                            <FlyerCard flyer={flyer} key={index} />
+                            <LatestFlyersCard flyer={flyer} key={index} />
                         ))}
 
                     </Slider>

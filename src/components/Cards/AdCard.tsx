@@ -7,15 +7,18 @@ import flyer2 from '../../../assets/flyers/flyer_2.jpg'
 
 const AdCard = () => {
     return (
-        <div className="flex justify-between bg-white px-20 py-16 rounded-md ">
-            <div className='w-full max-w-[12.5rem] min-w-[12.5rem] h-64 rounded-sm relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer'>
+        <div className="flex justify-between bg-white px-20 py-12 rounded-md ">
+            <div className='w-[300px] min-w-[12.5rem] h-[340px] rounded-sm relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer '>
                 <Image
                     src={flyer1}
-                    layout='fill'
+                    style={{ objectFit: "cover" }}
+                    sizes='height: 100%'
+                    height={600}
+                    width={400}
                     alt='flyer'
                 />
 
-                <div className='absolute bottom-0 w-full flex flex-col gap-1 p-2 bg-white bg-opacity-30 backdrop-blur-sm'>
+                <div className='absolute bottom-0 w-full flex flex-col gap-1 p-2 bg-white bg-opacity-30 backdrop-blur-sm '>
                     <h4 className='text-sm capitalize font-medium'>
                         KREO BRICO AND CASA
                     </h4>
@@ -42,13 +45,19 @@ const AdCard = () => {
             </div>
 
             {/* ....... */}
-        
-                <Image src={gad} alt="ads" />
+
+            <div className='h-[340px] w-auto mx-6'>
+            <Image src={gad} alt="ads" />
+            </div>
+
             {/* ....... */}
-            <div className='w-full max-w-[12.5rem] min-w-[12.5rem] h-64 rounded-sm relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer'>
+            <div className='w-[300px] min-w-[12.5rem] h-[340px] rounded-sm relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer z-10'>
                 <Image
                     src={flyer2}
-                    layout='fill'
+                    style={{ objectFit: "cover" }}
+                    sizes='height: 100%'
+                    height={600}
+                    width={400}
                     alt='flyer'
                 />
 

@@ -3,17 +3,33 @@ import { BsFillPersonFill, BsFillLockFill } from "react-icons/bs";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from 'react';
-import {http} from "../../../utils/request";
+import { http } from "../../../utils/request";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup.object({
+    email: yup.string().email().required(),
+    username: yup.string().required(),
+    password: yup.string().required(),
+}).required();
+type FormData = yup.InferType<typeof schema>;
 
 
 const Signin = () => {
+
+    const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+        resolver: yupResolver(schema),
+    });
+
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-   
 
-    
 
-    const handleSubmit = async (e :any) => {
+
+
+    const onSubmit = async (e: any) => {
         e.preventDefault();
         try {
             const details = {
@@ -21,49 +37,55 @@ const Signin = () => {
                 password,
                 role: 2
             }
-            
-            const res = await http.post(`/auth/signin` , {...details}); 
-            
+
+            const res = await http.post(`/auth/signin`, { ...details });
+
 
             console.log(res.data)
             JSON.stringify(res.data)
             btoa(JSON.stringify(res.data))
-            localStorage.setItem('data',btoa(JSON.stringify(res.data)))
+            localStorage.setItem('data', btoa(JSON.stringify(res.data)))
 
         } catch (err) {
             console.log(err);
         }
 
-    } 
+    }
 
     return (
         <div className="mt-10 flex flex-col gap-3 w-80 xxl:w-[400px] xxxl:w-[480px]">
             <section className="px-2">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="space-y-5">
                         <div className="flex flex-raw relative items-center">
                             <BsFillPersonFill className="fill-[#CD212A] absolute ml-2" />
                             <input
-                                type="text"
-                                name="email"
+                                type="email"
+                                // name="email"
+                                {...register("email", { required: true })}
                                 placeholder="Email and Contact Number"
                                 className="pl-8 py-2 w-full border border-gray-400 placeholder-gray-600"
-                                value={email} 
+                                value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
+                        <p className="pl-2 text-red-600">{errors.email && "Email is required"} </p>
+
 
                         <div className="flex flex-raw relative items-center">
                             <BsFillLockFill className="fill-[#CD212A] absolute ml-2" />
                             <input
                                 type="password"
-                                name="password"
+                                // name="password"
+                                {...register("password", { required: true })}
                                 placeholder="Password"
                                 className="pl-8 py-2 w-full border border-gray-400 placeholder-gray-600"
-                                value={password} 
+                                value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
+                        <p className="pl-2 text-red-600">{errors.password && "Password is required"} </p>
+
 
                         {/* <p className="mx-2 text-[#CD212A] text-xs"><Link href="#">Forget Password ?</Link></p> */}
 
@@ -88,8 +110,8 @@ const Signin = () => {
 
             <div className="flex flex-raw relative items-center mx-auto ">
                 <FcGoogle className="fill-blue-500 absolute ml-4 " />
-                <button 
-                className="border border-[#8DC14F] rounded-lg text-[#8DC14F] py-1 w-[300px] xxl:w-[390px] xxxl:w-[460px] pl-6 hover:bg-[#8DC14F] hover:text-white ">
+                <button
+                    className="border border-[#8DC14F] rounded-lg text-[#8DC14F] py-1 w-[300px] xxl:w-[390px] xxxl:w-[460px] pl-6 hover:bg-[#8DC14F] hover:text-white ">
                     Login with Google
                 </button>
             </div>
