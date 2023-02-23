@@ -25,7 +25,7 @@ const Lidl = () => {
             Shops of City
         </h2>
         <div className="grid grid-cols-7 gap-4">
-          <section className="w-full h-max col-span-5">
+          <section className="w-full h-full col-span-5">
             <Card styleClass="rounded-md flex flex-col gap-4">
               <div
                 className="w-full h-[60vh] pr-2 grid grid-cols-4 gap-4 
