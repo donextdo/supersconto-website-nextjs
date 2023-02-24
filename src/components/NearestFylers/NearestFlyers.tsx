@@ -72,7 +72,7 @@ const NearestFlyers: React.FC<Props> = ({ catalogs }) => {
     // ]
 
   return (
-    <Card styleClass='rounded-md flex flex-col gap-4 h-[74vh] overflow-hidden'>
+    <Card styleClass='rounded-md flex flex-col gap-4 h-[74vh] overflow-hidden '>
 
         <div 
         className='w-full h-[60vh] pr-2 grid grid-cols-2 gap-x-2 gap-y-2 justify-items-center

@@ -27,7 +27,7 @@ const Home: React.FC<Props> = ({ catalogs,shops,items }) => {
 
     useEffect(() => {
         getLocation()
-        // console.log(shops)
+        console.log(shops)
     }, [])
 
     useEffect(() => {

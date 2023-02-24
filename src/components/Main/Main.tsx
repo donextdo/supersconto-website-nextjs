@@ -34,7 +34,7 @@ const Main: React.FC<Props> = ({ catalogs }) => {
     }
 
   return (
-    <main className="mt-24  px-10 mx-auto ">
+    <main className="mt-24  px-10 mx-auto">
 
       {/* mobile cart button */}
       <button className="fixed right-2 bottom-2  text-4xl p-2 z-50 bg-white hover:bg-gray-200 shadow-lg  rounded-full xl:hidden border border-green-800" onClick={handleCart} ><RiShoppingCart2Fill className='text-green-800' />
@@ -64,7 +64,7 @@ const Main: React.FC<Props> = ({ catalogs }) => {
         NEAREST FLYERS
       </h2>
       <div className="grid grid-cols-7 gap-4 ">
-        <section className="w-full h-[74vh] col-span-7 xl:col-span-5 xxl:col-span-5">
+        <section className="w-full h-[74vh] col-span-7 xl:col-span-5 xxl:col-span-5 ">
           {/* Nearest Fylers Area  */}
           <NearestFlyers catalogs={catalogs} />
         </section>
