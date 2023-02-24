@@ -13,10 +13,7 @@ const Footer = () => {
             
             <Image src={logo} alt="logo" className="w-auto h-16" />
             <p  className="my-2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+            Shop the best of Italian foods, grocery items , beauty, and home decor on our multivendor website. Find unique products from top vendors across Italy, all in one place. Shop now and add a touch of Italian elegance to your life with amazing discounts.
             </p>
             <div className="flex space-x-2 my-3">
                 <FaFacebookSquare className="fill-[#CD212A]"/>

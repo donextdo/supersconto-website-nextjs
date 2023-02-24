@@ -22,23 +22,6 @@ const Main: React.FC<Props> = ({ catalogs }) => {
   const [login, setLogin] = useState(true);
   const [showCart, setShowCart] = useState(true);
   const [mobileShowCart, setMobileShowCart] = useState(false);
-  // const [isFixed, setIsFixed] = useState(true);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const scrollPosition = window.scrollY;
-  //     const elementPosition = document.getElementById('fixed-element').offsetTop;
-  //     if (scrollPosition >= elementPosition) {
-  //       setIsFixed(true);
-  //     } else {
-  //       setIsFixed(false);
-  //     }
-  //   };
-  //   window.addEventListener('scroll', handleScroll);
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, []);
 
   const handleCart = () => {
     setMobileShowCart(!mobileShowCart)
@@ -51,7 +34,7 @@ const Main: React.FC<Props> = ({ catalogs }) => {
     }
 
   return (
-    <main className="pt-24  px-10 mx-auto ">
+    <main className="mt-24  px-10 mx-auto ">
 
       {/* mobile cart button */}
       <button className="fixed right-2 bottom-2  text-4xl p-2 z-50 bg-white hover:bg-gray-200 shadow-lg  rounded-full xl:hidden border border-green-800" onClick={handleCart} ><RiShoppingCart2Fill className='text-green-800' />
@@ -77,22 +60,19 @@ const Main: React.FC<Props> = ({ catalogs }) => {
         </button> 
       </div>
 
-      <h2 className='text-lg font-semibold mb-6 mt-10'>
+      <h2 className='text-lg font-semibold mb-6 pt-4'>
         NEAREST FLYERS
       </h2>
       <div className="grid grid-cols-7 gap-4 ">
-        <section className="w-full h-[760px] col-span-7 xl:col-span-5 xxl:col-span-5">
+        <section className="w-full h-[74vh] col-span-7 xl:col-span-5 xxl:col-span-5">
           {/* Nearest Fylers Area  */}
           <NearestFlyers catalogs={catalogs} />
         </section>
 
-        <aside className="hidden xl:block w-full h-[760px] col-span-2 relative">
-          {/* Login Area  */}
-          {/* <div id="fixed-element" className={`${
-          isFixed  ? 'fixed' : ''
-        }`}> */}
+        <aside className="hidden xl:block w-full h-[74vh] col-span-2 relative">
+         
           <div className="fixed">
-            <Card styleClass="rounded-md h-[760px] relative ">
+            <Card styleClass="rounded-md h-[74vh] relative ">
 
               {
                 showCart ?

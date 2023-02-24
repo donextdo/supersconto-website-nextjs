@@ -21,7 +21,7 @@ const Ad = () => {
         },
     ]
     return (
-        <div className=" hidden xl:block pt-24  px-10 mx-auto">
+        <div className=" hidden xl:block mt-24 px-10 mx-auto">
             <h2 className='text-lg font-semibold mb-6'>
                 SPECIAL FLYERS
             </h2>

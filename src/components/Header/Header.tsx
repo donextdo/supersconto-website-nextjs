@@ -24,7 +24,7 @@ const Header = () => {
                     <Link href={'/'}
                         className='text-3xl text-[#008C45] font-semibold '
                     >
-                        <Image src={logo} alt="LOGO" className='h-11 sm:h-14 md:h-16 w-auto'></Image>
+                        <Image src={logo} alt="LOGO" className='h-11 sm:h-9 md:h-11 w-auto'></Image>
                     </Link>
 
                     

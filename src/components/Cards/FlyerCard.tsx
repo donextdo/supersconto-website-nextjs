@@ -22,7 +22,7 @@ const FlyerCard: React.FC<Props> = ({flyer,onClick}) => {
     {/* <div className='w-[102px] h-36 ssm:w-32 ssm:h-40 lsm:w-[172px] lsm:h-56 llsm:w-52 llsm:h-64 sm:w-32 sm:h-44 md:w-full md:h-52 xmd:w-[182px] xmd:h-60 lg:w-56 lg:h-72 xlg:h-80 xlg:w-64 xl:w-52 xl:h-64 xxl:w-60 xxl:h-80 xxxl:w-[300px] xxxl:h-[360px] rounded-md relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer' onClick={onClick}> */}
         <Image 
             src={flyer.pages?.length && flyer.pages?.length > 0 ? flyer.pages[0]?.page_image : ''}
-            style={{objectFit:"cover"}}
+            style={{objectFit:"cover", backgroundColor:"gray"}}
             alt='flyer'
             sizes='height: 100%'
             height={600}

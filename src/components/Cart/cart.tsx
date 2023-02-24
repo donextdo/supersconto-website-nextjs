@@ -100,7 +100,7 @@ const Cart = () => {
                 <div>{getTotalAmount()}</div>
             </div>
 
-            <div className="overflow-y-auto overflow-x-hidden h-[48vh]">
+            <div className="overflow-y-auto overflow-x-hidden h-[46vh] ">
             {Object.keys(cartObj).map((shop) => (
                
                 <div key={`shop${shop}`} >
@@ -158,7 +158,7 @@ const Cart = () => {
 
             ))}
             </div>
-            <div className="mb-4 flex justify-between mt-24">
+            <div className="mb-4 flex justify-between mt-12">
 
                 <button disabled={Object.keys(cartObj).length === 0} className={`bg-[#8DC14F] text-white rounded-lg px-2 py-2 flex-1 mx-1 ${Object.keys(cartObj).length === 0 ? 'bg-opacity-50': ''}`} onClick={() => {
                     localStorage.removeItem("cartItems")
