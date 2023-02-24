@@ -1,4 +1,4 @@
-import gad from '../../../assets/ad/googleads.png'
+import gad from '../../../assets/ad/googleads.jpg'
 import { RiPinDistanceFill } from 'react-icons/ri'
 import { FaCalendar } from 'react-icons/fa'
 import Image from 'next/image'
@@ -47,7 +47,11 @@ const AdCard = () => {
             {/* ....... */}
 
             <div className='h-[340px] w-auto mx-6'>
-            <Image src={gad} alt="ads" />
+            <Image src={gad} alt="ads"  style={{ objectFit: "cover" }}
+                    sizes='height: 100%'
+                    height={600}
+                    width={400}
+                    />
             </div>
 
             {/* ....... */}
