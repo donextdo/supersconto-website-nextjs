@@ -60,9 +60,9 @@ function Draggable({pages, setShowModal}: any) {
         setIsDragging(false);
     };
 
-    const handleIntersect = (entries) => {
+    const handleIntersect = (entries: any) => {
         console.log(entries)
-        entries.forEach((entry) => {
+        entries.forEach((entry: any) => {
             if (entry.isIntersecting && entry.intersectionRatio === 1) {
                 if (isDragging) {
                     console.log("intersecting", {
