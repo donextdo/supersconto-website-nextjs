@@ -6,13 +6,25 @@ import logo from '../../../assets/logo/logo.png'
 import Image from 'next/image'
 import { FaSearch, FaLocationArrow, FaUserCircle } from "react-icons/fa";
 import { SlUser } from "react-icons/sl";
+import { useRouter } from 'next/router'
 
 const Header = () => {
 
     const [query, setQuery] = useState<string>('')
+    const [location, setLocation] = useState<string>('')
+
+    const router = useRouter()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setQuery(e.target.value)
+    }
+
+    const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setLocation(e.target.value)
+    }
+
+    const handleSearch = (): void => {  
+        router.push(`/search-results?query=${query}`)
     }
 
     return (
@@ -40,7 +52,10 @@ const Header = () => {
                             Styles='bg-[#EDEDED] text-[#3D3B3B] text-sm font-light md:w-48 lg:w-60 xl:w-96 rounded-md h-[40px]'
                             placeholder='Search by Category or Items'
                         />
-                        <button className='relative'>
+                        <button 
+                        disabled={!query}
+                        onClick={handleSearch}
+                        className='relative'>
                             <FaSearch className='absolute text-white bg-[#008C45] w-12 h-[40px] px-4 -left-8 -bottom-[20px] rounded-r-md' />
                         </button>
                     </div>
@@ -49,8 +64,8 @@ const Header = () => {
                     <section className='hidden md:block'>
                     <div className='flex flex-raw items-center ml-8 lg:ml-20'>
                         <TextInput
-                            value={query}
-                            onChange={handleChange}
+                            value={location}
+                            onChange={handleLocationChange}
                             Styles='bg-[#EDEDED] text-[#3D3B3B] text-sm font-light md:w-48 lg:w-60 xl:w-96 rounded-l-md h-[40px]'
                             placeholder='Search by Location'
                         />

@@ -73,7 +73,7 @@ const Signup = () => {
 
   return (
     <div className="w-80 xxl:w-[400px] xxxl:w-[480px]">
-      <form onSubmit={handleSubmit(onSubmit)} >
+      <form onSubmit={handleSubmit(onSubmit)} className="h-max">
         
           <section className=" mt-8 overflow-y-scroll overflow-x-hidden sm:h-[35vh] l">
             <div className="flex flex-raw relative items-center mx-2">
@@ -170,16 +170,7 @@ const Signup = () => {
           </section>
 
           
-            <p className="text-xs mx-2 mt-16 ">
-              By clicking the `Sign Up` button you will agree to our terms and
-              conditions
-            </p>
-
-            <div className="mt-8 xmd:mt-14 ">
-              <button type="submit" className="bg-[#8DC14F] text-white w-[305px] xxl:w-[390px] xxxl:w-[470px] rounded-lg mx-2 py-2 mb-4 ">
-                Sign Up
-              </button>
-            </div>
+            
 
             {/* <div className="relative">
               <button type="submit" className="bg-[#8DC14F] text-white w-[305px] xxl:w-[390px] xxxl:w-[470px] rounded-lg mx-2 py-2 mt-8 mb-4 fixed bottom-8">
@@ -189,6 +180,21 @@ const Signup = () => {
           
         
       </form>
+
+      <p className="text-xs mx-2 mt-4">
+              By clicking the `Sign Up` button you will agree to our terms and
+              conditions
+      </p>
+
+        <div className="absolute bottom-5 left-0 right-0 px-4 mx-auto w-full">
+              {/* <button type="submit" className="bg-[#8DC14F] text-white w-[305px] xxl:w-[390px] xxxl:w-[470px] rounded-lg mx-2 py-2 mb-4 ">
+                Sign Up
+              </button> */}
+
+              <button type="submit" className="bg-[#8DC14F] text-white w-full rounded-lg py-2">
+                Sign Up
+              </button>
+        </div>
     </div>
   );
 };
