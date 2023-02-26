@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import requests from "../../utils/request";
 import SingleItemPreview from "../../src/components/Catalog/SingleItemPreview";
 import Slider from "react-slick";
@@ -7,28 +7,35 @@ import prevArrow from "../../public/arrow-prev.svg";
 import Image from "next/image";
 import AddToCartModal from "../../src/components/Cart/AddCartModal";
 import Link from 'next/link';
-import {FaAngleLeft} from "react-icons/fa";
+import { FaAngleLeft } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Draggable from "../../src/components/Draggable/Draggable";
+import { RiShoppingCart2Fill } from "react-icons/ri";
+import logo from '../../assets//logo/logo.png'
+import NavbarCartModal from '../../src/components/Cart/NavbarCartModal';
+
+
 
 interface Props {
     catalog?: any
 }
 
-const CatalogCarousel: React.FC<Props> = ({catalog}) => {
+const CatalogCarousel: React.FC<Props> = ({ catalog }) => {
     const [pages, setPages] = useState([])
-    const [showModal, setShowModal] = useState({show: false, item: null})
+    const [showModal, setShowModal] = useState({ show: false, item: null })
     const [settings, setSettings] = useState({
         dots: true,
         infinite: true,
         speed: 500,
         slidesToShow: 2,
         slidesToScroll: 2,
-        nextArrow: <NextArrowCircle/>,
-        prevArrow: <PrevArrowCircle/>,
+        nextArrow: <NextArrowCircle />,
+        prevArrow: <PrevArrowCircle />,
     })
-    const [windowInfo, setWindowInfo] = useState({width: 0, height: 0})
+    const [windowInfo, setWindowInfo] = useState({ width: 0, height: 0 })
+    const [showCart, setShowCart] = useState(false);
+
 
     useEffect(() => {
         console.log(catalog);
@@ -43,18 +50,37 @@ const CatalogCarousel: React.FC<Props> = ({catalog}) => {
         }
     }, [catalog])
 
+    const originalDate = new Date(catalog[0].expiredate)
+    const formattedDate = new Date(originalDate).toLocaleDateString("en-GB")
+    // console.log(formattedDate);
+
+    const handleCart = () => {
+        setShowCart(!showCart)
+    }
 
     console.log(windowInfo)
 
     return (
         <div className="catalog-page">
             <div className="catalog-header">
-
+                <div className='flex justify-between mx-2 items-center py-4'>
+                    <div className='ml-12 '><Image src={logo} alt="LOGO" className='h-11 sm:h-9 md:h-11 w-auto'></Image></div>
+                    <div className='text-center'>
+                        <p>{catalog[0].title}</p>
+                        <p>Expire Date -{formattedDate}</p>
+                    </div>
+                    <div>
+                        <button className="text-4xl" onClick={handleCart} ><RiShoppingCart2Fill className='text-green-800' /></button>
+                    </div>
+                    {showCart && 
+                        <NavbarCartModal />
+                    }
+                </div>
             </div>
             <div className="catalog-component">
 
-                <Link href="/" className='fixed left-16 top-4'>
-                    <button className="text-4xl  z-50 bg-[#8DC14F] rounded-full "><FaAngleLeft className='text-white'/>
+                <Link href="/" className='fixed left-2 top-4'>
+                    <button className="text-4xl  z-50 bg-[#8DC14F] rounded-full "><FaAngleLeft className='text-white' />
                     </button>
                 </Link>
                 {/*<Slider {...settings}>
@@ -83,13 +109,13 @@ const CatalogCarousel: React.FC<Props> = ({catalog}) => {
                     ))
                 }
             </Slider>*/}
-                <Draggable pages={pages} setShowModal={setShowModal}/>
+                <Draggable pages={pages} setShowModal={setShowModal} />
 
                 {showModal.show && showModal.item && <AddToCartModal item={showModal.item}
-                                                                     handler={() => setShowModal(prevState => ({
-                                                                         ...prevState,
-                                                                         show: false
-                                                                     }))}/>}
+                    handler={() => setShowModal(prevState => ({
+                        ...prevState,
+                        show: false
+                    }))} />}
 
             </div>
         </div>
@@ -114,7 +140,7 @@ export const getServerSideProps = async (context: any) => {
 
 }
 
-export function NextArrowCircle({className, style, onClick}: any) {
+export function NextArrowCircle({ className, style, onClick }: any) {
     return (
         <div
             className={`${className}`}
@@ -122,12 +148,12 @@ export function NextArrowCircle({className, style, onClick}: any) {
             onClick={onClick}
             draggable={false}
         >
-            <Image fill src={nextArrow} alt={""}/>
+            <Image fill src={nextArrow} alt={""} />
         </div>
     );
 }
 
-export function PrevArrowCircle({className, style, onClick}: any) {
+export function PrevArrowCircle({ className, style, onClick }: any) {
     return (
         <div
             className={`${className}`}
@@ -135,7 +161,7 @@ export function PrevArrowCircle({className, style, onClick}: any) {
             onClick={onClick}
             draggable={false}
         >
-            <Image fill src={prevArrow} alt={""}/>
+            <Image fill src={prevArrow} alt={""} />
         </div>
     );
 }

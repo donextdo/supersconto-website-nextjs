@@ -80,7 +80,7 @@ export const getServerSideProps = async (context: any) => {
     const [shop] = await Promise.all([
         fetch(requests.findShopById(context.query.shopId)).then((res) => res.json())
     ])
-
+    console.log(shop)
 
     return {
         props: {
