@@ -36,10 +36,10 @@ const ShopPages: React.FC<Props> = ({shop}) => {
                     Shops of City
                 </h2>
                 <div className="grid grid-cols-7 gap-4">
-                    <section className="w-full h-max col-span-5">
+                    <section className="w-full h-max col-span-7">
                         <Card styleClass="rounded-md flex flex-col gap-4">
                             <div
-                                className="w-full h-[60vh] pr-2 grid grid-cols-4 gap-4
+                                className="w-full h-max pr-2 grid grid-cols-5 gap-4
                     overflow-y-scroll overflow-x-hidden 
                     !scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-gray-400
                     xxl:grid-cols-5"
@@ -54,10 +54,10 @@ const ShopPages: React.FC<Props> = ({shop}) => {
                         </Card>
                     </section>
 
-                    <aside className="w-full h-full col-span-2">
+                    {/* <aside className="w-full h-full col-span-2"> */}
                         {/* Shop deatils  */}
 
-                        <Card styleClass="rounded-md h-full" bgColor="bg-white">
+                        {/* <Card styleClass="rounded-md h-full" bgColor="bg-white">
                             <div>
                                 <h6><span>Shop Name:- </span>{shop.shop_name}</h6>
                                 <h6><span>TP :- </span>{shop.telephone}</h6>
@@ -66,7 +66,7 @@ const ShopPages: React.FC<Props> = ({shop}) => {
                                 <h6></h6>
                             </div>
                         </Card>
-                    </aside>
+                    </aside> */}
                 </div>
             </div>
         </>
@@ -80,7 +80,7 @@ export const getServerSideProps = async (context: any) => {
     const [shop] = await Promise.all([
         fetch(requests.findShopById(context.query.shopId)).then((res) => res.json())
     ])
-
+    console.log(shop)
 
     return {
         props: {

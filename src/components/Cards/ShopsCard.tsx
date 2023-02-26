@@ -12,15 +12,14 @@ const ShopsCard: React.FC<Props> = ({ shop }) => {
 
   return (
     <div className="w-[12.5rem] h-48 rounded-lg shadow-md bg-gray-100 flex flex-col overflow-hidden hover:bg-gray-500 hover:text-white">
-      <div className="w-[12.5rem] h-40 relative">
+      <div className="w-[12.5rem] h-40 relative overflow-hidden">
         <Image 
           src={shop.logo_img} 
           alt={shop.shop_name} 
           // fill
           style={{objectFit:"cover"}}
           sizes='height: 100%'
-          height={600}
-          width={400}
+          fill
            />
       </div>
 

@@ -21,9 +21,9 @@ export interface Catalog {
 }
 
 export interface Item{
-    name:string,
+    product_name:string,
     product_image:string,
-    price:string
+    unit_price:string
     pages?: SinglePage[]
 }
 

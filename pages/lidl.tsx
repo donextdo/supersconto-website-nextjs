@@ -21,8 +21,8 @@ const Lidl = () => {
         </div> */}
 
       <div className="pt-24 container px-2 mx-auto">
-      <h2 className='text-lg font-semibold my-4'>
-            Shops of City
+        <h2 className='text-lg font-semibold my-4'>
+          Shops of City
         </h2>
         <div className="grid grid-cols-7 gap-4">
           <section className="w-full h-full col-span-5">
@@ -31,7 +31,7 @@ const Lidl = () => {
                 className="w-full h-[60vh] pr-2 grid grid-cols-4 gap-4 
                     overflow-y-scroll overflow-x-hidden 
                     !scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-gray-400
-                    xxl:grid-cols-5"
+                    xxl:grid-cols-4"
               >
                 <div className="hover:scale-105 cursor-pointer">
                   <Image src={flyer1} alt="aq" />
@@ -47,6 +47,16 @@ const Lidl = () => {
                 </div>
                 <div>
                   <Image src={flyer1} alt="aqaq" />
+                </div>
+                <div style={{ position: 'relative', width: '100%', height: '400px' }}>
+                  <div style={{ position: 'relative', width: '100%', height: '100%', backgroundColor: '#f0f0f0' }}>
+                    <Image
+                      src={flyer1}
+                      alt="Example Image"
+                      layout="responsive"
+                      objectFit="cover"
+                    />
+                  </div>
                 </div>
               </div>
             </Card>
