@@ -79,7 +79,7 @@ export interface OneShop{
 // }
 
 export interface News{
-    image: StaticImageData,
+    image: string,
     title:string,
     description:string
 }

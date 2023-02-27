@@ -181,12 +181,12 @@ const Signup = () => {
         
       </form>
 
-      <p className="text-xs mx-2 mt-4">
+      <p className="text-xs mx-2 mt-10">
               By clicking the `Sign Up` button you will agree to our terms and
               conditions
       </p>
 
-        <div className="absolute bottom-5 left-0 right-0 px-4 mx-auto w-full">
+        <div className="absolute bottom-10 left-0 right-0 px-4 mx-auto w-full">
               {/* <button type="submit" className="bg-[#8DC14F] text-white w-[305px] xxl:w-[390px] xxxl:w-[470px] rounded-lg mx-2 py-2 mb-4 ">
                 Sign Up
               </button> */}

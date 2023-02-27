@@ -8,7 +8,9 @@ const requests = {
     getCatalogBookPageItemByIds:`${BASE_URL}/catelog/item/find-list`,
     getLatestItemId : `${BASE_URL}/catelog/item`,
     allShops : `${BASE_URL}/shop`,
-    findShopById : (id :string) => `${BASE_URL}/shop/find/${id}`
+    findShopById : (id :string) => `${BASE_URL}/shop/find/${id}`,
+    allNews : `${BASE_URL}/news`,
+
 }
 export const http = axios.create({
     baseURL: BASE_URL ,
