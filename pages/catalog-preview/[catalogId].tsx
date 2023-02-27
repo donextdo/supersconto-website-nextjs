@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import requests from "../../utils/request";
 import SingleItemPreview from "../../src/components/Catalog/SingleItemPreview";
 import Slider from "react-slick";
@@ -35,6 +35,8 @@ const CatalogCarousel: React.FC<Props> = ({ catalog }) => {
     })
     const [windowInfo, setWindowInfo] = useState({ width: 0, height: 0 })
     const [showCart, setShowCart] = useState(false);
+    const ref = useRef<HTMLDivElement>(null);
+
 
 
     useEffect(() => {
@@ -49,6 +51,34 @@ const CatalogCarousel: React.FC<Props> = ({ catalog }) => {
             }
         }
     }, [catalog])
+
+    useEffect(() => {
+        function handleClickOutside(event:any) {
+          if (ref.current && !ref.current.contains(event.target)) {
+            setShowCart(false);
+          }
+        }
+      
+        document.addEventListener("mousedown", handleClickOutside);
+      
+        return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, [ref]);
+     
+    //   const getItemCount = () => {
+    //     let count = 0
+    //     let totol = 0
+    //   if (cartObj) {
+    //       Object.keys(cartObj).forEach(shop => {
+    //           count += cartObj[shop].length
+    //           cartObj[shop].forEach((item: { cartQuantity: number; }) => {
+    //               totol += item.cartQuantity
+    //           })
+    //       })
+    //   }
+    //   return `${count} (${totol})`
+    // }
 
     const originalDate = new Date(catalog[0].expiredate)
     const formattedDate = new Date(originalDate).toLocaleDateString("en-GB")
@@ -71,10 +101,13 @@ const CatalogCarousel: React.FC<Props> = ({ catalog }) => {
                     </div>
                     <div>
                         <button className="text-4xl" onClick={handleCart} ><RiShoppingCart2Fill className='text-green-800' /></button>
-                    </div>
+                        {/* <b>{getItemCount()}</b> */}
+                    </div >
+                    
                     {showCart && 
-                        <NavbarCartModal />
+                        <NavbarCartModal ref={ref} />
                     }
+                    
                 </div>
             </div>
             <div className="catalog-component">
