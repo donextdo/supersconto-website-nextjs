@@ -87,5 +87,7 @@ export interface News{
 export interface City{
     image: StaticImageData,
     title:string,
-    description:string
+    description:string,
+    address:string,
+    city:string,
 }
