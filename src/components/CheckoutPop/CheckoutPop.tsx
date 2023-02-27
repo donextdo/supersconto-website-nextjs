@@ -42,7 +42,7 @@ const getItemCount = () => {
                     <div className="row">
                         <div className="flex-1 p-5">
                             <div className="container ">
-                                <form action="/action_page.php">
+                                <form action="">
                                     <div className="row">
                                         <div className="col-50">
                                             <h3>Billing Address</h3>
