@@ -1,14 +1,14 @@
-import { City } from "../../../typings";
+import { City,Shop } from "../../../typings";
 import Slider from "../Utils/Slider";
 import cit1 from "../../../assets/cities/cit1.png";
 import cit2 from "../../../assets/cities/cit2.png";
 import CitiesCard from "../Cards/CitiesCard";
 
 interface Props {
-  citys: City[]
+  shops: Shop[]
 }
 
-const Cities: React.FC<Props>  = ({citys}) => {
+const Cities: React.FC<Props>  = ({shops}) => {
   // const citys: City[] = [
   //   {
   //     image: cit1,
@@ -57,7 +57,7 @@ const Cities: React.FC<Props>  = ({citys}) => {
                 ))}</section> */}
         <section className="w-full col-span-7 xl:col-span-5">
           {/* <Slider> */}
-            {citys.map((city, index) => (
+            {shops.map((city, index) => (
               < CitiesCard city={city} key={index} />
             ))}
 

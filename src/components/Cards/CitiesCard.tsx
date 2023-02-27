@@ -1,10 +1,10 @@
-import { City } from "../../../typings";
+import { City ,Shop} from "../../../typings";
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 
 interface Props {
-  city: City;
+  city: Shop;
 }
 
 const CitiesCode: React.FC<Props> = ({city}) => {

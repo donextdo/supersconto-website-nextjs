@@ -118,7 +118,7 @@ const Main: React.FC<Props> = ({ catalogs }) => {
                         }
                       </button>
                     </div>
-                    {login ? <Signin /> : <Signup />}
+                    {login ? <Signin showCart={()=>setShowCart(true)} /> : <Signup shiftTab={()=>setLogin(true)}/>}
 
                   </>
                   : <>

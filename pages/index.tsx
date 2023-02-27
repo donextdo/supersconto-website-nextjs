@@ -68,7 +68,7 @@ const Home: React.FC<Props> = ({ catalogs,shops,items ,news}) => {
                 <Shops shops={shops}/>
                 <LatestItems items={items}/>
                 <News allnews={news}/>
-                <Cities citys={shops} />
+                <Cities shops={shops} />
 
             </section>
 

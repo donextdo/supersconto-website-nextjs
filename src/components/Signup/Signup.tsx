@@ -26,7 +26,7 @@ type FormData = yup.InferType<typeof schema>;
 
 
 
-const Signup = () => {
+const Signup = ({shiftTab}:any) => {
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: yupResolver(schema),
@@ -64,7 +64,11 @@ const Signup = () => {
 
     try {
       const response = await http.post(`/auth/signup`, { ...data });
-      console.log(response);
+      console.log(response.status);
+      if (response.status==200){
+        shiftTab()
+        alert("hi")
+      }
     } catch (error) {
       console.log(error);
     }
