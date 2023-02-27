@@ -10,11 +10,11 @@ import {
     FaCcMastercard,
     FaCcDiscover
 } from "react-icons/fa";
-import requests from "../../../utils/request";
+import requests, { http } from "../../../utils/request";
 import Image from "next/image";
 import { GrFormClose } from "react-icons/gr";
 import { RiDeleteBinLine } from 'react-icons/ri';
-
+import ButtonSpinner from '../Utils/ButtonSpinner'
 
 const CheckoutPop = ({ setCheckout, cartObj, getTotalAmount, getShopAmount, handleCart }: any) => {
     const [userData, setUserData] = useState({
@@ -25,6 +25,7 @@ const CheckoutPop = ({ setCheckout, cartObj, getTotalAmount, getShopAmount, hand
         state: '',
         zip: ''
     });
+    const [loading, setLoading] = useState(false)
 
     const handleInputChange = (event: any) => {
         const { name, value } = event.target;
@@ -60,8 +61,33 @@ const CheckoutPop = ({ setCheckout, cartObj, getTotalAmount, getShopAmount, hand
         // setCartObj(newItems)
     }
 
-    const handleSubmit = () => {
-        console.log(userData)
+    const handleSubmit = async () => {
+        try {
+            const orderDto = {
+                fullName: userData.name,
+                billingAddress: {
+                    address_line1: userData.address,
+                    state: userData.state,
+                    city: userData.city,
+                    postal_code: userData.zip
+                },
+                orderItems: JSON.parse(localStorage.getItem("cartItems")!) ?? [],
+                payementMethod: 'CASH_ON_DELIVERY'
+            }
+
+            setLoading(true)
+            
+            const {data} = await http.post('/order', orderDto)
+    
+            setLoading(false)
+            localStorage.removeItem("cartItems")
+            setCheckout(false)
+        }
+        catch (error) {
+            setLoading(false)
+            console.log(error)
+        }
+        
     }
     return (
         <>
@@ -79,7 +105,7 @@ const CheckoutPop = ({ setCheckout, cartObj, getTotalAmount, getShopAmount, hand
                     <div className="row">
                         <div className="flex-1 p-5">
                             <div className="container ">
-                                <form action="/action_page.php">
+                                <form action="">
                                     <div className="row">
                                         <div className="col-50">
                                             <h3 style={{ paddingBottom: '5px' }}>Shipping Address</h3>
@@ -231,7 +257,14 @@ const CheckoutPop = ({ setCheckout, cartObj, getTotalAmount, getShopAmount, hand
                                     <div>{getTotalAmount()}</div>
                                 </div>
                                 {/* <input type="submit" value="Confirm Order" className="btn"/> */}
-                                <button className="btn" type="submit" onClick={handleSubmit} >Confirm Order</button>
+                                <button className="btn" type="submit" onClick={handleSubmit} >
+                                    { !loading ?
+                                        <span>Confirm Order</span> :
+                                        <ButtonSpinner />
+                                    }
+                                    
+                                    
+                                </button>
                             </div>
                         </div>
                     </div>
