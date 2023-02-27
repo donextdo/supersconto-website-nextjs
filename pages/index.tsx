@@ -18,16 +18,19 @@ interface Props {
     catalogs: Catalog[]
     items : Item[]
     shops: Shop[]
+    news:any
 
 }
 
-const Home: React.FC<Props> = ({ catalogs,shops,items }) => {
+const Home: React.FC<Props> = ({ catalogs,shops,items ,news}) => {
     const [userCoordinates, setUserCoordinates] = useState<any>()
     const router = useRouter()
 
     useEffect(() => {
         getLocation()
+        console.log(news)
         console.log(shops)
+
     }, [])
 
     useEffect(() => {
@@ -64,7 +67,7 @@ const Home: React.FC<Props> = ({ catalogs,shops,items }) => {
                 <LatestFlyers catalogs={catalogs}/>
                 <Shops shops={shops}/>
                 <LatestItems items={items}/>
-                <News />
+                <News allnews={news}/>
                 <Cities />
 
             </section>
@@ -80,10 +83,12 @@ export default Home
 export const getServerSideProps = async (context: { query: { long: any; lat: any; }; }) => {
     const url = context.query.long && context.query.lat ? `${requests.fetchCatelogs}?long=${context.query.long}&lat=${context.query.lat}` : requests.fetchCatelogs
 
-    const [catalogs,items,shops] = await Promise.all([
+    const [catalogs,items,shops,news] = await Promise.all([
         fetch(url).then((res) => res.json()),
         fetch(requests.getLatestItemId).then((res) => res.json()),
-        fetch(requests.allShops).then((res) => res.json())
+        fetch(requests.allShops).then((res) => res.json()),
+        fetch(requests.allNews).then((res) => res.json())
+
     ])
 
     console.log(catalogs)
@@ -92,7 +97,8 @@ export const getServerSideProps = async (context: { query: { long: any; lat: any
         props: {
             catalogs: catalogs,
             items : items,
-            shops : shops
+            shops : shops,
+            news : news
         }
     }
 
