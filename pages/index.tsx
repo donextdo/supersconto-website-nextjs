@@ -13,6 +13,7 @@ import { Catalog, Item , Shop, Categories} from '../typings';
 import React, {useEffect, useState} from 'react';
 import Ad from '../src/components/Ad/Ad';
 import {useRouter} from "next/router";
+import { useTranslation } from 'next-i18next';
 
 interface Props {
     catalogs: Catalog[]
@@ -25,6 +26,9 @@ interface Props {
 const Home: React.FC<Props> = ({ catalogs, shops, items ,news, categories}) => {
     const [userCoordinates, setUserCoordinates] = useState<any>()
     const router = useRouter()
+
+    const { t } = useTranslation();
+    
 
     useEffect(() => {
         getLocation()
@@ -63,6 +67,7 @@ const Home: React.FC<Props> = ({ catalogs, shops, items ,news, categories}) => {
             <Ad />
 
             <section className='mx-auto px-10 flex flex-col gap-10 my-10'>
+            {/* <h1>{t('welcome')}</h1>; */}
                 <Category categories={categories}/>
                 <LatestFlyers catalogs={catalogs}/>
                 <Shops shops={shops}/>
