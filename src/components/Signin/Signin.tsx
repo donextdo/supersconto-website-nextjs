@@ -90,7 +90,7 @@ const Signin = ({showCart}:any) => {
                         <p className="pl-2 text-red-600">{errors.password && "Password is required"} </p>
 
 
-                        {/* <p className="mx-2 text-[#CD212A] text-xs"><Link href="#">Forget Password ?</Link></p> */}
+                        <p className="mx-2 text-[#CD212A] text-xs"><Link href="/password-reset">Forget Password ?</Link></p>
 
                         <button className="bg-[#8DC14F] text-white w-full rounded-lg py-2" type="submit" onClick={onSubmit}>
                             Login
