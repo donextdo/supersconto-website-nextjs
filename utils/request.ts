@@ -14,7 +14,7 @@ const requests = {
 }
 export const http = axios.create({
     baseURL: BASE_URL ,
-    timeout: 1000,
+    timeout: 2000,
     headers: {'X-Custom-Header': 'foobar'}
   });
 
