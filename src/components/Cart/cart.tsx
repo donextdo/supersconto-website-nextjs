@@ -21,8 +21,12 @@ const Cart = () => {
     const [print, setPrint] = useState(false);
 
     useEffect(() => {
+        fetchCart()
+    }, [])
+
+    async function fetchCart () {
         const items: [string] = JSON.parse(localStorage.getItem("cartItems")!) ?? []
-        console.log(items)
+        
         if (items.length > 0) {
             fetch(requests.getCatalogBookPageItemByIds, {
                 method: 'post',
@@ -43,7 +47,7 @@ const Cart = () => {
                     console.error(error);
                 });
         }
-    }, [])
+    }
 
 
     const groupBy = (x: any[], f: (arg0: any, arg1: any, arg2: any) => string | number) => x.reduce((a, b, i) => ((a[f(b, i, x)] ||= []).push(b), a), {});
@@ -100,12 +104,28 @@ const Cart = () => {
 
     });
 
-   
-   
-    const handleDelete = () => {
+
+
+    // function PrintButton() {
+    //     const componentRef = React.useRef();
+
+    //     const handlePrint = useReactToPrint({
+    //       content: () => componentRef.current,
+    //     });
+    
+    const handleDelete = (id: string) => {
+        const cartItems: [any] = JSON.parse(localStorage.getItem("cartItems")!) ?? []
         
-        // const newItems = shop.filter((item)=>item._id != _id)
-        // setCartObj(newItems)
+        const filteredCartItems = cartItems.filter(item => item._id !== id)
+
+        if(filteredCartItems.length == 0) {
+            localStorage.removeItem("cartItems")
+        }
+        else {
+            localStorage.setItem("cartItems", JSON.stringify(filteredCartItems))
+        }
+        
+        fetchCart()
     }
 
     return (
@@ -143,7 +163,7 @@ const Cart = () => {
                                     <p className="font-semibold text-lg">{item.product_name}</p>
                                     <p className="text-gray-400">Є{item.unit_price}</p>
                                 </div>
-                                <div className="mx-auto flex items-end"><button><RiDeleteBinLine onClick={() => handleDelete()} className="text-xl text-red-400" /></button>
+                                <div className="mx-auto flex items-end"><button><RiDeleteBinLine onClick={() => handleDelete(item._id)} className="text-xl text-red-400" /></button>
                                 </div>
 
                                 <div className="col-span-3 text-right">

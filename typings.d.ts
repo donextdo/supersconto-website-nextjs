@@ -21,6 +21,7 @@ export interface Catalog {
 }
 
 export interface Item{
+    catelog_book_id: string,
     product_name:string,
     product_image:string,
     unit_price:string

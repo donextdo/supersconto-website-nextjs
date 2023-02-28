@@ -27,6 +27,20 @@ const Header = () => {
         router.push(`/search-results?query=${query}`)
     }
 
+    const handleLocationSearch = (): void => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const lat = position.coords.latitude
+              const long = position.coords.longitude
+
+              setLocation(`${lat}, ${long}`)
+            },
+            (error) => {
+              console.error(error);
+            }
+        );
+    }
+
     return (
         <header>
             <div className='px-10 flex items-center w-full'>
@@ -69,7 +83,9 @@ const Header = () => {
                             Styles='bg-[#EDEDED] text-[#3D3B3B] text-sm font-light md:w-48 lg:w-60 xl:w-96 rounded-l-md h-[40px]'
                             placeholder='Search by Location'
                         />
-                        <button className='relative'>
+                        <button 
+                        onClick={handleLocationSearch}
+                        className='relative'>
                             <FaLocationArrow className='absolute text-white bg-blue-400 w-12 h-[40px] px-4 -left-8 -bottom-[20px] rounded-r-md' />
                         </button>
                     </div>

@@ -46,7 +46,7 @@
 
 .selection-div {
   position: absolute;
-  background: rgba(0, 0, 255, 0.24);
+  background: rgba(4, 120, 87, 0.34);
   cursor: pointer;
   top: 0;
 }
@@ -108,5 +108,3 @@
 .catalog-page .catalog-component .arrow.right {
   right: 1rem;
 }
-
-/*# sourceMappingURL=app.css.map */

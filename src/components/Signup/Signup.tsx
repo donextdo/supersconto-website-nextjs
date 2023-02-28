@@ -47,24 +47,23 @@ const Signup = ({shiftTab}:any) => {
       return;
     }
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-    console.log(hashedPassword)
+    // const salt = await bcrypt.genSalt(10);
+    // const hashedPassword = await bcrypt.hash(password, salt);
+    // console.log(hashedPassword)
 
     const data = {
       fullName: fullname,
       phone: contactNumber,
       email: email,
       username: username,
-      password: hashedPassword,
-      userType: 2,
-      isVerified: 1,
-      isDelete: 0
+      password: password,
+      userType: 2
     };
 
     try {
       const response = await http.post(`/auth/signup`, { ...data });
       console.log(response.status);
+      console.log(response.data);
       if (response.status==200){
         shiftTab()
         alert("hi")

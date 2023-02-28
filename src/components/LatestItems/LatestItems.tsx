@@ -9,6 +9,7 @@ import flyer5 from '../../../assets/flyers/flyer_5.jpg'
 import flyer6 from '../../../assets/flyers/flyer_6.jpg'
 import flyer7 from '../../../assets/flyers/flyer_7.jpg'
 import LatestItemCard from '../Cards/LatestItemCard'
+import Link from "next/link";
 
 interface Props {
     items: Item[]
@@ -101,7 +102,10 @@ const LatestItems: React.FC<Props> = ({ items }) => {
                     <Slider >
 
                         {items.map((item, index) => (
-                            <LatestItemCard item={item} key={index} />
+                            <Link href={`/catalog-preview/${item?.catelog_book_id}`} key={index}>
+                                <LatestItemCard item={item} />
+                            </Link>
+                            // <LatestItemCard item={item} key={index} />
                         ))}
 
                     </Slider>

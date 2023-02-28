@@ -26,9 +26,6 @@ const Signin = ({showCart}:any) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-
-
-
     const onSubmit = async (e: any) => {
         e.preventDefault();
         showCart()

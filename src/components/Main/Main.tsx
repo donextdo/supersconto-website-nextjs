@@ -39,7 +39,7 @@ const Main: React.FC<Props> = ({ catalogs }) => {
       {/* mobile cart button */}
       <button className="fixed right-2 bottom-2  text-4xl p-2 z-50 bg-white hover:bg-gray-200 shadow-lg  rounded-full xl:hidden border border-green-800" onClick={handleCart} ><RiShoppingCart2Fill className='text-green-800' />
       </button>
-      {
+      { 
         mobileShowCart && <div>
           <MobileCartModal setMobileShowCart={setMobileShowCart} />
         </div>
