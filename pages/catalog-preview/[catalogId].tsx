@@ -94,7 +94,7 @@ const CatalogCarousel: React.FC<Props> = ({ catalog }) => {
         <div className="catalog-page">
             <div className="catalog-header">
                 <div className='flex justify-between mx-2 items-center py-4'>
-                    <div className='ml-12 '><Image src={logo} alt="LOGO" className='h-11 sm:h-9 md:h-11 w-auto'></Image></div>
+                    <div className='ml-12 '><Link href="/"><Image src={logo} alt="LOGO" className='h-11 sm:h-9 md:h-11 w-auto'></Image> </Link></div>
                     <div className='text-center'>
                         <p>{catalog[0].title}</p>
                         <p>Expire Date -{formattedDate}</p>

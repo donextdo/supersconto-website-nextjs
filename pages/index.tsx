@@ -9,7 +9,7 @@ import LatestItems from '../src/components/LatestItems/LatestItems';
 import Cities from '../src/components/Cities/Cities';
 import Footer from '../src/components/Footer/Footer';
 import requests from '../utils/request';
-import { Catalog, Item ,Shop} from '../typings';
+import { Catalog, Item , Shop, Categories} from '../typings';
 import React, {useEffect, useState} from 'react';
 import Ad from '../src/components/Ad/Ad';
 import {useRouter} from "next/router";
@@ -19,17 +19,17 @@ interface Props {
     items : Item[]
     shops: Shop[]
     news:any
-
+    categories: Categories
 }
 
-const Home: React.FC<Props> = ({ catalogs,shops,items ,news}) => {
+const Home: React.FC<Props> = ({ catalogs, shops, items ,news, categories}) => {
     const [userCoordinates, setUserCoordinates] = useState<any>()
     const router = useRouter()
 
     useEffect(() => {
         getLocation()
         console.log(news)
-        console.log(shops)
+        console.log(categories)
 
     }, [])
 
@@ -63,13 +63,12 @@ const Home: React.FC<Props> = ({ catalogs,shops,items ,news}) => {
             <Ad />
 
             <section className='mx-auto px-10 flex flex-col gap-10 my-10'>
-                <Category />
+                <Category categories={categories}/>
                 <LatestFlyers catalogs={catalogs}/>
                 <Shops shops={shops}/>
                 <LatestItems items={items}/>
                 <News allnews={news}/>
                 <Cities shops={shops} />
-
             </section>
 
             {/* <Footer /> */}
@@ -83,11 +82,13 @@ export default Home
 export const getServerSideProps = async (context: { query: { long: any; lat: any; }; }) => {
     const url = context.query.long && context.query.lat ? `${requests.fetchCatelogs}?long=${context.query.long}&lat=${context.query.lat}` : requests.fetchCatelogs
 
-    const [catalogs,items,shops,news] = await Promise.all([
+    const [catalogs, items, shops, news, categories] = await Promise.all([
         fetch(url).then((res) => res.json()),
         fetch(requests.getLatestItemId).then((res) => res.json()),
         fetch(requests.allShops).then((res) => res.json()),
-        fetch(requests.allNews).then((res) => res.json())
+        fetch(requests.allNews).then((res) => res.json()),
+        fetch(requests.allCategory).then((res) => res.json())
+
 
     ])
 
@@ -98,7 +99,8 @@ export const getServerSideProps = async (context: { query: { long: any; lat: any
             catalogs: catalogs,
             items : items,
             shops : shops,
-            news : news
+            news : news,
+            categories : categories
         }
     }
 

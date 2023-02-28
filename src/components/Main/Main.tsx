@@ -69,9 +69,9 @@ const Main: React.FC<Props> = ({ catalogs }) => {
           <NearestFlyers catalogs={catalogs} />
         </section>
 
-        <aside className="hidden xl:block w-full h-[74vh] col-span-2 relative">
+        <aside className="hidden xl:block w-full h-[74vh] col-span-2 relative ">
          
-          <div className="fixed">
+          <div className="fixed shadow-2xl">
             <Card styleClass="rounded-md h-[74vh] relative ">
 
               {

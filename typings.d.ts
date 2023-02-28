@@ -62,9 +62,11 @@ export interface Shop{
 //     flyer: SaticImageData
 // }
 
-export interface Category{
-    image: StaticImageData,
+export interface Categories{
+    // image: StaticImageData,
     name : string,
+    mainCategories : array,
+    subCategories : array,
 }
 
 export interface OneShop{

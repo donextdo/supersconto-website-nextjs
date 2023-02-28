@@ -12,12 +12,12 @@ interface Props {
 
 }
 
-const Print: React.FC<Props> = ({ setPrint}) => {
+const Print: React.FC<Props> = ({ setPrint }) => {
 
-    
+
     const [cartObj, setCartObj] = useState<any>([]);
     const [order, setOrder] = useState<any>([])
-    
+
 
     useEffect(() => {
         const items: [string] = JSON.parse(localStorage.getItem("cartItems")!) ?? []
@@ -84,7 +84,7 @@ const Print: React.FC<Props> = ({ setPrint}) => {
             return a
         }, 0)
     }
-   
+
     const componentRef = useRef(null);
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
@@ -97,61 +97,61 @@ const Print: React.FC<Props> = ({ setPrint}) => {
         <div className="fixed inset-0 z-50 grid place-items-center bg-slate-900 bg-opacity-70" >
             <div className="py-6 px-4 flex gap-6 flex-col relative bg-white shadow-lg rounded-md w-2/5">
                 <div id="print-container">
-                    
+                <div className="text-right"><button className="mt-2 text-4xl" onClick={printClose}><GrFormClose /></button></div>
                     <section ref={componentRef}>
-                        <div className=" mt-2 text-2xl bold">Shopping List</div>
-                    {Object.keys(cartObj).map((shop) => (
-                    <div key={`shop${shop}`} >
+                        <div className="flex justify-between">
+                            <div className=" mt-2 text-2xl bold">My Shopping List</div>
+                         </div>
+                        {Object.keys(cartObj).map((shop) => (
+                            <div key={`shop${shop}`} >
+                                <div className="flex justify-between px-4 border border-gray-200 bg-gray-200 py-2 items-center mt-2 ">
+                                    <div className="flex flex-raw gap-8 items-center">
+                                    <img src={cartObj[shop][0]?.shop_id?.logo_img} alt="fly" className="object-contain w-full h-8" />
+                                    <h6 className="font-semibold">{shop}</h6>
+                                    </div>
+                                    <div className="font-semibold">Є : {getShopAmount(cartObj[shop])}</div>
+                                </div>
 
-                   
-                        <div className="flex justify-between px-2 border border-gray-200 bg-gray-200 py-2 items-center mt-2">
-                            <div className="flex flex-raw gap-8 items-center">
-                                <Image src={sh1} alt="cart" className="h-10 w-16" />
-                                <h6>shopName</h6>
+                                {cartObj[shop].sort((a: any, b: any) => a.product_name.localeCompare(b.product_name)).map((item: any, index: string) => (
+                                <div key={`item${shop + index}`} className="grid grid-cols-5 gap-4 my-4  py-2 item-center w-full px-4">
+                                    {/* 1st column */}
+                                    < div >
+                                    <img src={item.product_image} alt="fly" className="object-contain w-full h-16" />
+                                    </div>
+
+                                    {/* 2nd column */}
+                                    <div className="col-span-3">
+                                        <p className=" font-semibold">{item.product_name}</p>
+                                        <p className="text-gray-400">Є {item.unit_price} x {item.cartQuantity}</p>
+                                    </div>
+
+                                    {/* 3rd column */}
+                                    <div className="text-right ">
+                                    <p className="mb-5 font-semibold">Є {item.cartQuantity * item.unit_price}</p>
+                                    </div>  
+                                </div>
+                                ))}
+
+                                <div className="flex justify-between px-4">
+                                    <div><p className="text-gray"></p>Sub Total </div>
+                                    <div className="">Є {getTotalAmount()}</div>
+                                </div>
+
+                                <div className="flex justify-between px-4">
+                                    <div><p className="text-lg font-semibold">Total </p>
+                                    </div>
+                                    <div className="">
+                                        <p className="text-lg font-semibold">Є {getTotalAmount()}</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div>Amount </div>
-                        </div>
 
-
-                        <div className="grid grid-cols-5 gap-4 my-4 mx-4 py-2 item-center w-full">
-                            {/* 1st column */}
-                            < div >
-                                <Image src={sh1} alt="fly" className="h-10 w-10" />
-                            </div>
-
-                            {/* 2nd column */}
-                            <div>
-                                <p>name</p>
-                            </div>
-
-                            {/* 3rd */}
-                            <div>
-                                <h6>unit price</h6>
-                            </div>
-
-                            {/* 4th column */}
-                            <div className="flex flex-raw">
-                                <h6>count</h6>
-                            </div>
-
-                            {/* 5th column */}
-
-                            <div className="text-right pr-5">
-                                Full amount
-                            </div>
-                        </div>
-
-                        <div className="text-right pr-2">
-                            <div>Grand Total - {getTotalAmount()}</div>
-                        </div>
-                        </div>
-
-))}
+                        ))}
 
                     </section>
-                    <div className="grid grid-cols-3 gap-4 text-center mt-4 mx-20">
-                        <div className="col-span-2"><button onClick={handlePrint} className="w-full bg-[#8DC14F] rounded-md py-2 ">Print</button></div>
-                        <div className=""><button className="flex items-center justify-center rounded-md  px-2.5 py-[5px] text-3xl bg-red-500 w-full" onClick={printClose}><GrFormClose /></button></div>
+                    <div className=" text-center mt-4 mx-20">
+                        <div className=""><button onClick={handlePrint} className="w-full bg-[#8DC14F] rounded-md py-2 ">Print</button></div>
+                        
                     </div>
                 </div>
             </div>
