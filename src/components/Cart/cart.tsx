@@ -119,7 +119,7 @@ const Cart = () => {
 
             <div className="text-2xl border-b-2 pb-2">Your Cart</div>
             <div className="flex justify-between items-end pb-3 pt-3 border-b-2">
-                <div className="text-1xl">Grand Total $</div>
+                <div className="text-1xl">Grand Total Є</div>
                 <div>{getTotalAmount()}</div>
             </div>
 
@@ -132,7 +132,7 @@ const Cart = () => {
                                 <img src={cartObj[shop][0]?.shop_id?.logo_img} alt="fly" className="object-contain w-full h-8" />
                             </div>
                             <p className="text-xl bold">{shop}</p>
-                            <div>Amount $: {getShopAmount(cartObj[shop])}</div>
+                            <div>Є : {getShopAmount(cartObj[shop])}</div>
                         </div>
 
 
@@ -146,13 +146,13 @@ const Cart = () => {
                                 {/* <div></div> */}
                                 <div className="col-span-3 pl-1">
                                     <p className="bold text-lg">{item.product_name}</p>
-                                    <p className="text-gray-400">${item.unit_price}</p>
+                                    <p className="text-gray-400">Є{item.unit_price}</p>
                                 </div>
                                 <div className="mx-auto flex items-end"><button><RiDeleteBinLine onClick={() => handleDelete()} className="text-xl text-red-400" /></button>
                                 </div>
 
                                 <div className="col-span-3 text-right">
-                                    <p className="mb-5">${item.cartQuantity * item.unit_price}</p>
+                                    <p className="mb-5">Є{item.cartQuantity * item.unit_price}</p>
                                     <div className="flex flex-raw justify-end">
                                         <div>
                                             <button className="bg-green-800 px-3 text-white rounded-l-md"

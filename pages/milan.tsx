@@ -22,7 +22,7 @@ const Milan = () => {
                 className="w-full h-[60vh] pr-2 grid grid-cols-4 gap-4 
                     overflow-y-scroll overflow-x-hidden 
                     !scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-gray-400
-                    xxl:grid-cols-5"
+                    xxl:grid-cols-4"
               >
                 <div className="hover:scale-105 cursor-pointer">
                   <Image src={flyer1} alt="aq" />

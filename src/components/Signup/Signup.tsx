@@ -26,7 +26,7 @@ type FormData = yup.InferType<typeof schema>;
 
 
 
-const Signup = () => {
+const Signup = ({shiftTab}:any) => {
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: yupResolver(schema),
@@ -64,7 +64,11 @@ const Signup = () => {
 
     try {
       const response = await http.post(`/auth/signup`, { ...data });
-      console.log(response);
+      console.log(response.status);
+      if (response.status==200){
+        shiftTab()
+        alert("hi")
+      }
     } catch (error) {
       console.log(error);
     }
@@ -73,7 +77,9 @@ const Signup = () => {
 
   return (
     <div className="w-80 xxl:w-[400px] xxxl:w-[480px]">
-      <form onSubmit={handleSubmit(onSubmit)} className="h-max">
+      <form 
+      // onSubmit={handleSubmit(onSubmit)} 
+      className="h-max">
         
           <section className=" mt-8 overflow-y-scroll overflow-x-hidden sm:h-[35vh] l">
             <div className="flex flex-raw relative items-center mx-2">
@@ -191,7 +197,7 @@ const Signup = () => {
                 Sign Up
               </button> */}
 
-              <button type="submit" className="bg-[#8DC14F] text-white w-full rounded-lg py-2">
+              <button type="submit" className="bg-[#8DC14F] text-white w-full rounded-lg py-2" onClick={onSubmit}>
                 Sign Up
               </button>
         </div>
