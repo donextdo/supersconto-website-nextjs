@@ -6,12 +6,16 @@ import logo from '../../../assets/logo/logo.png'
 import Image from 'next/image'
 import { FaSearch, FaLocationArrow, FaUserCircle } from "react-icons/fa";
 import { SlUser } from "react-icons/sl";
+import { TfiWorld } from "react-icons/tfi";
 import { useRouter } from 'next/router'
+import Language from '../Language/Language'
+import { useTranslation } from 'next-i18next';
 
 const Header = () => {
 
     const [query, setQuery] = useState<string>('')
     const [location, setLocation] = useState<string>('')
+    const [languagePopup, setLanguagePopup] = useState(false)
 
     const router = useRouter()
 
@@ -40,6 +44,19 @@ const Header = () => {
             }
         );
     }
+    const { i18n } = useTranslation();
+
+    const handleLanguage = () => {
+        setLanguagePopup(!languagePopup)
+    }
+
+    function handleChangeLanguage(language:any) {
+        // const language = event.target.value;
+        // i18n.changeLanguage('it');
+        // i18n.changeLanguage('en')
+      }
+    
+
 
     return (
         <header>
@@ -102,8 +119,15 @@ const Header = () => {
 
                         
                     </div> */}
+                    <button className='hover:bg-gray-200 shadow-lg ml-10 lg:ml-16' onClick={handleLanguage}>
+                        <TfiWorld className='fill-[#008C45] w-6 h-6 ' />
+                    </button>
+                    {
+                        languagePopup && 
+                        <Language setLanguagePopup={setLanguagePopup} handleChangeLanguage={handleChangeLanguage}/>
+                    }
 
-                    <button className='hover:bg-gray-200 p-2 rounded-full border border-green-700 shadow-lg ml-10 lg:ml-16'>
+                    <button className='hover:bg-gray-200 p-2 rounded-full border border-green-700 shadow-lg ml-4 lg:ml-8'>
                         <SlUser className='fill-[#008C45] w-6 h-6' />
                     </button>
 

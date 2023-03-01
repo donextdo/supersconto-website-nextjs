@@ -130,7 +130,7 @@ const Cart = () => {
 
     return (
         // <div mt-2>
-        <div className="w-80 xxl:w-[400px] xxxl:w-[480px] h-full relative" >
+        <div className="w-80 axl:w-[350px] xxl:w-[400px] xxxl:w-[480px] h-full relative" >
             <div className="text-2xl border-b-2 pb-2">Your Cart</div>
             <div className="flex justify-between items-end pb-3 pt-3 border-b-2">
                 <div className="text-1xl font-bold">Grand Total </div>
