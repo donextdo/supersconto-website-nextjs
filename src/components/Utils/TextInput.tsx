@@ -10,10 +10,13 @@ interface Props {
     border?: boolean,
     borderColor?: string,
     placeholder?: string,
-    onChange: React.ChangeEventHandler<HTMLInputElement>
+    onChange: React.ChangeEventHandler<HTMLInputElement>,
+    id?:string,
+    onKeyDown?:any
 }
 
 const TextInput: React.FC<Props> = ({
+        id,
         label, 
         error, 
         errorMessage, 
@@ -23,7 +26,8 @@ const TextInput: React.FC<Props> = ({
         border, 
         borderColor, 
         placeholder, 
-        onChange
+        onChange,
+        onKeyDown
     }) => {
   return (
     <div className='flex flex-col gap-2 items-start'>
@@ -35,11 +39,13 @@ const TextInput: React.FC<Props> = ({
         }
 
         <input
+            id={id}
             type={type ? type : 'text'}
             value={value}
             className={`${Styles ? Styles : 'text-sm font-medium bg-white'} w-full px-6 py-2 focus:outline-none ${border && 'border'} ${border && error ? 'border-red-600': borderColor} `}
             placeholder={placeholder}
             onChange={onChange}
+            onKeyDown={onKeyDown}
         />
 
         {error && 

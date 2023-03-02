@@ -21,6 +21,7 @@ const Header = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setQuery(e.target.value)
+       
     }
 
     const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -56,7 +57,14 @@ const Header = () => {
         // i18n.changeLanguage('en')
       }
     
+    function handleKeyDown(event:any) {
+        if (event.key==='Enter') {
+        //   console.log("Enter key pressed!");
+        router.push(`/search-results?query=${query}`)
 
+          // Add your code here to handle the Enter key press
+        }
+      }
 
     return (
         <header>
@@ -80,6 +88,7 @@ const Header = () => {
                         <TextInput
                             value={query}
                             onChange={handleChange}
+                            onKeyDown={handleKeyDown}
                             Styles='bg-[#EDEDED] text-[#3D3B3B] text-sm font-light md:w-48 lg:w-60 xl:w-96 rounded-md h-[40px]'
                             placeholder='Search by Category or Items'
                         />

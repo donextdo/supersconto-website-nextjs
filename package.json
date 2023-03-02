@@ -17,6 +17,8 @@
     "bcryptjs": "^2.4.3",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "next": "13.0.6",
     "next-i18next": "^13.1.6",
     "print-js": "^1.6.0",

@@ -4,7 +4,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useReactToPrint } from 'react-to-print';
 import { GrFormClose } from 'react-icons/gr';
 import requests from "../../../utils/request";
-
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 
 interface Props {
@@ -90,6 +91,26 @@ const Print: React.FC<Props> = ({ setPrint }) => {
         content: () => componentRef.current,
     });
 
+    function handleDownload() {
+    //     const input = componentRef.current;
+
+    // if (!input) {
+    //   return;
+    // }
+
+    // html2canvas(input, { scale: 2 }).then((canvas) => {
+    //   const imgData = canvas.toDataURL('image/png');
+    //   const pdf = new jsPDF({ orientation: 'portrait', unit: 'in', format: 'letter' });
+
+    //   const imgProps = pdf.getImageProperties(imgData);
+    //   const pdfWidth = pdf.internal.pageSize.getWidth() - 2 * 0.5;
+
+    //   const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    //   pdf.addImage(imgData, 'PNG', 0.5, 0.5, pdfWidth, pdfHeight, null, 'FAST');
+    //   pdf.save('my_component.pdf');
+    // });
+  }
+
     const printClose = () => {
         setPrint(false)
     }
@@ -98,7 +119,7 @@ const Print: React.FC<Props> = ({ setPrint }) => {
             <div className="py-6 px-4 flex gap-6 flex-col relative bg-white shadow-lg rounded-md w-2/5">
                 <div id="print-container">
                 <div className="text-right"><button className="mt-2 text-4xl" onClick={printClose}><GrFormClose /></button></div>
-                    <section ref={componentRef}>
+                    <section ref={componentRef} className='mb-1'>
                         <div className="flex justify-between">
                             <div className=" mt-2 text-2xl bold">My Shopping List</div>
                          </div>
@@ -151,6 +172,10 @@ const Print: React.FC<Props> = ({ setPrint }) => {
                     </section>
                     <div className=" text-center mt-4 mx-20">
                         <div className=""><button onClick={handlePrint} className="w-full bg-[#8DC14F] rounded-md py-2 ">Print</button></div>
+                        
+                    </div>
+                    <div className=" text-center mt-4 mx-20">
+                        <div className=""><button onClick={handleDownload} className="w-full bg-[#8DC14F] rounded-md py-2 ">download</button></div>
                         
                     </div>
                 </div>
