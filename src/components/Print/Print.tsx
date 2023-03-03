@@ -4,7 +4,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useReactToPrint } from 'react-to-print';
 import { GrFormClose } from 'react-icons/gr';
 import requests from "../../../utils/request";
-
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 
 interface Props {
@@ -90,6 +91,38 @@ const Print: React.FC<Props> = ({ setPrint }) => {
         content: () => componentRef.current,
     });
 
+    async function handleDownload() {
+        //     const input = componentRef.current;
+
+        // if (!input) {
+        //   return;
+        // }
+
+        // html2canvas(input, { scale: 2 }).then((canvas) => {
+        //   const imgData = canvas.toDataURL('image/png');
+        //   console.log(imgData )
+        //   const pdf = new jsPDF({ orientation: 'portrait', unit: 'in', format: 'letter' });
+
+        //   const imgProps = pdf.getImageProperties(imgData);
+        //   const pdfWidth = pdf.internal.pageSize.getWidth() - 2 * 0.5;
+
+        //   const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        //   pdf.addImage(decodedData, 'PNG', 0.5, 0.5, pdfWidth, pdfHeight, null, 'FAST');
+        //   pdf.save('my_component.pdf');
+        // });
+
+        try {
+            const canvas = await html2canvas(componentRef.current);
+            const imgData = canvas.toDataURL('image/png');
+            console.log(imgData)
+            const pdf = new jsPDF();
+            pdf.addImage(imgData, 'PNG', 0, 0);
+            pdf.save('download.pdf');
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const printClose = () => {
         setPrint(false)
     }
@@ -97,39 +130,52 @@ const Print: React.FC<Props> = ({ setPrint }) => {
         <div className="fixed inset-0 z-50 grid place-items-center bg-slate-900 bg-opacity-70" >
             <div className="py-6 px-4 flex gap-6 flex-col relative bg-white shadow-lg rounded-md w-2/5">
                 <div id="print-container">
-                <div className="text-right"><button className="mt-2 text-4xl" onClick={printClose}><GrFormClose /></button></div>
-                    <section ref={componentRef}>
+                    <div className="text-right"><button className="mt-2 text-4xl" onClick={printClose}><GrFormClose /></button></div>
+                    <section ref={componentRef} className='mb-1 overflow-y-auto h-[35vh]'>
                         <div className="flex justify-between">
-                            <div className=" mt-2 text-2xl bold">My Shopping List</div>
-                         </div>
+                            <div className=" text-2xl bold">My Shopping List</div>
+                        </div>
+                        
                         {Object.keys(cartObj).map((shop) => (
                             <div key={`shop${shop}`} >
                                 <div className="flex justify-between px-4 border border-gray-200 bg-gray-200 py-2 items-center mt-2 ">
                                     <div className="flex flex-raw gap-8 items-center">
-                                    <img src={cartObj[shop][0]?.shop_id?.logo_img} alt="fly" className="object-contain w-full h-8" />
-                                    <h6 className="font-semibold">{shop}</h6>
+                                        {/* <img src={cartObj[shop][0]?.shop_id?.logo_img} alt="fly" className="object-contain w-full h-8" /> */}
+                                        <Image src={cartObj[shop][0]?.shop_id?.logo_img}
+                                            alt="fly"
+                                            style={{ objectFit: "contain", backgroundColor: "#DCDCDC", width: "100%", height: "32px" }}
+                                            // sizes='height: 100%'
+                                            width={450}
+                                            height={400} />
+                                        <h6 className="font-semibold">{shop}</h6>
                                     </div>
                                     <div className="font-semibold">Є : {getShopAmount(cartObj[shop])}</div>
                                 </div>
 
                                 {cartObj[shop].sort((a: any, b: any) => a.product_name.localeCompare(b.product_name)).map((item: any, index: string) => (
-                                <div key={`item${shop + index}`} className="grid grid-cols-5 gap-4 my-4  py-2 item-center w-full px-4">
-                                    {/* 1st column */}
-                                    < div >
-                                    <img src={item.product_image} alt="fly" className="object-contain w-full h-16" />
-                                    </div>
+                                    <div key={`item${shop + index}`} className="grid grid-cols-5 gap-4 my-4  py-2 item-center w-full px-4">
+                                        {/* 1st column */}
+                                        < div >
+                                            {/* <img src={item.product_image} alt="fly" className="object-contain w-full h-16" /> */}
+                                            <Image src={item.product_image} 
+                                            alt="fly" 
+                                            style={{ objectFit: "contain", backgroundColor: "#DCDCDC", width: "100%", height: "64px" }}
+                                            // sizes='height: 100%'
+                                            width={450}
+                                            height={400} />
+                                        </div>
 
-                                    {/* 2nd column */}
-                                    <div className="col-span-3">
-                                        <p className=" font-semibold">{item.product_name}</p>
-                                        <p className="text-gray-400">Є {item.unit_price} x {item.cartQuantity}</p>
-                                    </div>
+                                        {/* 2nd column */}
+                                        <div className="col-span-3">
+                                            <p className=" font-semibold">{item.product_name}</p>
+                                            <p className="text-gray-400">Є {item.unit_price} x {item.cartQuantity}</p>
+                                        </div>
 
-                                    {/* 3rd column */}
-                                    <div className="text-right ">
-                                    <p className="mb-5 font-semibold">Є {item.cartQuantity * item.unit_price}</p>
-                                    </div>  
-                                </div>
+                                        {/* 3rd column */}
+                                        <div className="text-right ">
+                                            <p className="mb-5 font-semibold">Є {item.cartQuantity * item.unit_price}</p>
+                                        </div>
+                                    </div>
                                 ))}
 
                                 <div className="flex justify-between px-4">
@@ -149,10 +195,16 @@ const Print: React.FC<Props> = ({ setPrint }) => {
                         ))}
 
                     </section>
-                    <div className=" text-center mt-4 mx-20">
+                    <section className="flex justify-between mt-4">
+                    <div className=" flex-1 mx-2">
                         <div className=""><button onClick={handlePrint} className="w-full bg-[#8DC14F] rounded-md py-2 ">Print</button></div>
-                        
+
                     </div>
+                    <div className=" flex-1 mx-2">
+                        <div className=""><button onClick={handleDownload} className="w-full bg-[#8DC14F] rounded-md py-2 ">Download</button></div>
+
+                    </div>
+                    </section>
                 </div>
             </div>
         </div>

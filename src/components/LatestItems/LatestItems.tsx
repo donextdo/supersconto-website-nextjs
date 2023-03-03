@@ -99,7 +99,7 @@ const LatestItems: React.FC<Props> = ({ items }) => {
 
             <div className="grid grid-cols-7 gap-4">
                 <section className="w-full col-span-7 xl:col-span-5">
-                    <Slider >
+                    <Slider padding='px-4 py-4'>
 
                         {items.map((item, index) => (
                             <Link href={`/catalog-preview/${item?.catelog_book_id}`} key={index}>

@@ -14,14 +14,17 @@ const LatestItemCard: React.FC<Props> = ({item}) => {
   return (
     <div className='w-[12.5rem] h-64 rounded-md relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer'>
         <Image 
-            // src={item.image}
+        
             src={item.product_image}
-            // fill
             alt='flyer'
-            style={{objectFit:"cover"}}
-          sizes='height: 100%'
-          height={600}
-          width={400}
+          //   style={{objectFit:"cover"}}
+          // sizes='height: 100%'
+          // height={600}
+          // width={400}
+          style={{ objectFit: "contain", backgroundColor: "#DCDCDC",width:"100%",height:"100%" }}
+          // sizes='height: 100%'
+          width={450}
+          height={400}
            
         />
 
@@ -31,7 +34,7 @@ const LatestItemCard: React.FC<Props> = ({item}) => {
             </h4>
 
             <h4 className='text-base font-medium'>
-                UDS { parseInt(item.unit_price).toFixed(2) }
+                USD { parseInt(item.unit_price).toFixed(2) }
             </h4>
 
         </div>

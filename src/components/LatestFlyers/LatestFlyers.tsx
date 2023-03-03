@@ -180,7 +180,7 @@ const LatestFlyers: React.FC<Props> = ({ catalogs }) => {
 
                         {catalogs.map((flyer, index) => (
                             <Link href={`/catalog-preview/${flyer._id}`} key={index}>
-                                <FlyerCard flyer={flyer} />
+                                <LatestFlyersCard flyer={flyer} />
                             </Link>
                             // <LatestFlyersCard flyer={flyer} key={index} />
                         ))}
