@@ -29,7 +29,6 @@ const Home: React.FC<Props> = ({ catalogs, shops, items ,news, categories}) => {
 
     const { t } = useTranslation();
     
-
     useEffect(() => {
         getLocation()
         console.log(news)

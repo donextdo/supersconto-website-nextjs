@@ -2,12 +2,14 @@ import { News } from "../../../typings";
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
+import news1 from '../../../assets/news/news1.jpg'
 
 interface Props {
   news: News;
 }
 
 const NewsCard: React.FC<Props> = ({ news }) => {
+  
   return (
     <div className="space-y-2 my-6 max-w-[16rem] min-w-[12.5rem] h-96 w-64 ">
       <div className="rounded-md overflow-hidden">
@@ -18,6 +20,7 @@ const NewsCard: React.FC<Props> = ({ news }) => {
           // width={450}
           // height={400}
           />
+          
       </div>
       <div className="flex flex-col   whitespace-no-wrap w-full px-1 h-24">
         <h6 className="font-semibold text-center">{news.title}</h6>
