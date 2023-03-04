@@ -1,8 +1,11 @@
 import Image from "next/image";
 import sh1 from "../assets/shops/sp_1.png";
+import { FiDownload, FiPrinter } from 'react-icons/fi';
+
 const Print = () => {
   return (
     <div className="p-4 text-center">
+      {/* <button className="bg-red-500 w-20 h-10 flex"><FiPrinter className=""/></button> */}
       <h4>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro quidem et
         consectetur, autem aspernatur sapiente totam! Veniam consequuntur quod

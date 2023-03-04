@@ -76,9 +76,9 @@ const CheckoutPop = ({ setCheckout, cartObj, getTotalAmount, getShopAmount, hand
             }
 
             setLoading(true)
-            
-            const {data} = await http.post('/order', orderDto)
-    
+
+            const { data } = await http.post('/order', orderDto)
+
             setLoading(false)
             localStorage.removeItem("cartItems")
             setCheckout(false)
@@ -87,13 +87,13 @@ const CheckoutPop = ({ setCheckout, cartObj, getTotalAmount, getShopAmount, hand
             setLoading(false)
             console.log(error)
         }
-        
+
     }
     return (
         <>
             <div
-                className="fixed inset-0 z-50 grid place-items-center bg-slate-900 bg-opacity-10 overflow-auto">
-                <div className="py-6 px-4 flex gap-1 flex-col relative bg-white shadow-md rounded-md h-[620px] w-3/4">
+                className="fixed inset-0 z-50 grid place-items-center bg-slate-900 bg-opacity-20 overflow-auto">
+                <div className="py-6 px-4 flex gap-1 flex-col relative bg-white shadow-lg rounded-md h-[65vh] h-9/12 w-3/4">
                     <div className="flex justify-between">
                         <h1 className="font-bold">Checkout</h1>
                         <div className="relative mb-">
@@ -102,13 +102,13 @@ const CheckoutPop = ({ setCheckout, cartObj, getTotalAmount, getShopAmount, hand
                             </button>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="flex-1 p-5">
+                    <div className="row overflow-y-auto h-[50vh]">
+                        <div className="flex-1 p-5 ">
                             <div className="container ">
                                 <form action="">
                                     <div className="row">
-                                        <div className="col-50">
-                                            <h3 style={{ paddingBottom: '5px' }}>Shipping Address</h3>
+                                        <div className="col-50 ">
+                                            <h3 style={{ paddingBottom: '5px', fontWeight: 500}}>Shipping Address</h3>
                                             <label htmlFor="fname" className='lbl'><FaUserAlt className='mgn' /> Full
                                                 Name</label>
                                             <input type="text" id="fname" name="name" placeholder="John M. Doe"
@@ -139,16 +139,18 @@ const CheckoutPop = ({ setCheckout, cartObj, getTotalAmount, getShopAmount, hand
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-50">
-                                            <h3 className="hh">Cash On delivery Policy</h3>
+                                        <div className="col-50 ">
+                                            <h3 className="hh font-medium">Cash On delivery Policy</h3>
                                             <p className="text-sm">
-                                                As soon as the order is dispatched, customers receive an email with the tracking number and a direct link to monitor the shipment status. 
+                                                As soon as the order is dispatched, customers receive an email with the tracking number and a direct link to monitor the shipment status.
+                                                <br /><br />
 
                                                 NATIONAL SHIPPING (ITALY): Specifics e Restrictions
 
-                                                1. BRT Standard ECON Courier (€ 7,90) – delivery within 48 business hours after the pick up of the shipment from the courier.
-                                                2. BRT Standard ECON Courier Free Delivery (FREE over € 150,00)  – delivery within 48 business hours after the pick up of the shipment from the courier.
-
+                                                <br /><br />
+                                               <span className="font-semibold"> 1. </span> BRT Standard ECON Courier (€ 7,90) – delivery within 48 business hours after the pick up of the shipment from the courier. <br />
+                                               <span className="font-semibold"> 2. </span> BRT Standard ECON Courier Free Delivery (FREE over € 150,00)  – delivery within 48 business hours after the pick up of the shipment from the courier.
+                                                <br /><br />
                                                 INTERNATIONAL SHIPPING: Specifics and Restrictions</p>
                                             {/* <label htmlFor="fname">Accepted Cards</label>
                                             <div className="icon-container">
@@ -193,77 +195,78 @@ const CheckoutPop = ({ setCheckout, cartObj, getTotalAmount, getShopAmount, hand
                                     display: "flex",
                                     alignItems: "center"
                                 }}><FaShoppingCart className='mgn' /> <b>{getItemCount()}</b></span></h4>
-                                <div className="h-5/6 overflow-x-hidden overflow-y-auto">{Object.keys(cartObj).map((shop) => (
+                                <div className="h-[35vh] overflow-x-hidden overflow-y-auto">
+                                    {Object.keys(cartObj).map((shop) => (
 
-                                    <div key={`shop${shop}`}>
-                                        <div
-                                            className="flex justify-between px-2 border border-gray-200 bg-gray-200 py-2 items-center ">
-                                            <div className="flex flex-raw gap-8 items-center relative ">
-                                                <img src={cartObj[shop][0]?.shop_id?.logo_img} alt="fly" className="object-contain w-full h-8" />
+                                        <div key={`shop${shop}`}>
+                                            <div
+                                                className="flex justify-between px-2 border border-gray-200 bg-gray-200 py-2 items-center ">
+                                                <div className="flex flex-raw gap-8 items-center relative ">
+                                                    <img src={cartObj[shop][0]?.shop_id?.logo_img} alt="fly" className="object-contain w-full h-8" />
 
+                                                </div>
+                                                <h6>{shop}</h6>
+                                                <div>Amount $: {getShopAmount(cartObj[shop])}</div>
                                             </div>
-                                            <h6>{shop}</h6>
-                                            <div>Amount $: {getShopAmount(cartObj[shop])}</div>
+
+
+                                            {cartObj[shop].sort((a: any, b: any) => a.product_name.localeCompare(b.product_name)).map((item: any, index: string) => (
+                                                <div key={`item${shop + index}`}
+                                                    className="grid grid-cols-8 gap-1 my-4 mx-4 py-2 item-center w-full pr-6">
+
+                                                    <div className=" rounded-lg overflow-hidden ">
+                                                        <img src={item.product_image} alt="fly" className="object-contain w-full h-16" />
+                                                    </div>
+                                                    {/* <div></div> */}
+                                                    <div className="col-span-3 pl-1">
+                                                        <p className="bold text-lg">{item.product_name}</p>
+                                                        <p className="text-gray-400">${item.unit_price}</p>
+                                                    </div>
+                                                    <div className="mx-auto flex items-end"><button><RiDeleteBinLine onClick={() => handleDelete()} className="text-xl text-red-400" /></button>
+                                                    </div>
+
+                                                    <div className="col-span-3 text-right">
+                                                        <p className="mb-5">${item.cartQuantity * item.unit_price}</p>
+                                                        <div className="flex flex-raw justify-end">
+                                                            <div>
+                                                                <button className="bg-green-800 px-3 text-white rounded-l-md"
+                                                                    onClick={() => handleCart(item, '-', shop)}>
+                                                                    -
+                                                                </button>
+                                                            </div>
+                                                            <div>
+                                                                <p className="bg-gray-50 w-10 text-center">{item.cartQuantity}</p>
+                                                            </div>
+                                                            <div>
+                                                                <button className="bg-green-800 px-3 text-white rounded-r-md"
+                                                                    onClick={() => handleCart(item, '+', shop)}>
+                                                                    +
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+                                            ))}
+
                                         </div>
 
 
-                                        {cartObj[shop].sort((a: any, b: any) => a.product_name.localeCompare(b.product_name)).map((item: any, index: string) => (
-                                            <div key={`item${shop + index}`}
-                                                className="grid grid-cols-8 gap-1 my-4 mx-4 py-2 item-center w-full pr-6">
-
-                                                <div className=" rounded-lg overflow-hidden ">
-                                                    <img src={item.product_image} alt="fly" className="object-contain w-full h-16" />
-                                                </div>
-                                                {/* <div></div> */}
-                                                <div className="col-span-3 pl-1">
-                                                    <p className="bold text-lg">{item.product_name}</p>
-                                                    <p className="text-gray-400">${item.unit_price}</p>
-                                                </div>
-                                                <div className="mx-auto flex items-end"><button><RiDeleteBinLine onClick={() => handleDelete()} className="text-xl text-red-400" /></button>
-                                                </div>
-
-                                                <div className="col-span-3 text-right">
-                                                    <p className="mb-5">${item.cartQuantity * item.unit_price}</p>
-                                                    <div className="flex flex-raw justify-end">
-                                                        <div>
-                                                            <button className="bg-green-800 px-3 text-white rounded-l-md"
-                                                                onClick={() => handleCart(item, '-', shop)}>
-                                                                -
-                                                            </button>
-                                                        </div>
-                                                        <div>
-                                                            <p className="bg-gray-50 w-10 text-center">{item.cartQuantity}</p>
-                                                        </div>
-                                                        <div>
-                                                            <button className="bg-green-800 px-3 text-white rounded-r-md"
-                                                                onClick={() => handleCart(item, '+', shop)}>
-                                                                +
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-
-                                            </div>
-                                        ))}
-
-                                    </div>
-
-
-                                ))}</div>
+                                    ))}</div>
                                 <div className="flex justify-between items-end pb-3 pt-3 border-b-2 border-t-2">
                                     <div className="text-1xl">Grand Total $</div>
                                     <div>{getTotalAmount()}</div>
                                 </div>
                                 {/* <input type="submit" value="Confirm Order" className="btn"/> */}
                                 <button className="btn" type="submit" onClick={handleSubmit} >
-                                    { !loading ?
+                                    {!loading ?
                                         <span>Confirm Order</span> :
                                         <ButtonSpinner />
                                     }
-                                    
-                                    
+
+
                                 </button>
                             </div>
                         </div>

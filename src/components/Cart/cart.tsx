@@ -2,15 +2,15 @@ import Image from "next/image";
 import sh1 from "../../../assets/shops/sp_1.png";
 import sh2 from "../../../assets/shops/sp_2.png";
 import flyer1 from "../../../assets/flyers/flyer_1.jpg";
-import React, { useEffect, useState, useRef, forwardRef} from "react";
+import React, { useEffect, useState, useRef, forwardRef } from "react";
 import requests from "../../../utils/request";
 import { object } from "prop-types";
 import CheckoutPop from "../CheckoutPop/CheckoutPop";
 import Print from "../Print/Print";
 import { useReactToPrint } from 'react-to-print';
 import { RiDeleteBinLine } from 'react-icons/ri';
-
-
+import { FiDownload, FiPrinter } from 'react-icons/fi';
+import jsPDF from 'jspdf';
 
 
 const Cart = () => {
@@ -24,9 +24,9 @@ const Cart = () => {
         fetchCart()
     }, [])
 
-    async function fetchCart () {
+    async function fetchCart() {
         const items: [string] = JSON.parse(localStorage.getItem("cartItems")!) ?? []
-        
+
         if (items.length > 0) {
             fetch(requests.getCatalogBookPageItemByIds, {
                 method: 'post',
@@ -112,26 +112,28 @@ const Cart = () => {
     //     const handlePrint = useReactToPrint({
     //       content: () => componentRef.current,
     //     });
-    
+
     const handleDelete = (id: string) => {
         const cartItems: [any] = JSON.parse(localStorage.getItem("cartItems")!) ?? []
-        
+
         const filteredCartItems = cartItems.filter(item => item._id !== id)
 
-        if(filteredCartItems.length == 0) {
+        if (filteredCartItems.length == 0) {
             localStorage.removeItem("cartItems")
         }
         else {
             localStorage.setItem("cartItems", JSON.stringify(filteredCartItems))
         }
-        
+
         fetchCart()
     }
+
+    
 
     return (
         // <div mt-2>
         <div className="w-80 axl:w-[350px] xxl:w-[400px] xxxl:w-[480px] h-full relative" >
-            <div className="text-2xl border-b-2 pb-2">Your Cart</div>
+            <div className="text-2xl border-b-2 pb-2">My Shopping List</div>
             <div className="flex justify-between items-end pb-3 pt-3 border-b-2">
                 <div className="text-1xl font-bold">Grand Total </div>
                 <div className="font-bold">Є {getTotalAmount()}</div>
@@ -142,12 +144,14 @@ const Cart = () => {
 
                     <div key={`shop${shop}`} >
                         <div className="flex justify-between px-2 border border-gray-200 bg-gray-200 py-2 items-center ">
-                            <div className="flex flex-raw gap-8 items-center relative ">
+                            <div className="flex flex-raw items-center relative ">
                                 <img src={cartObj[shop][0]?.shop_id?.logo_img} alt="fly" className="object-contain w-full h-8" />
-                            
-                            <p className="text-xl font-semibold">{shop}</p>
+
+                                <p className="text-xl font-semibold">{shop}</p>
                             </div>
+
                             <div className="font-bold">Є : {getShopAmount(cartObj[shop])}</div>
+
                         </div>
 
 
@@ -212,16 +216,17 @@ const Cart = () => {
                 {/*<button onClick={toggleprint} disabled={Object.keys(cartObj).length === 0} className={`bg-[#8DC14F] text-white rounded-lg px-2 py-2 flex-1 mx-1 ${Object.keys(cartObj).length === 0 ? 'bg-opacity-50': ''}`}>Print</button>*/}
                 {/* <Cart ref={componentRef} /> */}
 
-                <button 
-                onClick={toggleprint}
-                className={`bg-[#8DC14F] text-white rounded-lg px-2 py-2 flex-1 mx-1`}>Print</button>
+                <button
+                    onClick={toggleprint}
+                    className={`bg-[#8DC14F] text-white rounded-lg px-2 py-2 flex-1 mx-1`}>Print</button>
                 {
                     print && (
                         <div>
-                            <Print setPrint={setPrint}/>
+                            <Print setPrint={setPrint} />
                         </div>
                     )
                 }
+                
             </div>
             {/* </div> */}
 
