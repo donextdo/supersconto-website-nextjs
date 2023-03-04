@@ -6,17 +6,22 @@ import logo from '../../../assets/logo/logo.png'
 import Image from 'next/image'
 import { FaSearch, FaLocationArrow, FaUserCircle } from "react-icons/fa";
 import { SlUser } from "react-icons/sl";
+import { TfiWorld } from "react-icons/tfi";
 import { useRouter } from 'next/router'
+import Language from '../Language/Language'
+import { useTranslation } from 'next-i18next';
 
 const Header = () => {
 
     const [query, setQuery] = useState<string>('')
     const [location, setLocation] = useState<string>('')
+    const [languagePopup, setLanguagePopup] = useState(false)
 
     const router = useRouter()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setQuery(e.target.value)
+       
     }
 
     const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -26,6 +31,40 @@ const Header = () => {
     const handleSearch = (): void => {  
         router.push(`/search-results?query=${query}`)
     }
+
+    const handleLocationSearch = (): void => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const lat = position.coords.latitude
+              const long = position.coords.longitude
+
+              setLocation(`${lat}, ${long}`)
+            },
+            (error) => {
+              console.error(error);
+            }
+        );
+    }
+    const { i18n } = useTranslation();
+
+    const handleLanguage = () => {
+        setLanguagePopup(!languagePopup)
+    }
+
+    function handleChangeLanguage(language:any) {
+        // const language = event.target.value;
+        // i18n.changeLanguage('it');
+        // i18n.changeLanguage('en')
+      }
+    
+    function handleKeyDown(event:any) {
+        if (event.key==='Enter') {
+        //   console.log("Enter key pressed!");
+        router.push(`/search-results?query=${query}`)
+
+          // Add your code here to handle the Enter key press
+        }
+      }
 
     return (
         <header>
@@ -49,6 +88,7 @@ const Header = () => {
                         <TextInput
                             value={query}
                             onChange={handleChange}
+                            onKeyDown={handleKeyDown}
                             Styles='bg-[#EDEDED] text-[#3D3B3B] text-sm font-light md:w-48 lg:w-60 xl:w-96 rounded-md h-[40px]'
                             placeholder='Search by Category or Items'
                         />
@@ -69,7 +109,9 @@ const Header = () => {
                             Styles='bg-[#EDEDED] text-[#3D3B3B] text-sm font-light md:w-48 lg:w-60 xl:w-96 rounded-l-md h-[40px]'
                             placeholder='Search by Location'
                         />
-                        <button className='relative'>
+                        <button 
+                        onClick={handleLocationSearch}
+                        className='relative'>
                             <FaLocationArrow className='absolute text-white bg-blue-400 w-12 h-[40px] px-4 -left-8 -bottom-[20px] rounded-r-md' />
                         </button>
                     </div>
@@ -86,8 +128,15 @@ const Header = () => {
 
                         
                     </div> */}
+                    <button className='hover:bg-gray-200 shadow-lg ml-10 lg:ml-16' onClick={handleLanguage}>
+                        <TfiWorld className='fill-[#008C45] w-6 h-6 ' />
+                    </button>
+                    {
+                        languagePopup && 
+                        <Language setLanguagePopup={setLanguagePopup} handleChangeLanguage={handleChangeLanguage}/>
+                    }
 
-                    <button className='hover:bg-gray-200 p-2 rounded-full border border-green-700 shadow-lg ml-10 lg:ml-16'>
+                    <button className='hover:bg-gray-200 p-2 rounded-full border border-green-700 shadow-lg ml-4 lg:ml-8'>
                         <SlUser className='fill-[#008C45] w-6 h-6' />
                     </button>
 

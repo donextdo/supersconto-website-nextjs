@@ -21,6 +21,7 @@ export interface Catalog {
 }
 
 export interface Item{
+    catelog_book_id: string,
     product_name:string,
     product_image:string,
     unit_price:string
@@ -61,9 +62,11 @@ export interface Shop{
 //     flyer: SaticImageData
 // }
 
-export interface Category{
-    image: StaticImageData,
+export interface Categories{
+    // image: StaticImageData,
     name : string,
+    mainCategories : array,
+    subCategories : array,
 }
 
 export interface OneShop{
@@ -87,5 +90,7 @@ export interface News{
 export interface City{
     image: StaticImageData,
     title:string,
-    description:string
+    description:string,
+    address:string,
+    city:string,
 }

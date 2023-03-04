@@ -39,7 +39,7 @@ const Main: React.FC<Props> = ({ catalogs }) => {
       {/* mobile cart button */}
       <button className="fixed right-2 bottom-2  text-4xl p-2 z-50 bg-white hover:bg-gray-200 shadow-lg  rounded-full xl:hidden border border-green-800" onClick={handleCart} ><RiShoppingCart2Fill className='text-green-800' />
       </button>
-      {
+      { 
         mobileShowCart && <div>
           <MobileCartModal setMobileShowCart={setMobileShowCart} />
         </div>
@@ -69,9 +69,9 @@ const Main: React.FC<Props> = ({ catalogs }) => {
           <NearestFlyers catalogs={catalogs} />
         </section>
 
-        <aside className="hidden xl:block w-full h-[74vh] col-span-2 relative">
+        <aside className="hidden xl:block w-full h-[74vh] col-span-2 relative ">
          
-          <div className="fixed">
+          <div className="fixed shadow-2xl">
             <Card styleClass="rounded-md h-[74vh] relative ">
 
               {
@@ -118,7 +118,7 @@ const Main: React.FC<Props> = ({ catalogs }) => {
                         }
                       </button>
                     </div>
-                    {login ? <Signin /> : <Signup />}
+                    {login ? <Signin showCart={()=>setShowCart(true)} /> : <Signup shiftTab={()=>setLogin(true)}/>}
 
                   </>
                   : <>

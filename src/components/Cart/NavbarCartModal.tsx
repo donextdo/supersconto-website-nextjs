@@ -100,7 +100,7 @@ const NavbarCartModal = ({ref,}:any) => {
 
                 <div className="text-2xl border-b-2 pb-2">Your Cart</div>
                 <div className="flex justify-between items-end pb-3  border-b-2">
-                    <div className="text-1xl">Grand Total $</div>
+                    <div className="text-1xl">Grand Total Є</div>
                     <div>{getTotalAmount()}</div>
                 </div>
 
@@ -112,7 +112,7 @@ const NavbarCartModal = ({ref,}:any) => {
                                     <img src={cartObj[shop][0]?.shop_id?.logo_img} alt="fly" className="object-contain w-full h-8" />
                                 </div>
                                 <p className="text-xl bold">{shop}</p>
-                                <div>Amount $: {getShopAmount(cartObj[shop])}</div>
+                                <div>Є: {getShopAmount(cartObj[shop])}</div>
                             </div>
 
                             {cartObj[shop].sort((a: any, b: any) => a.product_name.localeCompare(b.product_name)).map((item: any, index: string) => (
@@ -123,11 +123,11 @@ const NavbarCartModal = ({ref,}:any) => {
                                     <div></div>
                                     <div className="col-span-3">
                                         <p className="bold text-lg">{item.product_name}</p>
-                                        <p className="text-gray-400">${item.unit_price}</p>
+                                        <p className="text-gray-400">Є{item.unit_price}</p>
                                     </div>
                                     <div className="mx-auto flex items-end pb-0.5"><button><RiDeleteBinLine onClick={()=>handleDelete()} className="text-2xl text-red-400"/></button></div>
                                     <div className="col-span-2 text-right ">
-                                        <p className="mb-5">${item.cartQuantity * item.unit_price}</p>
+                                        <p className="mb-5">Є{item.cartQuantity * item.unit_price}</p>
                                         <div className="flex col-span-2 items-center justify-between border-2 w-full border-green-800 rounded-md py-1 px-4">
                                             <div className="flex items-center">
                                                 <button className="text-2xl text-green-800  "

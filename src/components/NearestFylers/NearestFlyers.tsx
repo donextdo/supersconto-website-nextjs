@@ -18,6 +18,7 @@ interface Props {
 
 const NearestFlyers: React.FC<Props> = ({ catalogs }) => {
     const [selectedCatalog, setSelectedCatalog] = useState<Catalog>()
+    const [visible, setVisible] = useState(8)
 
     // const flyers: Flyer[] = [
     //     {
@@ -70,17 +71,20 @@ const NearestFlyers: React.FC<Props> = ({ catalogs }) => {
     //         flyer: flyer7
     //     }
     // ]
+    const showMoreItem = () => {
+        setVisible((prevValue)=>prevValue + 8)
+    }
 
   return (
-    <Card styleClass='rounded-md flex flex-col gap-4 h-[74vh] overflow-hidden '>
+    <Card styleClass='rounded-md flex flex-col gap-4 h-[74vh] overflow-hidden'>
 
         <div 
-        className='w-full h-[60vh] pr-2 grid grid-cols-2 gap-x-2 gap-y-2 justify-items-center
+        className='w-full h-[60vh] pr-2 grid grid-cols-2 gap-x-2 gap-y-5 justify-items-center
         overflow-y-scroll overflow-x-hidden 
         !scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-gray-400 sm:grid-cols-4 
         xxl:grid-cols-4 shadow-inner'>
 
-            {catalogs.map((catelog, index) => (
+            {catalogs.slice(0,visible).map((catelog, index) => (
                 <Link href={`/catalog-preview/${catelog._id}`} key={index}>
                     <FlyerCard flyer={catelog} />
                 </Link>
@@ -89,7 +93,7 @@ const NearestFlyers: React.FC<Props> = ({ catalogs }) => {
         </div>
 
        
-        <Button styleClass='w-full bg-[#8DC14F] py-2 px-6 text-base font-medium text-white rounded-md hover:bg-[#8DC14F]/80 '>
+        <Button styleClass='w-full bg-[#8DC14F] py-2 px-6 text-base font-medium text-white rounded-md hover:bg-[#8DC14F]/80 ' onClick={showMoreItem}>
             Load Nearest Flyers
         </Button>
     </Card>

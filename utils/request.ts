@@ -10,11 +10,14 @@ const requests = {
     allShops : `${BASE_URL}/shop`,
     findShopById : (id :string) => `${BASE_URL}/shop/find/${id}`,
     allNews : `${BASE_URL}/news`,
+    // allCategory : `${BASE_URL}/category/categories`,
+    allCategory : 'https://api.supersconto24.com/v1/api/category/categories',
+
 
 }
 export const http = axios.create({
     baseURL: BASE_URL ,
-    timeout: 1000,
+    timeout: 2000,
     headers: {'X-Custom-Header': 'foobar'}
   });
 

@@ -16,7 +16,7 @@ const schema = yup.object({
 type FormData = yup.InferType<typeof schema>;
 
 
-const Signin = () => {
+const Signin = ({showCart}:any) => {
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
         resolver: yupResolver(schema),
@@ -26,11 +26,9 @@ const Signin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-
-
-
     const onSubmit = async (e: any) => {
         e.preventDefault();
+        showCart()
         try {
             const details = {
                 email,
@@ -55,7 +53,9 @@ const Signin = () => {
     return (
         <div className="mt-10 flex flex-col gap-3 w-80 xxl:w-[400px] xxxl:w-[480px]">
             <section className="px-2">
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form 
+                // onSubmit={handleSubmit(onSubmit)}
+                >
                     <div className="space-y-5">
                         <div className="flex flex-raw relative items-center">
                             <BsFillPersonFill className="fill-[#CD212A] absolute ml-2" />
@@ -87,9 +87,9 @@ const Signin = () => {
                         <p className="pl-2 text-red-600">{errors.password && "Password is required"} </p>
 
 
-                        {/* <p className="mx-2 text-[#CD212A] text-xs"><Link href="#">Forget Password ?</Link></p> */}
+                        <p className="mx-2 text-[#CD212A] text-xs"><Link href="/password-reset">Forget Password ?</Link></p>
 
-                        <button className="bg-[#8DC14F] text-white w-full rounded-lg py-2" type="submit">
+                        <button className="bg-[#8DC14F] text-white w-full rounded-lg py-2" type="submit" onClick={onSubmit}>
                             Login
                         </button>
                     </div>

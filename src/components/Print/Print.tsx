@@ -4,7 +4,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useReactToPrint } from 'react-to-print';
 import { GrFormClose } from 'react-icons/gr';
 import requests from "../../../utils/request";
-
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 
 interface Props {
@@ -12,12 +13,12 @@ interface Props {
 
 }
 
-const Print: React.FC<Props> = ({ setPrint}) => {
+const Print: React.FC<Props> = ({ setPrint }) => {
 
-    
+
     const [cartObj, setCartObj] = useState<any>([]);
     const [order, setOrder] = useState<any>([])
-    
+
 
     useEffect(() => {
         const items: [string] = JSON.parse(localStorage.getItem("cartItems")!) ?? []
@@ -84,11 +85,43 @@ const Print: React.FC<Props> = ({ setPrint}) => {
             return a
         }, 0)
     }
-   
+
     const componentRef = useRef(null);
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
     });
+
+    async function handleDownload() {
+        //     const input = componentRef.current;
+
+        // if (!input) {
+        //   return;
+        // }
+
+        // html2canvas(input, { scale: 2 }).then((canvas) => {
+        //   const imgData = canvas.toDataURL('image/png');
+        //   console.log(imgData )
+        //   const pdf = new jsPDF({ orientation: 'portrait', unit: 'in', format: 'letter' });
+
+        //   const imgProps = pdf.getImageProperties(imgData);
+        //   const pdfWidth = pdf.internal.pageSize.getWidth() - 2 * 0.5;
+
+        //   const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        //   pdf.addImage(decodedData, 'PNG', 0.5, 0.5, pdfWidth, pdfHeight, null, 'FAST');
+        //   pdf.save('my_component.pdf');
+        // });
+
+        try {
+            const canvas = await html2canvas(componentRef.current);
+            const imgData = canvas.toDataURL('image/png');
+            console.log(imgData)
+            const pdf = new jsPDF();
+            pdf.addImage(imgData, 'PNG', 0, 0);
+            pdf.save('download.pdf');
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const printClose = () => {
         setPrint(false)
@@ -97,62 +130,81 @@ const Print: React.FC<Props> = ({ setPrint}) => {
         <div className="fixed inset-0 z-50 grid place-items-center bg-slate-900 bg-opacity-70" >
             <div className="py-6 px-4 flex gap-6 flex-col relative bg-white shadow-lg rounded-md w-2/5">
                 <div id="print-container">
-                    
-                    <section ref={componentRef}>
-                        <div className=" mt-2 text-2xl bold">Shopping List</div>
-                    {Object.keys(cartObj).map((shop) => (
-                    <div key={`shop${shop}`} >
-
-                   
-                        <div className="flex justify-between px-2 border border-gray-200 bg-gray-200 py-2 items-center mt-2">
-                            <div className="flex flex-raw gap-8 items-center">
-                                <Image src={sh1} alt="cart" className="h-10 w-16" />
-                                <h6>shopName</h6>
-                            </div>
-                            <div>Amount </div>
+                    <div className="text-right"><button className="mt-2 text-4xl" onClick={printClose}><GrFormClose /></button></div>
+                    <section ref={componentRef} className='mb-1 overflow-y-auto h-[35vh]'>
+                        <div className="flex justify-between">
+                            <div className=" text-2xl bold">My Shopping List</div>
                         </div>
+                        
+                        {Object.keys(cartObj).map((shop) => (
+                            <div key={`shop${shop}`} >
+                                <div className="flex justify-between px-4 border border-gray-200 bg-gray-200 py-2 items-center mt-2 ">
+                                    <div className="flex flex-raw gap-8 items-center">
+                                        {/* <img src={cartObj[shop][0]?.shop_id?.logo_img} alt="fly" className="object-contain w-full h-8" /> */}
+                                        <Image src={cartObj[shop][0]?.shop_id?.logo_img}
+                                            alt="fly"
+                                            style={{ objectFit: "contain", backgroundColor: "#DCDCDC", width: "100%", height: "32px" }}
+                                            // sizes='height: 100%'
+                                            width={450}
+                                            height={400} />
+                                        <h6 className="font-semibold">{shop}</h6>
+                                    </div>
+                                    <div className="font-semibold">Є : {getShopAmount(cartObj[shop])}</div>
+                                </div>
 
+                                {cartObj[shop].sort((a: any, b: any) => a.product_name.localeCompare(b.product_name)).map((item: any, index: string) => (
+                                    <div key={`item${shop + index}`} className="grid grid-cols-5 gap-4 my-4  py-2 item-center w-full px-4">
+                                        {/* 1st column */}
+                                        < div >
+                                            {/* <img src={item.product_image} alt="fly" className="object-contain w-full h-16" /> */}
+                                            <Image src={item.product_image} 
+                                            alt="fly" 
+                                            style={{ objectFit: "contain", backgroundColor: "#DCDCDC", width: "100%", height: "64px" }}
+                                            // sizes='height: 100%'
+                                            width={450}
+                                            height={400} />
+                                        </div>
 
-                        <div className="grid grid-cols-5 gap-4 my-4 mx-4 py-2 item-center w-full">
-                            {/* 1st column */}
-                            < div >
-                                <Image src={sh1} alt="fly" className="h-10 w-10" />
+                                        {/* 2nd column */}
+                                        <div className="col-span-3">
+                                            <p className=" font-semibold">{item.product_name}</p>
+                                            <p className="text-gray-400">Є {item.unit_price} x {item.cartQuantity}</p>
+                                        </div>
+
+                                        {/* 3rd column */}
+                                        <div className="text-right ">
+                                            <p className="mb-5 font-semibold">Є {item.cartQuantity * item.unit_price}</p>
+                                        </div>
+                                    </div>
+                                ))}
+
+                                <div className="flex justify-between px-4">
+                                    <div><p className="text-gray"></p>Sub Total </div>
+                                    <div className="">Є {getTotalAmount()}</div>
+                                </div>
+
+                                <div className="flex justify-between px-4">
+                                    <div><p className="text-lg font-semibold">Total </p>
+                                    </div>
+                                    <div className="">
+                                        <p className="text-lg font-semibold">Є {getTotalAmount()}</p>
+                                    </div>
+                                </div>
                             </div>
 
-                            {/* 2nd column */}
-                            <div>
-                                <p>name</p>
-                            </div>
-
-                            {/* 3rd */}
-                            <div>
-                                <h6>unit price</h6>
-                            </div>
-
-                            {/* 4th column */}
-                            <div className="flex flex-raw">
-                                <h6>count</h6>
-                            </div>
-
-                            {/* 5th column */}
-
-                            <div className="text-right pr-5">
-                                Full amount
-                            </div>
-                        </div>
-
-                        <div className="text-right pr-2">
-                            <div>Grand Total - {getTotalAmount()}</div>
-                        </div>
-                        </div>
-
-))}
+                        ))}
 
                     </section>
-                    <div className="grid grid-cols-3 gap-4 text-center mt-4 mx-20">
-                        <div className="col-span-2"><button onClick={handlePrint} className="w-full bg-[#8DC14F] rounded-md py-2 ">Print</button></div>
-                        <div className=""><button className="flex items-center justify-center rounded-md  px-2.5 py-[5px] text-3xl bg-red-500 w-full" onClick={printClose}><GrFormClose /></button></div>
+                    <section className="flex justify-between mt-4">
+                    <div className=" flex-1 mx-2">
+                        <div className=""><button onClick={handlePrint} className="w-full bg-[#8DC14F] rounded-md py-2 ">Print</button></div>
+
                     </div>
+                    <div className=" flex-1 mx-2">
+                        <div className=""><button onClick={handleDownload} className="w-full bg-[#8DC14F] rounded-md py-2 ">Download</button></div>
+
+                    </div>
+                    </section>
                 </div>
             </div>
         </div>

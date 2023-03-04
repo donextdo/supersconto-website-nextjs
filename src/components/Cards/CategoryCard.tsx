@@ -1,10 +1,10 @@
-import { Category } from "../../../typings";
+import { Categories } from "../../../typings";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
-  category: Category;
+  category: Categories;
 }
 
 const CategoryCard: React.FC<Props> = ({ category }) => {
@@ -12,7 +12,7 @@ const CategoryCard: React.FC<Props> = ({ category }) => {
     
     <div className="h-24 w-40 md:flex items-center justify-left gap-3 select-none">
    
-        <Image src={category.image} alt={category.name} className='w-5 h-5 object-contain' />
+        {/* <Image src={category.image} alt={category.name} className='w-5 h-5 object-contain' /> */}
         <Link href={"/category"} className='text-base font-medium'>{category.name} </Link>
 
     </div>
