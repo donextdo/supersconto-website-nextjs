@@ -68,14 +68,14 @@ const Header = () => {
 
     return (
         <header>
-            <div className='px-10 flex items-center w-full'>
-                <div className='flex items-center gap-4 w-full pl-16 lsm:pl-0'>
+            <div className='flex items-center w-full px-10'>
+                <div className='flex items-center w-full gap-4 pl-16 lsm:pl-0'>
 
 
                     <Link href={'/'}
                         className='text-3xl text-[#008C45] font-semibold '
                     >
-                        <Image src={logo} alt="LOGO" className='h-11 sm:h-9 md:h-11 w-auto'></Image>
+                        <Image src={logo} alt="LOGO" className='w-auto h-11 sm:h-9 md:h-11'></Image>
                     </Link>
 
                     
@@ -83,7 +83,7 @@ const Header = () => {
 
                 <div className='flex items-center gap-4 text-right'>
                     <section className='hidden md:block'>
-                    <div className='flex flex-raw items-center'>
+                    <div className='flex items-center flex-raw'>
 
                         <TextInput
                             value={query}
@@ -102,7 +102,7 @@ const Header = () => {
                     </section>
 
                     <section className='hidden md:block'>
-                    <div className='flex flex-raw items-center ml-8 lg:ml-20'>
+                    <div className='flex items-center ml-8 flex-raw lg:ml-20'>
                         <TextInput
                             value={location}
                             onChange={handleLocationChange}
@@ -117,28 +117,30 @@ const Header = () => {
                     </div>
                     </section>
 
-                    {/* <div className='flex items-center gap-4 w-full'>
+                    {/* <div className='flex items-center w-full gap-4'>
 
 
                         <Link href={'/'}
                             className='text-3xl text-[#008C45] font-semibold'
                         >
-                            <Image src={logo} alt="LOGO" className='h-9 sm:h-14 md:h-16 w-auto'></Image>
+                            <Image src={logo} alt="LOGO" className='w-auto h-9 sm:h-14 md:h-16'></Image>
                         </Link>
 
                         
-                    </div> */}
-                    <button className='hover:bg-gray-200 shadow-lg ml-10 lg:ml-16' onClick={handleLanguage}>
+    </div> */}
+                    <button className='ml-10 shadow-lg hover:bg-gray-200 lg:ml-16' onClick={handleLanguage}>
                         <TfiWorld className='fill-[#008C45] w-6 h-6 ' />
                     </button>
                     {
                         languagePopup && 
                         <Language setLanguagePopup={setLanguagePopup} handleChangeLanguage={handleChangeLanguage}/>
                     }
-
-                    <button className='hover:bg-gray-200 p-2 rounded-full border border-green-700 shadow-lg ml-4 lg:ml-8'>
+                    
+                    
+                    {/* Account */}
+                    <div><Link href="/account"><button className='p-2 ml-4 border border-green-700 rounded-full shadow-lg hover:bg-gray-200 lg:ml-8'>
                         <SlUser className='fill-[#008C45] w-6 h-6' />
-                    </button>
+                    </button></Link></div>
 
                 </div>
             </div>

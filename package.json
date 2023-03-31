@@ -22,7 +22,7 @@
     "next": "13.0.6",
     "next-i18next": "^13.1.6",
     "print-js": "^1.6.0",
-    "react": "18.2.0",
+    "react": "^18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.1",
     "react-i18next": "^12.2.0",
@@ -34,7 +34,7 @@
     "swiper": "^8.4.5",
     "tailwind-scrollbar-hide": "^1.1.7",
     "typescript": "4.9.3",
-    "yup": "^1.0.0"
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@types/react-slick": "^0.23.10",

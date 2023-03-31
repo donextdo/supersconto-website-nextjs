@@ -49,35 +49,42 @@ const AddToCartModal: React.FC<Props> = ({item, handler}) => {
     console.log({item})
 
     return (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-slate-900 bg-opacity-75">
-            <div className="py-6 px-4 flex gap-6 flex-col relative bg-white shadow-md rounded-md w-[60vw]">
-                <section className="flex gap-4">
+        
+        <div className="fixed inset-0 z-50 grid bg-opacity-75 place-items-center bg-slate-900">
+             
+            <div className="md:py-6 py-0 pt-3 px-4 flex md:gap-6 flex-col relative bg-white shadow-md rounded-md w-[60vw]">
+                
+            <div className="bg-white rounded-full text-end">
+            <button className="px-3 text-xl font-bold text-black md:px-6" onClick={handler}>X</button>
+            </div>
+            
+                <section className="md:gap-4 md:flex">
                     {/* 1st */}
-                    <div className="mt-2 h-[50vh] w-4/6  h ml-4 relative">
+                    <div className="md:mt-2 h-[50vh]  md:w-4/6   md:ml-4 relative">
                         <Image src={item.product_image} fill style={{objectFit:"contain"}} alt={item.product_name}/>
                     </div>
                     {/* 2nd */}
-                    <div className="col-span-2 mx-16  mt-8 w-1/4" >
+                    <div className="mx-5 md:mt-8 md:mx-10 md:w-1/2 md:col-2 md:span-2" >
                         <div>
-                            <p className="text-2xl font-bold">{item.product_name}</p>
+                            <p className="text-2xl font-bold text-center md:text-left">{item.product_name}</p>
                         </div>
-                        <div className="flex flex-raw gap-8 mt-6">
-                            <div className="text-lg">${item.unit_price}</div>
-                            <div className="flex flex-raw">
+                        <div className="flex gap-4 mt-6 md:gap-16 flex-raw">
+                            <div className="text-lg ">${item.unit_price}</div>
+                            <div className="flex flex-raw ">
                                 <div>
                                     <button
-                                        className="bg-black px-3 text-lg text-white"
+                                        className="px-3 text-lg text-white bg-black"
                                         onClick={decreaseClick}
                                     >
                                         -
                                     </button>
                                 </div>
                                 <div>
-                                    <p className="bg-gray-300 w-10 text-center text-lg">{count}</p>
+                                    <p className="w-10 text-lg text-center bg-gray-300">{count}</p>
                                 </div>
                                 <div>
                                     <button
-                                        className="bg-black px-3 text-lg text-white"
+                                        className="px-3 text-lg text-white bg-black "
                                         onClick={increaseClick}
                                     >
                                         +
@@ -85,9 +92,12 @@ const AddToCartModal: React.FC<Props> = ({item, handler}) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="mt-6 text-lg">${item.unit_price * count}</div>
-                        <div className="mt-10 flex">
-                            <button disabled={count === 0} className="disabled:opacity-50 bg-[#8DC14F] mr-4 px-4 py-4 rounded w-48" onClick={(e) => {
+                       
+                        <div className="mt-5 text-lg ">${item.unit_price * count}</div>
+                      
+                        <div className="flex mt-10 mb-5 md:mt-10 md:mb-0">
+                          
+                            <button disabled={count === 0} className="disabled:opacity-50 bg-[#8DC14F]  px-2 py-[8px] rounded w-full" onClick={(e) => {
                                 const cartItems: [any] = JSON.parse(localStorage.getItem("cartItems")!) ?? []
                                 const product = cartItems.find(it => it._id === item._id)
                                 if (product) {
@@ -100,9 +110,7 @@ const AddToCartModal: React.FC<Props> = ({item, handler}) => {
                             }}>
                                 Add to cart
                             </button>
-                            <div className="bg-white shadow-md rounded-full">
-                            <button className="bg-red-700 px-6 py-4 rounded-full text-white" onClick={handler}>X</button>
-                            </div>
+                            
                         </div>
                     </div>
                 </section>
