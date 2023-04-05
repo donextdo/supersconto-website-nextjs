@@ -10,10 +10,10 @@ interface Props {
 const CategoryCard: React.FC<Props> = ({ category }) => {
   return (
     
-    <div className="h-24 w-40 md:flex items-center justify-left gap-3 select-none">
+    <div className="items-center w-40 h-10 gap-3 lg:h-24 md:flex justify-left">
    
-        {/* <Image src={category.image} alt={category.name} className='w-5 h-5 object-contain' /> */}
-        <Link href={"/category"} className='text-base font-medium'>{category.name} </Link>
+        {/* <Image src={category.image} alt={category.name} className='object-contain w-5 h-5' /> */}
+        <Link href={"/category"} className='text-lg  text-[#8DC14F] hover:text-green-800 font-semibold '>{category.name} </Link>
 
     </div>
       

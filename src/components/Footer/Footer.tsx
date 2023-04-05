@@ -4,18 +4,18 @@ import logo from '../../../assets/logo/logo.png'
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-200 py-4">
-      <div className=" mx-auto px-16 ">
+    <footer className="py-4 bg-ray-200">
+      <div className="px-16 mx-auto ">
         {/* create four column  */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-5 xl:grid-cols-4 ">
           {/* 1st column  */}
-          <div className="pr-4 col-span-1 sm:col-span-2 xl:col-span-1">
+          <div className="col-span-1 pr-4 sm:col-span-2 xl:col-span-1">
             
             <Image src={logo} alt="logo" className="w-auto h-16" />
             <p  className="my-2">
             Shop the best of Italian foods, grocery items , beauty, and home decor on our multivendor website. Find unique products from top vendors across Italy, all in one place. Shop now and add a touch of Italian elegance to your life with amazing discounts.
             </p>
-            <div className="flex space-x-2 my-3">
+            <div className="flex my-3 space-x-2">
                 <FaFacebookSquare className="fill-[#CD212A]"/>
                 <FaTwitter className="fill-[#CD212A]" />
                 <FaInstagram className="fill-[#CD212A]" />
@@ -24,7 +24,7 @@ const Footer = () => {
 
           </div>
           {/* 2nd column  */}
-          <div className="mt-8 space-y-4">
+          <div className="mt-8 space-y-4 lg:ml-16">
             <h2 className="my-2 font-semibold">ARE YOU A USER?</h2>
             <ul>
               <li className="my-2">
@@ -45,7 +45,7 @@ const Footer = () => {
             </ul>
           </div>
           {/* 3rd column  */}
-          <div className="mt-8 space-y-4">
+          <div className="mt-8 space-y-4 lg:ml-10">
             <h2 className="my-2 font-semibold">ARE YOU A COMPANY?</h2>
             <ul>
               <li className="my-2">
@@ -66,7 +66,7 @@ const Footer = () => {
             </ul>
           </div>
           {/* 4th column  */}
-          <div className="mt-8 space-y-4">
+          <div className="mt-8 space-y-4 lg:ml-10">
             <h2 className="my-2 font-semibold">INDEX</h2>
             <ul>
               <li className="my-2">

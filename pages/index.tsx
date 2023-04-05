@@ -11,7 +11,7 @@ import Footer from '../src/components/Footer/Footer';
 import requests from '../utils/request';
 import { Catalog, Item , Shop, Categories} from '../typings';
 import React, {useEffect, useState} from 'react';
-import Ad from '../src/components/Ad/Ad';
+import Ad from '../src/components/SpecialFlyers/Ad';
 import {useRouter} from "next/router";
 import { useTranslation } from 'next-i18next';
 

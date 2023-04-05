@@ -91,14 +91,14 @@ const LatestItems: React.FC<Props> = ({ items }) => {
     // ]
 
     return (
-        <div className='w-full flex flex-col gap-6'>
+        <div className='flex flex-col gap-6 '>
 
             <h2 className='text-lg font-semibold'>
                 LATEST ITEMS
             </h2>
 
             <div className="grid grid-cols-7 gap-4">
-                <section className="w-full col-span-7 xl:col-span-5">
+                <section className="w-full col-span-7 xl:col-span-5 xl:w-[1280px]">
                     <Slider padding='px-4 py-4'>
 
                         {items.map((item, index) => (

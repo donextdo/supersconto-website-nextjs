@@ -5,6 +5,7 @@ import { RiDeleteBinLine } from 'react-icons/ri';
 import CheckoutPop from "../CheckoutPop/CheckoutPop";
 import Print from "../Print/Print";
 import { FaPlus, FaMinus } from 'react-icons/fa';
+import { HiOutlineShoppingBag } from "react-icons/hi";
 
 
 const NavbarCartModal = ({ref,}:any) => {
@@ -96,50 +97,57 @@ const NavbarCartModal = ({ref,}:any) => {
 
     return (
         <div ref={ref} className="fixed inset-0 z-50 bg-slate-900 bg-opacity-0 flex justify-end top-20 max-h-[600px] ">
-            <div className="py-4 px-4 flex gap-6 flex-col bg-gray-50 shadow-md rounded-md w-11/12 md:w-9/12 lg:w-6/12 xxl:w-2/5">
+            <div className="flex flex-col w-11/12 gap-6 px-4 py-4 rounded-md shadow-md bg-gray-50 md:w-9/12 lg:w-5/12 xxl:w-2/5">
 
-                <div className="text-2xl border-b-2 pb-2">Your Cart</div>
-                <div className="flex justify-between items-end pb-3  border-b-2">
-                    <div className="text-1xl">Grand Total Є</div>
-                    <div>{getTotalAmount()}</div>
+            <div className=" text-[20px] text-center mt-5 font-ff-headings flex flex-wrap justify-center ">
+              <div className="text-[30px] text-center mx-2 ">
+              <HiOutlineShoppingBag />{" "}
+                 </div>
+               Your Cart
+           </div>
+                <div className="flex items-end justify-between pb-3 border-b-2">
+                    <div className="text-[16px]">Grand Total Є</div>
+                    <div className="text-[16px]">{getTotalAmount()}</div>
                 </div>
 
                 <div className="overflow-y-auto overflow-x-hidden h-[46vh] ">
                     {Object.keys(cartObj).map((shop) => (
                         <div key={`shop${shop}`} >
-                            <div className="flex justify-between px-2 border border-gray-200 bg-gray-200 py-2 items-center ">
-                                <div className="flex flex-raw gap-8 items-center relative rounded-lg">
+                            <div className="flex items-center justify-between px-2 py-2 bg-gray-200 border border-gray-200 ">
+                                <div className="relative flex items-center gap-8 rounded-lg flex-raw">
                                     <img src={cartObj[shop][0]?.shop_id?.logo_img} alt="fly" className="object-contain w-full h-8" />
                                 </div>
-                                <p className="text-xl bold">{shop}</p>
-                                <div>Є: {getShopAmount(cartObj[shop])}</div>
+                                <p className="text-[16px]">{shop}</p>
+                                <div>{"  "}</div>
+                                <div className="text-[16px]">Є: {getShopAmount(cartObj[shop])}</div>
                             </div>
 
                             {cartObj[shop].sort((a: any, b: any) => a.product_name.localeCompare(b.product_name)).map((item: any, index: string) => (
                                 <div key={`item${shop + index}`} className='grid grid-cols-8 gap-1 py-2'>
-                                    <div className=" rounded-lg overflow-hidden ">
+                                    <div className="overflow-hidden rounded-lg ">
                                         <img src={item.product_image} alt="fly" className="object-contain w-full h-20" />
                                     </div>
-                                    <div></div>
-                                    <div className="col-span-3">
-                                        <p className="bold text-lg">{item.product_name}</p>
-                                        <p className="text-gray-400">Є{item.unit_price}</p>
+                                   
+                                    <div className="col-span-3 ml-2">
+                                         <p className="text-[16px]">{item.product_name}</p>
+                                        <p className="text-gray-400 text-[16px]">Є {item.unit_price}</p>
                                     </div>
+                                    <div></div>
                                     <div className="mx-auto flex items-end pb-0.5"><button><RiDeleteBinLine onClick={()=>handleDelete()} className="text-2xl text-red-400"/></button></div>
                                     <div className="col-span-2 text-right ">
-                                        <p className="mb-5">Є{item.cartQuantity * item.unit_price}</p>
-                                        <div className="flex col-span-2 items-center justify-between border-2 w-full border-green-800 rounded-md py-1 px-4">
+                                        <p className="mb-5">Є {item.cartQuantity * item.unit_price}</p>
+                                        <div className="flex items-center justify-between w-full col-span-2 px-4 py-1 border-2 border-green-800 rounded-md">
                                             <div className="flex items-center">
-                                                <button className="text-2xl text-green-800  "
+                                                <button className="text-[16px] text-green-800 "
                                                     onClick={() => handleCart(item, '-', shop)}>
                                                     <FaMinus />
                                                 </button>
                                             </div>
                                             <div className="flex items-center">
-                                                <p className=" w-10 text-xl text-center">{item.cartQuantity}</p>
+                                                <p className="w-10 text-[16px] text-center ">{item.cartQuantity}</p>
                                             </div>
                                             <div className="flex items-center">
-                                                <button className="text-2xl text-green-800  flex items-center"
+                                                <button className="flex items-center text-[16px] text-green-800"
                                                     onClick={() => handleCart(item, '+', shop)}>
                                                     <FaPlus />
                                                 </button>
@@ -154,7 +162,7 @@ const NavbarCartModal = ({ref,}:any) => {
 
                     ))}
                 </div>
-                <div className="mb-4 flex justify-between mt-12">
+                <div className="flex justify-between mt-12 mb-4">
 
                     <button disabled={Object.keys(cartObj).length === 0} className={`bg-[#8DC14F] text-white rounded-lg px-2 py-2 flex-1 mx-1 ${Object.keys(cartObj).length === 0 ? 'bg-opacity-50' : ''}`} onClick={() => {
                         localStorage.removeItem("cartItems")

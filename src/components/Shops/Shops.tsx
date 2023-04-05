@@ -54,11 +54,11 @@ const Shops: React.FC<Props> = ({ shops }) => {
   // ];
 
   return (
-    <div className="w-full flex flex-col gap-6">
+    <div className="flex flex-col w-full gap-6">
       <h2 className="text-lg font-semibold">SHOPS</h2>
 
       <div className="grid grid-cols-7 gap-4">
-        <section className="w-full col-span-7  xl:col-span-5">
+        <section className="w-full col-span-7 xl:col-span-5 xl:w-[1280px]">
           <Slider padding="px-10 py-10">
             {shops.map((shop, index) => (
               <Link href={`/shop-preview/${shop._id}`} key={index}>

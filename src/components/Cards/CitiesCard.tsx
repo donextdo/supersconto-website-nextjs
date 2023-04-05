@@ -14,22 +14,22 @@ const CitiesCode: React.FC<Props> = ({ city }) => {
     //   <div>
     //     <Image src={city.image} fill sizes="width: 100%" alt="{city.title}" />
     //   </div>
-    //   <div className="absolute bottom-0 backdrop-blur-sm bg-white bg-opacity-30 h-1/3 p-2">
+    //   <div className="absolute bottom-0 p-2 bg-white backdrop-blur-sm bg-opacity-30 h-1/3">
     //     <h6 className="font-semibold">{city.title}</h6>
     //     <p className="text-xs">{city.description.substring(0, 50)} ...</p>
     //   </div>
     //   </Link>
     // </div>
     <>
-    {/* <div className="grid grid-cols-4 gap-4 bg-white px-4 py-4 shadow-md">
+    {/* <div className="grid grid-cols-4 gap-4 px-4 py-4 bg-white shadow-md">
       <Link href="/milan">
         <p className="bold text-lg text-[#6d973a] bg-red-500">{city.address.city}</p>
       </Link>
     </div> */}
-    <div className="h-24 w-40 md:flex items-center justify-left gap-3 select-none">
+    <div className="items-center w-40 h-10 gap-3 select-none lg:h-24 md:flex justify-left">
    
     <Link href="/milan">
-        <p className="bold text-lg text-[#6d973a] ">{city.address.city}</p>
+        <p className="font-semibold  text-lg text-[#6d973a] hover:text-green-800  ">{city.address.city}</p>
       </Link>
 
 </div>

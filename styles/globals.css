@@ -5,6 +5,26 @@
 
 /* @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap'); */
 
+/* Cart Open */
+@keyframes cartOpen {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-20%);
+  }
+  50% {
+    transform: translateX(-40%);
+  }
+  75% {
+    transform: translateX(-60%);
+  }
+  100% {
+    transform: translateX(-80%);
+  }
+}
+
+
 @layer base {
     body {
         @apply bg-[#EBEBEB];

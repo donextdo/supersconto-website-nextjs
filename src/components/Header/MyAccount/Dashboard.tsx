@@ -3,7 +3,7 @@ import Orders from "./Orders";
 
 const Dashboard = () => {
   return (
-    <div >
+    <div className="lg:ml-3">
       <p>
         Hello <span className="font-semibold">Customer Name</span> (not{" "}
         <span className="font-semibold">Customer Name?</span>

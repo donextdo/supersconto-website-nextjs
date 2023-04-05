@@ -128,12 +128,12 @@ const Print: React.FC<Props> = ({ setPrint }) => {
     }
     return (
         <div className="fixed inset-0 z-50 grid place-items-center bg-slate-900 bg-opacity-70" >
-            <div className="py-6 px-4 flex gap-6 flex-col relative bg-white shadow-lg rounded-md w-2/5">
+            <div className="py-2 px-4 flex gap-6 flex-col relative bg-white shadow-lg rounded-md w-2/5">
                 <div id="print-container">
-                    <div className="text-right"><button className="mt-2 text-4xl" onClick={printClose}><GrFormClose /></button></div>
+                    <div className="text-right"><button className="mt-2 text-2xl mr-2" onClick={printClose}><GrFormClose /></button></div>
                     <section ref={componentRef} className='mb-1 overflow-y-auto h-[35vh]'>
-                        <div className="flex justify-between">
-                            <div className=" text-2xl bold">My Shopping List</div>
+                        <div className="flex justify-between ">
+                            <div className=" text-[20px] mb-3 font-semibold">My Shopping List</div>
                         </div>
                         
                         {Object.keys(cartObj).map((shop) => (
@@ -147,9 +147,9 @@ const Print: React.FC<Props> = ({ setPrint }) => {
                                             // sizes='height: 100%'
                                             width={450}
                                             height={400} />
-                                        <h6 className="font-semibold">{shop}</h6>
+                                        <h6 className="text-[14px]">{shop}</h6>
                                     </div>
-                                    <div className="font-semibold">Є : {getShopAmount(cartObj[shop])}</div>
+                                    <div className="text-[14px]">Є : {getShopAmount(cartObj[shop])}</div>
                                 </div>
 
                                 {cartObj[shop].sort((a: any, b: any) => a.product_name.localeCompare(b.product_name)).map((item: any, index: string) => (
@@ -167,27 +167,27 @@ const Print: React.FC<Props> = ({ setPrint }) => {
 
                                         {/* 2nd column */}
                                         <div className="col-span-3">
-                                            <p className=" font-semibold">{item.product_name}</p>
-                                            <p className="text-gray-400">Є {item.unit_price} x {item.cartQuantity}</p>
+                                            <p className="text-[14px]">{item.product_name}</p>
+                                            <p className="text-gray-400 text-[14px]">Є {item.unit_price} x {item.cartQuantity}</p>
                                         </div>
 
                                         {/* 3rd column */}
                                         <div className="text-right ">
-                                            <p className="mb-5 font-semibold">Є {item.cartQuantity * item.unit_price}</p>
+                                            <p className="mb-5 text-[14px]">Є {item.cartQuantity * item.unit_price}</p>
                                         </div>
                                     </div>
                                 ))}
 
                                 <div className="flex justify-between px-4">
-                                    <div><p className="text-gray"></p>Sub Total </div>
-                                    <div className="">Є {getTotalAmount()}</div>
+                                    <div><p className="text-gray text-[14px]"></p>Sub Total </div>
+                                    <div className="text-[14px]">Є {getTotalAmount()}</div>
                                 </div>
 
                                 <div className="flex justify-between px-4">
-                                    <div><p className="text-lg font-semibold">Total </p>
+                                    <div><p className="text-lg text-[14px]">Total </p>
                                     </div>
                                     <div className="">
-                                        <p className="text-lg font-semibold">Є {getTotalAmount()}</p>
+                                        <p className="text-lg text-[14px]">Є {getTotalAmount()}</p>
                                     </div>
                                 </div>
                             </div>

@@ -55,9 +55,9 @@ const MyAccount = () => {
                     <button className={`px-4 py-3 border-b-2  ${isColor === 2 ? 'border-green-700' : 'border-white'}`}
                         onClick={() => handleChange(2)}>ORDERS</button>
                     <button className={`px-4 py-3 border-b-2  ${isColor === 3 ? 'border-green-700' : 'border-white'}`}
-                        onClick={() => handleChange(3)}>ACCOUNT DETAILS</button>
+                        onClick={() => handleChange(3)}>ADDRESSES</button>
                     <button className={`px-4 py-3 border-b-2  ${isColor === 4 ? 'border-green-700' : 'border-white'}`}
-                        onClick={() => handleChange(4)}>ADDRESSES</button>
+                        onClick={() => handleChange(4)}>ACCOUNT DETAILS</button>
             </div>
             <hr />
 

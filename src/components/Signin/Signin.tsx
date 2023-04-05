@@ -57,14 +57,14 @@ const Signin = ({showCart}:any) => {
                 // onSubmit={handleSubmit(onSubmit)}
                 >
                     <div className="space-y-5">
-                        <div className="flex flex-raw relative items-center">
+                        <div className="relative flex items-center flex-raw">
                             <BsFillPersonFill className="fill-[#CD212A] absolute ml-2" />
                             <input
                                 type="email"
                                 // name="email"
                                 {...register("email", { required: true })}
                                 placeholder="Email and Contact Number"
-                                className="pl-8 py-2 w-full border border-gray-400 placeholder-gray-600"
+                                className="w-full py-2 pl-8 placeholder-gray-600 border border-gray-400"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
@@ -72,14 +72,14 @@ const Signin = ({showCart}:any) => {
                         <p className="pl-2 text-red-600">{errors.email && "Email is required"} </p>
 
 
-                        <div className="flex flex-raw relative items-center">
+                        <div className="relative flex items-center flex-raw">
                             <BsFillLockFill className="fill-[#CD212A] absolute ml-2" />
                             <input
                                 type="password"
                                 // name="password"
                                 {...register("password", { required: true })}
                                 placeholder="Password"
-                                className="pl-8 py-2 w-full border border-gray-400 placeholder-gray-600"
+                                className="w-full py-2 pl-8 placeholder-gray-600 border border-gray-400"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
@@ -98,26 +98,26 @@ const Signin = ({showCart}:any) => {
 
             <div className="flex items-center gap-2 px-2 my-4">
                 <span className="w-full h-[1px] bg-gray-400 flex-1"></span>
-                <span className="text-gray-800 font-semibold text-base">or</span>
+                <span className="text-base font-semibold text-gray-800">or</span>
                 <span className="w-full h-[1px] bg-gray-400 flex-1"></span>
             </div>
 
-            {/* <div className="flex flex-raw gap-1 mx-2 mt-10">
-                <hr className=" text-black bg-black h-px w-5/12" />
+            {/* <div className="flex gap-1 mx-2 mt-10 flex-raw">
+                <hr className="w-5/12 h-px text-black bg-black " />
                 <p className="w-2/12 text-center"> or </p>
-                <hr className=" text-black bg-black h-px w-5/12" />
+                <hr className="w-5/12 h-px text-black bg-black " />
             </div> */}
 
-            <div className="flex flex-raw relative items-center mx-auto ">
-                <FcGoogle className="fill-blue-500 absolute ml-4 " />
+            <div className="relative flex items-center mx-auto flex-raw ">
+                <FcGoogle className="absolute ml-4 fill-blue-500 " />
                 <button
                     className="border border-[#8DC14F] rounded-lg text-[#8DC14F] py-1 w-[300px] xxl:w-[390px] xxxl:w-[460px] pl-6 hover:bg-[#8DC14F] hover:text-white ">
                     Login with Google
                 </button>
             </div>
 
-            {/* <div className="flex flex-raw relative items-center mx-20 mt-7 mb-20">
-                <FaFacebook className="fill-blue-500 absolute ml-4  " />
+            {/* <div className="relative flex items-center mx-20 mb-20 flex-raw mt-7">
+                <FaFacebook className="absolute ml-4 fill-blue-500 " />
                 <button className="border border-[#8DC14F] rounded-lg text-[#8DC14F] py-1 w-56 pl-6">Login with Facebook</button>
             </div> */}
 

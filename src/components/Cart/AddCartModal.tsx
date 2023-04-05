@@ -71,7 +71,7 @@ const AddToCartModal: React.FC<Props> = ({item, handler}) => {
                         <div className="flex gap-4 mt-6 md:gap-16 flex-raw">
                             <div className="text-lg ">${item.unit_price}</div>
                             <div className="flex flex-raw ">
-                                <div>
+                            <div>
                                     <button
                                         className="px-3 text-lg text-white bg-black"
                                         onClick={decreaseClick}

@@ -1,207 +1,329 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import requests from "../../../utils/request";
 import CheckoutPop from "../CheckoutPop/CheckoutPop";
 import Print from "../Print/Print";
 import Image from "next/image";
-import { FaWindowMinimize } from "react-icons/fa";
-import { RiDeleteBinLine } from 'react-icons/ri';
+import { IoIosClose } from "react-icons/io";
+import { RiDeleteBinLine } from "react-icons/ri";
+
+import { HiOutlineShoppingBag } from "react-icons/hi";
+import { CiPercent } from "react-icons/ci";
+
+import classNames from 'classnames';
 
 interface Props {
-    setMobileShowCart: any;
+  setMobileShowCart: any;
+  mobileShowCart:any;
+  
+
+}
+
+const MobileCartModal: React.FC<Props> = ({
+  setMobileShowCart
+}) => {
+  const [checkout, setCheckout] = useState(false);
+  const [print, setPrint] = useState(false);
+  const [cartObj, setCartObj] = useState<any>([]);
+
+  const animation =useRef<HTMLInputElement>(null);
+
+  // const [isAnimating, setIsAnimating] = useState(false);
+
+  const handleClose = () => {
+    // setIsAnimating(true);
+    setMobileShowCart(false);
+};
+
+useEffect(() => {
+  if (!setMobileShowCart) {
+    setTimeout(() => {
+    },500); 
+  }
+}, []);
+
+
+
+const show=()=>{
+  let id:any;
+  let pos = 0;
+  clearInterval(id);
+  id = setInterval(frame, 5);
+  function frame() {
+    if (pos == 350) {
+      clearInterval(id);
+    } else {
+      pos++; 
+   
+      if (animation.current) {
+        
+        animation.current.style.left = pos + "%"; 
+      }
+      
+      
+    }
   }
 
-const MobileCartModal : React.FC<Props> = ({ setMobileShowCart}) => {
-    const [checkout, setCheckout] = useState(false);
-    const [print, setPrint] = useState(false);
-    const [cartObj, setCartObj] = useState<any>([]);
-
-
-
-    const handleClose = () => {
-        setMobileShowCart(false)
-    }
-
-    useEffect(() => {
-        const items: [string] = JSON.parse(localStorage.getItem("cartItems")!) ?? []
-        console.log(items)
-        if (items.length > 0) {
-            fetch(requests.getCatalogBookPageItemByIds, {
-                method: 'post',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    items: items.map((i: any) => i._id)
-                }),
-            }).then((response) => response.json())
-                .then((responseJson) => {
-                    const cloneResponse = [...responseJson]
-                    cloneResponse.map(item => {
-                        const product: any = items.find((i: any) => i._id === item._id)
-                        item.cartQuantity = product?.quantity ? product?.quantity : 0
-                    })
-                    setCartObj(groupBy([...cloneResponse], (v => v.shop_id.shop_name)))
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        }
-    }, [])
-
-
-    const groupBy = (x: any[], f: (arg0: any, arg1: any, arg2: any) => string | number) => x.reduce((a, b, i) => ((a[f(b, i, x)] ||= []).push(b), a), {});
-
-    const handleCart = (item: any, type: string, shop: string) => {
-        console.log(item)
-        if (type === "-") {
-            if (item.cartQuantity <= 0) return
-            item.cartQuantity -= 1
-
-        } else {
-            if (item.cartQuantity >= item.quantity) return
-            item.cartQuantity += 1
-        }
-        let cartShop = cartObj[shop]
-        const filtered = cartShop.filter((it: { _id: any; }) => it._id !== item._id)
-        filtered.push(item)
-        setCartObj({ ...cartObj, [shop]: filtered });
-        // setCartObj(cartShop)
-    }
-
-    console.log(cartObj)
-
-    const getShopAmount = (items: any) => {
-        return items.reduce((a: any, b: { cartQuantity: number; unit_price: number; }) => {
-            a += b.cartQuantity * b.unit_price
-            return a
-        }, 0)
-    }
-
-    const getTotalAmount = () => {
-        console.log();
-        const allItems = Object.keys(cartObj).map(shop => {
-            return cartObj[shop]
-        }).flatMap(a => a)
-
-        return allItems.reduce((a, b) => {
-            a += b.cartQuantity * b.unit_price
-            return a
-        }, 0)
-    }
-
-    const togglepopup = () => {
-        setCheckout(true)
-    }
-
-    const toggleprint = () => {
-        setPrint(true)
-    }
-    const handleDelete = () => {
-        
-        // const newItems = shop.filter((item)=>item._id != _id)
-        // setCartObj(newItems)
-    }
-
-    return (
-        <div className="fixed inset-0 z-50 grid place-items-end bg-slate-900 bg-opacity-10">
-            <div className="py-4 px-4 flex gap-6 flex-col relative bg-white shadow-md rounded-md w-11/12 bottom-2 right-2 md:w-9/12 lg:w-8/12 ">
-                <div className="text-right">
-                    <button onClick={handleClose}><FaWindowMinimize /></button>
-                </div>
-                <div>
-
-                    <div className="text-2xl border-b-2 pb-2">Your Cart</div>
-                    <div className="flex justify-between items-end pb-3 pt-3 border-b-2">
-                        <div className="text-1xl">Grand Total Є</div>
-                        <div>{getTotalAmount()}</div>
-                    </div>
-
-                    <div className="overflow-y-auto overflow-x-hidden h-[48vh]">
-                        {Object.keys(cartObj).map((shop) => (
-
-                            <div key={`shop${shop}`} >
-                                <div className="flex justify-between px-2 border border-gray-200 bg-gray-200 py-2 items-center ">
-                                    <div className="flex flex-raw gap-8 items-center relative">
-                                    <img src={cartObj[shop][0]?.shop_id?.logo_img} alt="fly" className="object-contain w-full h-8" />
-
-                                    </div>
-                                    <h6>{shop}</h6>
-                                    <div>Є: {getShopAmount(cartObj[shop])}</div>
-                                </div>
-
-
-                                {cartObj[shop].sort((a: any, b: any) => a.product_name.localeCompare(b.product_name)).map((item: any, index: string) => (
-                                    <div key={`item${shop + index}`}
-                                    className="grid grid-cols-8 gap-1 my-4 mx-4 py-2 item-center w-full pr-6">
-    
-                                    <div className=" rounded-lg overflow-hidden ">
-                                    <img src={item.product_image} alt="fly" className="object-contain w-full h-16" />
-                                    </div>
-                                    {/* <div></div> */}
-                                    <div className="col-span-3 pl-1">
-                                        <p className="bold text-lg">{item.product_name}</p>
-                                        <p className="text-gray-400">Є{item.unit_price}</p>
-                                    </div>
-                                    <div className="mx-auto flex items-end"><button><RiDeleteBinLine onClick={() => handleDelete()} className="text-xl text-red-400" /></button>
-                                    </div>
-    
-                                    <div className="col-span-3 text-right">
-                                        <p className="mb-5">Є{item.cartQuantity * item.unit_price}</p>
-                                        <div className="flex flex-raw justify-end">
-                                            <div>
-                                                <button className="bg-green-800 px-3 text-white rounded-l-md"
-                                                    onClick={() => handleCart(item, '-', shop)}>
-                                                    -
-                                                </button>
-                                            </div>
-                                            <div>
-                                                <p className="bg-gray-50 w-10 text-center">{item.cartQuantity}</p>
-                                            </div>
-                                            <div>
-                                                <button className="bg-green-800 px-3 text-white rounded-r-md"
-                                                    onClick={() => handleCart(item, '+', shop)}>
-                                                    +
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-    
-    
-    
-                                </div>
-                                ))}
-                            </div>
-
-                        ))}
-                    </div>
-                    <div className="mb-4 flex justify-between mt-2">
-
-                        <button disabled={Object.keys(cartObj).length === 0} className={`bg-[#8DC14F] text-white rounded-lg px-2 py-2 flex-1 mx-1 ${Object.keys(cartObj).length === 0 ? 'bg-opacity-50' : ''}`} onClick={() => {
-                            localStorage.removeItem("cartItems")
-                            setCartObj({})
-                        }}>Clear cart</button>
-                        <button onClick={togglepopup} disabled={Object.keys(cartObj).length === 0} className={`bg-[#8DC14F] text-white rounded-lg px-2 py-2 flex-1 mx-1 ${Object.keys(cartObj).length === 0 ? 'bg-opacity-50' : ''}`}>Checkout</button>
-                        {
-                            checkout && (
-                                <div>
-                                    <CheckoutPop setCheckout={setCheckout} cartObj={cartObj} getShopAmount={getShopAmount} getTotalAmount={getTotalAmount} handleCart={handleCart} />
-                                </div>
-                            )
-                        }
-                        {/*<button onClick={toggleprint} disabled={Object.keys(cartObj).length === 0} className={`bg-[#8DC14F] text-white rounded-lg px-2 py-2 flex-1 mx-1 ${Object.keys(cartObj).length === 0 ? 'bg-opacity-50': ''}`}>Print</button>*/}
-                        <button onClick={toggleprint} className={`bg-[#8DC14F] text-white rounded-lg px-2 py-2 flex-1 mx-1 `}>Print</button>
-                        {
-                            print && (
-                                <div>
-                                    <Print setPrint={setPrint} />
-                                </div>
-                            )
-                        }
-                    </div>
-                    {/* </div> */}
-
-                </div>
-            </div>
-        </div>
-    );
 }
+
+  useEffect(() => {
+    const items: [string] =
+      JSON.parse(localStorage.getItem("cartItems")!) ?? [];
+    console.log(items);
+    if (items.length > 0) {
+      fetch(requests.getCatalogBookPageItemByIds, {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: items.map((i: any) => i._id),
+        }),
+      })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          const cloneResponse = [...responseJson];
+          cloneResponse.map((item) => {
+            const product: any = items.find((i: any) => i._id === item._id);
+            item.cartQuantity = product?.quantity ? product?.quantity : 0;
+          });
+          setCartObj(groupBy([...cloneResponse], (v) => v.shop_id.shop_name));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, []);
+
+  const groupBy = (
+    x: any[],
+    f: (arg0: any, arg1: any, arg2: any) => string | number
+  ) => x.reduce((a, b, i) => ((a[f(b, i, x)] ||= []).push(b), a), {});
+
+  const handleCart = (item: any, type: string, shop: string) => {
+    console.log(item);
+    if (type === "-") {
+      if (item.cartQuantity <= 0) return;
+      item.cartQuantity -= 1;
+    } else {
+      if (item.cartQuantity >= item.quantity) return;
+      item.cartQuantity += 1;
+    }
+    let cartShop = cartObj[shop];
+    const filtered = cartShop.filter((it: { _id: any }) => it._id !== item._id);
+    filtered.push(item);
+    setCartObj({ ...cartObj, [shop]: filtered });
+    // setCartObj(cartShop)
+  };
+
+  console.log(cartObj);
+
+  const getShopAmount = (items: any) => {
+    return items.reduce(
+      (a: any, b: { cartQuantity: number; unit_price: number }) => {
+        a += b.cartQuantity * b.unit_price;
+        return a;
+      },
+      0
+    );
+  };
+
+  const getTotalAmount = () => {
+    console.log();
+    const allItems = Object.keys(cartObj)
+      .map((shop) => {
+        return cartObj[shop];
+      })
+      .flatMap((a) => a);
+
+    return allItems.reduce((a, b) => {
+      a += b.cartQuantity * b.unit_price;
+      return a;
+    }, 0);
+  };
+
+  const togglepopup = () => {
+    setCheckout(true);
+  };
+
+  const toggleprint = () => {
+    setPrint(true);
+  };
+  const handleDelete = () => {
+    // const newItems = shop.filter((item)=>item._id != _id)
+    // setCartObj(newItems)
+  };
+
+  return (
+    <div ref={animation} className="fixed inset-0 z-50 grid mb-0 bg-opacity-50 place-items-end bg-slate-900 transition-transform duration-1000 transform hover:-translate-x-0">
+      <div className="relative  flex flex-col w-9/12 h-screen px-4 pt-5 bg-white rounded-md shadow-md bottom-1 left-2 right-0 md:w-8/12 lg:w-3/12"
+       >
+        <div className={`text-right ${setMobileShowCart ? 'translate-x-0':'translate-x-full'} ease-in-out duration-300`}>
+          <button  onClick={() => handleClose()}>
+            <IoIosClose className="text-2xl" />
+          </button>
+        </div>
+        <div>
+          <div className=" text-[20px] text-center  font-ff-headings flex flex-wrap justify-center ">
+            <div className="text-[30px] text-center mx-2 mb-2">
+              <HiOutlineShoppingBag />{" "}
+            </div>
+            Your Cart
+          </div>
+
+          <hr className="mt-3 mb-5 font-bold border" />
+
+          {/* Items */}
+
+          <div className="h-[50vh] overflow-x-hidden overflow-y-auto">
+            {Object.keys(cartObj).map((shop) => (
+              <div key={`shop${shop}`}>
+                <div className="flex items-center justify-between px-2 py-2 bg-gray-200 border border-gray-200 ">
+                  <div className="relative flex items-center gap-8 flex-raw">
+                    <img
+                      src={cartObj[shop][0]?.shop_id?.logo_img}
+                      alt="fly"
+                      className="object-contain w-full h-8"
+                    />
+                  </div>
+                  <h6 className="font-ff-headings text-[14px] ">{shop}</h6>
+                  <div className=" text-[14px]">
+                    Є {getShopAmount(cartObj[shop])}
+                  </div>
+                </div>
+
+                {cartObj[shop]
+                  .sort((a: any, b: any) =>
+                    a.product_name.localeCompare(b.product_name)
+                  )
+                  .map((item: any, index: string) => (
+                    <div
+                      key={`item${shop + index}`}
+                      className="grid w-full grid-cols-8 gap-1 py-2 pr-6 mx-4 my-4 item-center"
+                    >
+                      <div className="overflow-hidden rounded-lg ">
+                        <img
+                          src={item.product_image}
+                          alt="fly"
+                          className="object-contain w-full h-16"
+                        />
+                      </div>
+                      {/* <div></div> */}
+                      <div className="col-span-3 pl-1">
+                        <p className="text-[14px] font-ff-headings">
+                          {item.product_name}
+                        </p>
+                        <p className="text-gray-400 text-[14px]">
+                          Є{item.unit_price}
+                        </p>
+                      </div>
+                      <div className="flex items-end ">
+                        <button>
+                          <RiDeleteBinLine
+                            onClick={() => handleDelete()}
+                            className="text-xl text-red-400"
+                          />
+                        </button>
+                      </div>
+
+                      <div className="col-span-3 text-right text-[14px] ">
+                        <p className="mb-5 ">
+                          Є {item.cartQuantity * item.unit_price}
+                        </p>
+
+                        <div className="flex justify-end flex-raw">
+                          <div>
+                            <button
+                              className="px-3 text-white bg-green-800 rounded-l-md"
+                              onClick={() => handleCart(item, "-", shop)}
+                            >
+                              -
+                            </button>
+                          </div>
+                          <div>
+                            <p className="w-10 text-center bg-gray-50 text-[14px] ">
+                              {item.cartQuantity}
+                            </p>
+                          </div>
+                          <div>
+                            <button
+                              className="px-3 text-white bg-green-800 rounded-r-md"
+                              onClick={() => handleCart(item, "+", shop)}
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            ))}
+          </div>
+
+          {/*Items End */}
+
+          <div className="flex mt-5 text-gray-500 text-[14px] mx-2 ">
+            <CiPercent className="mt-1 mr-1 " />
+            Have a Promo Code?
+          </div>
+          <div className="flex items-end justify-between pt-3 pb-3 mx-2">
+            <div className="text-[16px] font-ff-headings">Grand Total</div>
+            <div className=" text-[16px]"> Є {getTotalAmount()}</div>
+          </div>
+          <hr className="font-bold border-dashed" />
+          {/* Buttons */}
+          <div className="flex justify-between mt-10 ">
+            <button
+              disabled={Object.keys(cartObj).length === 0}
+              className={`bg-[#8DC14F] text-white rounded-lg md:px-2 px-1 md:py-2 py-1 flex-1 mx-1 ${
+                Object.keys(cartObj).length === 0 ? "bg-opacity-50" : ""
+              }`}
+              onClick={() => {
+                localStorage.removeItem("cartItems");
+                setCartObj({});
+              }}
+            >
+              Clear cart
+            </button>
+            <button
+              onClick={togglepopup}
+              disabled={Object.keys(cartObj).length === 0}
+              className={`bg-[#8DC14F] text-white rounded-lg md:px-2 px-1 md:py-2 py-1 flex-1 mx-1 ${
+                Object.keys(cartObj).length === 0 ? "bg-opacity-50" : ""
+              }`}
+            >
+              Checkout
+            </button>
+            {checkout && (
+              <div>
+                <CheckoutPop
+                  setCheckout={setCheckout}
+                  cartObj={cartObj}
+                  getShopAmount={getShopAmount}
+                  getTotalAmount={getTotalAmount}
+                  handleCart={handleCart}
+                />
+              </div>
+            )}
+            {/*<button onClick={toggleprint} disabled={Object.keys(cartObj).length === 0} className={`bg-[#8DC14F] text-white rounded-lg px-2 py-2 flex-1 mx-1 ${Object.keys(cartObj).length === 0 ? 'bg-opacity-50': ''}`}>Print</button>*/}
+            <button
+              onClick={toggleprint}
+              className={`bg-[#8DC14F] text-white rounded-lg md:px-2 px-1 md:py-2 py-1 flex-1 mx-1 `}
+            >
+              Print
+            </button>
+            {print && (
+              <div>
+                <Print setPrint={setPrint} />
+              </div>
+            )}
+          </div>
+
+          {/* Buttons End */}
+
+          {/* </div> */}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default MobileCartModal;
