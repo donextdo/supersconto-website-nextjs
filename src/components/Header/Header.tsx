@@ -70,7 +70,7 @@ const Header = () => {
 
   return (
     <header>
-      <div className="flex items-center w-full px-10">
+      <div className="flex items-center w-full px-10 ">
         <div className="flex items-center w-full gap-4 pl-16 lsm:pl-0">
           <Link href={"/"} className="text-3xl text-[#008C45] font-semibold ">
             <Image

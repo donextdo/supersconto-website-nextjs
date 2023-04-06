@@ -24,6 +24,7 @@ import { FaSearch, FaLocationArrow, FaUserCircle } from "react-icons/fa";
 interface Props {
   catalogs: Catalog[];
  
+ 
 }
 
 const Main: React.FC<Props> = ({ catalogs }) => {
@@ -46,12 +47,12 @@ const Main: React.FC<Props> = ({ catalogs }) => {
 
   return (
     <main className="px-10 mx-auto mt-24 overflow-y-hidden">
+      
       {/* mobile cart button */}
-     
-      <div className="relative  ">
+      <div className="relative ">
         <div
           onClick={() => handleCart()}
-          className="fixed z-50 p-2 text-4xl bg-white border border-green-800 rounded-full shadow-lg right-2 bottom-2 hover:bg-gray-200 scroll-hidden"
+          className={`fixed z-50 p-2 text-4xl bg-white border border-green-800 rounded-full shadow-lg right-2 bottom-2 hover:bg-gray-200 scroll-hidden ${ mobileShowCart ? 'scale-0 transition ease-in-out duration-300':'scale-100'}`}
         >
           <RiShoppingCart2Fill className="text-green-800" />
         
@@ -60,12 +61,12 @@ const Main: React.FC<Props> = ({ catalogs }) => {
 
       {/* <div
         onClick={() => handleCart()}
-        className="fixed z-50 p-2 text-4xl bg-white border border-green-800 rounded-full shadow-lg right-2 bottom-2 hover:bg-gray-200 transition-transform duration-1000 transform "
+        className="fixed z-50 p-2 text-4xl transition-transform duration-1000 transform bg-white border border-green-800 rounded-full shadow-lg right-2 bottom-2 hover:bg-gray-200 "
       >
         <RiShoppingCart2Fill className="text-green-800" />
       </div> */}
 
-      {/* <div className="fixed z-50 p-2 text-4xl bg-white border border-green-800 rounded-full shadow-lg right-2 bottom-2 hover:bg-gray-200 transition-transform duration-1000 transform ">
+      {/* <div className="fixed z-50 p-2 text-4xl transition-transform duration-1000 transform bg-white border border-green-800 rounded-full shadow-lg right-2 bottom-2 hover:bg-gray-200 ">
         <Link href="/SideBar">
     
         <RiShoppingCart2Fill className="text-green-800" />

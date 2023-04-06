@@ -9,61 +9,50 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { CiPercent } from "react-icons/ci";
 
-import classNames from 'classnames';
+import classNames from "classnames";
 
 interface Props {
   setMobileShowCart: any;
-  mobileShowCart:any;
-  
-
+  mobileShowCart: any;
 }
 
-const MobileCartModal: React.FC<Props> = ({
-  setMobileShowCart
-}) => {
+const MobileCartModal: React.FC<Props> = ({ setMobileShowCart }) => {
   const [checkout, setCheckout] = useState(false);
   const [print, setPrint] = useState(false);
   const [cartObj, setCartObj] = useState<any>([]);
 
-  const animation =useRef<HTMLInputElement>(null);
+  const animation = useRef<HTMLInputElement>(null);
 
   // const [isAnimating, setIsAnimating] = useState(false);
 
   const handleClose = () => {
     // setIsAnimating(true);
     setMobileShowCart(false);
-};
+  };
 
-useEffect(() => {
-  if (!setMobileShowCart) {
-    setTimeout(() => {
-    },500); 
-  }
-}, []);
-
-
-
-const show=()=>{
-  let id:any;
-  let pos = 0;
-  clearInterval(id);
-  id = setInterval(frame, 5);
-  function frame() {
-    if (pos == 350) {
-      clearInterval(id);
-    } else {
-      pos++; 
-   
-      if (animation.current) {
-        
-        animation.current.style.left = pos + "%"; 
-      }
-      
-      
+  useEffect(() => {
+    if (!setMobileShowCart) {
+      setTimeout(() => {}, 500);
     }
-  }
+  }, []);
 
-}
+  const show = () => {
+    let id: any;
+    let pos = 0;
+    clearInterval(id);
+    id = setInterval(frame, 5);
+    function frame() {
+      if (pos == 350) {
+        clearInterval(id);
+      } else {
+        pos++;
+
+        if (animation.current) {
+          animation.current.style.left = pos + "%";
+        }
+      }
+    }
+  };
 
   useEffect(() => {
     const items: [string] =
@@ -150,16 +139,36 @@ const show=()=>{
     // const newItems = shop.filter((item)=>item._id != _id)
     // setCartObj(newItems)
   };
+  
+//   const styleObj = {
+//     // position: "absolute",
+//     right: !mobileShowCart?"-1500px":"0px",
+//     transition: "1s",
+//     zIndex:!mobileShowCart?"50":"",
+//     opacity:!mobileShowCart?"0px":"50px"
+// }
+//style={styleObj}
+
+  
 
   return (
-    <div ref={animation} className="fixed inset-0 z-50 grid mb-0 bg-opacity-50 place-items-end bg-slate-900 transition-transform duration-1000 transform hover:-translate-x-0">
-      <div className="relative  flex flex-col w-9/12 h-screen px-4 pt-5 bg-white rounded-md shadow-md bottom-1 left-2 right-0 md:w-8/12 lg:w-3/12"
-       >
-        <div className={`text-right ${setMobileShowCart ? 'translate-x-0':'translate-x-full'} ease-in-out duration-300`}>
-          <button  onClick={() => handleClose()}>
+    <div
+      ref={animation}
+      className="fixed inset-0 z-50 grid mb-0 transition-transform duration-1000 transform bg-opacity-50 place-items-end bg-slate-900 hover:-translate-x-0"
+    >
+      <div className="relative right-0 flex flex-col w-10/12 h-screen px-3 pt-5 bg-white rounded-md shadow-md lg:px-4 bottom-1 left-2 md:w-8/12 lg:w-3/12">
+        <div
+          className={`text-right ${
+            setMobileShowCart
+              ? "translate-x-0 transition ease-in-out duration-300"
+              : "translate-x-full"
+          }`}
+        >
+          <button onClick={() => handleClose()}>
             <IoIosClose className="text-2xl" />
           </button>
         </div>
+
         <div>
           <div className=" text-[20px] text-center  font-ff-headings flex flex-wrap justify-center ">
             <div className="text-[30px] text-center mx-2 mb-2">
@@ -218,7 +227,7 @@ const show=()=>{
                         <button>
                           <RiDeleteBinLine
                             onClick={() => handleDelete()}
-                            className="text-xl text-red-400"
+                            className="text-xl text-red-400 "
                           />
                         </button>
                       </div>
