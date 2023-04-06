@@ -19,7 +19,7 @@ interface Props {
 }
 
 const MobileCartModal: React.FC<Props> = ({
-  setMobileShowCart
+  setMobileShowCart,mobileShowCart
 }) => {
   const [checkout, setCheckout] = useState(false);
   const [print, setPrint] = useState(false);
@@ -151,8 +151,15 @@ const show=()=>{
     // setCartObj(newItems)
   };
 
+  const styleObj = {
+    position: "absolute",
+    right: !mobileShowCart?"-1500px":"0px",
+    transition: "1s",
+    zIndex:!mobileShowCart?"-500":"1"
+}
+
   return (
-    <div ref={animation} className="fixed inset-0 z-50 grid mb-0 bg-opacity-50 place-items-end bg-slate-900 transition-transform duration-1000 transform hover:-translate-x-0">
+    <div style={styleObj} ref={animation} className="fixed inset-0 z-50 grid mb-0 bg-opacity-50 place-items-end  transition-transform duration-1000 transform hover:-translate-x-0">
       <div className="relative  flex flex-col w-9/12 h-screen px-4 pt-5 bg-white rounded-md shadow-md bottom-1 left-2 right-0 md:w-8/12 lg:w-3/12"
        >
         <div className={`text-right ${setMobileShowCart ? 'translate-x-0':'translate-x-full'} ease-in-out duration-300`}>
@@ -165,7 +172,7 @@ const show=()=>{
             <div className="text-[30px] text-center mx-2 mb-2">
               <HiOutlineShoppingBag />{" "}
             </div>
-            Your Cart
+            Your Carttt
           </div>
 
           <hr className="mt-3 mb-5 font-bold border" />

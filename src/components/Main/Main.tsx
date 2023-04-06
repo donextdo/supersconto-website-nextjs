@@ -44,6 +44,12 @@ const Main: React.FC<Props> = ({ catalogs }) => {
     setQuery(e.target.value);
   };
 
+  const styleObj = {
+    margin:"500px",
+    padding:"10px",
+    backgroundColor: "blue"
+}
+
   return (
     <main className="px-10 mx-auto mt-24 overflow-y-hidden">
       {/* mobile cart button */}
@@ -71,11 +77,11 @@ const Main: React.FC<Props> = ({ catalogs }) => {
         <RiShoppingCart2Fill className="text-green-800" />
       </Link></div> */}
 
-      {mobileShowCart && (
+      {/* {mobileShowCart && ( */}
         <div>
           <MobileCartModal setMobileShowCart={setMobileShowCart} mobileShowCart={mobileShowCart} />
         </div>
-      )}
+      {/* )} */}
 
       <div className="flex justify-between w-full md:hidden ">
         <input
