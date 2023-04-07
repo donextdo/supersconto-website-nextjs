@@ -48,7 +48,7 @@ const LoginRegisterPage = () => {
             />
           </div>
         )}
-        {activeTab === "tab2" && (
+        {/* {activeTab === "tab2" && (
           <div>
             <Register
               onSubmit={function (values: {
@@ -59,7 +59,7 @@ const LoginRegisterPage = () => {
               }}
             />
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
