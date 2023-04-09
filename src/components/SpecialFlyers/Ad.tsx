@@ -25,14 +25,14 @@ const Ad = () => {
             <h2 className='mb-6 text-lg font-semibold'>
                 SPECIAL FLYERS
             </h2>
-            <div className="grid grid-cols-7 gap-4">
+            <div className="">
                 {/* <section className="w-full col-span-5">{ads.map((ad) => (
                     <AdCard ad={ad} />
                 ))}</section> */}
-                <section className="w-full col-span-5 xl:w-[1280px]">
+                <section className="w-full ">
                     <AdCard />
                 </section>
-                <section className="w-full col-span-2"></section>
+                
             </div>
         </div>
     );

@@ -56,15 +56,15 @@ const Cities: React.FC<Props>  = ({shops}) => {
   return (
     <div className="flex flex-col gap-6 ">
       <h2 className="text-lg font-semibold">CITIES WITH NEARBY OFFERS</h2>
-      <div className="grid grid-cols-7 gap-4">
-        <section className="w-full col-span-7 xl:col-span-5 xl:w-[1280px]">
+      <div className="">
+        <section className="w-full">
             <Slider>
             {uniqueItems.map((city, index) => (
               < CitiesCard city={city} key={index} />
             ))}
             </Slider>
         </section>
-        <section className="w-full col-span-2"></section>
+        
       </div>
     </div>
 

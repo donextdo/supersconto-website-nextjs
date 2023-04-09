@@ -1,5 +1,8 @@
+
 import Link from "next/link";
+import  { useRouter } from "next/router";
 import React, { useState } from "react";
+import { http } from "../../../../../utils/request";
 
 type FormValues = {
   usernameoremail: string;
@@ -13,12 +16,30 @@ type Props = {
 const Login: React.FC<Props> = () => {
   const [usernameoremail, setUsernameoremail] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const router = useRouter();
+  
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log({ usernameoremail, password });
-    setUsernameoremail("");
-    setPassword("");
+    const details = {
+      email:usernameoremail,
+      password:password,
+      
+  }
+    try {
+      const response = await http.post(`/users/login`, details);
+      console.log(response.data);
+      localStorage.setItem('token', response.data.token)
+      localStorage.setItem('id', response.data._id)
+
+
+      if(response.status==200){
+        // location.reload(); 
+        router.push('/');
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>
@@ -41,6 +62,8 @@ const Login: React.FC<Props> = () => {
                   autoComplete="given-username-email"
                   required 
                   className="block w-full border-0 py-2 px-3.5 text-gray-900 bg-[#f3f4f7] "
+                  value={usernameoremail}
+                  onChange={(e) => setUsernameoremail(e.target.value)}
                 />
               </div>
             </div>
@@ -56,6 +79,8 @@ const Login: React.FC<Props> = () => {
                   autoComplete="password"
                   required 
                   className="block w-full border-0 py-2 px-3.5 text-gray-900 bg-[#f3f4f7]"
+                  value={password}
+                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
             </div>

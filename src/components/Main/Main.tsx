@@ -105,13 +105,13 @@ const Main: React.FC<Props> = ({ catalogs }) => {
       </div>
 
       <h2 className="pt-4 mb-6 text-lg font-semibold">NEAREST FLYERS</h2>
-      <div className="grid grid-cols-7 gap-4 ">
-        <section className="w-full h-[74vh] col-span-7 xl:col-span-5 xxl:col-span-5 ">
+      <div className="">
+        <section className="w-full h-[74vh] ">
           {/* Nearest Fylers Area  */}
           <NearestFlyers catalogs={catalogs} />
         </section>
 
-        <aside className="hidden w-full h-[74vh] col-span-2 relative ">
+        {/* <aside className="hidden w-full h-[74vh] col-span-2 relative ">
           <div className="fixed shadow-2xl">
             <Card styleClass="rounded-md h-[74vh] relative ">
               {showCart ? (
@@ -170,7 +170,7 @@ const Main: React.FC<Props> = ({ catalogs }) => {
               )}
             </Card>
           </div>
-        </aside>
+        </aside> */}
       </div>
 
      

@@ -10,7 +10,7 @@ interface Props {
   allnews: News[]
 }
 
-const News: React.FC<Props> = ({allnews}) => {
+const News: React.FC<Props> = ({ allnews }) => {
   // const newss: News[] = [
   //   {
   //     image: news1,
@@ -30,18 +30,18 @@ const News: React.FC<Props> = ({allnews}) => {
     <div className="flex flex-col w-full gap-6">
       <h2 className="text-lg font-semibold">NEWS</h2>
 
-    <div className="grid grid-cols-7 gap-4">
+      <div className="">
 
-   <section className="w-full col-span-7 xl:col-span-5 xl:w-[1280px]">
-    <Slider>
-      {allnews.map((news, index) => (
+        <section className="w-full ">
+          <Slider>
+            {allnews.map((news, index) => (
 
-        < NewsCard news={news} key={index} />
-      ))}
-    </Slider>
-  </section>
-  <section className="w-full col-span-2"></section>
-</div>
+              < NewsCard news={news} key={index} />
+            ))}
+          </Slider>
+        </section>
+    
+      </div>
 
 
     </div>

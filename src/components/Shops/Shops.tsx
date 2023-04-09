@@ -57,8 +57,8 @@ const Shops: React.FC<Props> = ({ shops }) => {
     <div className="flex flex-col w-full gap-6">
       <h2 className="text-lg font-semibold">SHOPS</h2>
 
-      <div className="grid grid-cols-7 gap-4">
-        <section className="w-full col-span-7 xl:col-span-5 xl:w-[1280px]">
+      <div className="">
+        <section className="w-full ">
           <Slider padding="px-10 py-10">
             {shops.map((shop, index) => (
               <Link href={`/shop-preview/${shop._id}`} key={index}>
@@ -68,7 +68,7 @@ const Shops: React.FC<Props> = ({ shops }) => {
           </Slider>
         </section>
 
-        <section className="w-full col-span-2"></section>
+       
 
       </div>
 
