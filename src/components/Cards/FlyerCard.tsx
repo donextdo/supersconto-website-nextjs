@@ -29,8 +29,8 @@ const FlyerCard: React.FC<Props> = ({flyer,onClick}) => {
             width={400}
         />
 
-        <div className='absolute bottom-0 w-full flex flex-col gap-1 p-2  bg-opacity-30 backdrop-blur-sm hover:bg-white'>
-            <h4 className='text-sm capitalize font-medium'>
+        <div className='absolute bottom-0 flex flex-col w-full gap-1 p-2 bg-opacity-30 backdrop-blur-sm hover:bg-white'>
+        <h4 className='text-sm font-medium capitalize'>
                 { flyer.title }
             </h4>
 

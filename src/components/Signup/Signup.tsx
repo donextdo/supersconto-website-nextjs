@@ -81,14 +81,14 @@ const Signup = ({shiftTab}:any) => {
       className="h-max">
         
           <section className=" mt-8 overflow-y-scroll overflow-x-hidden sm:h-[35vh] l">
-            <div className="flex flex-raw relative items-center mx-2">
+            <div className="relative flex items-center mx-2 flex-raw">
               <BsFillPersonFill className="fill-[#CD212A] absolute ml-2" />
               <input
                 type="text"
                 {...register("fullname", { required: true })}
                 // name="fullName"
                 placeholder="Full Name"
-                className="pl-8 py-2 w-full border border-gray-400 placeholder-gray-600"
+                className="w-full py-2 pl-8 placeholder-gray-600 border border-gray-400"
                 value={fullname}
                 onChange={(e) => setFullname(e.target.value)}
 
@@ -97,14 +97,14 @@ const Signup = ({shiftTab}:any) => {
             </div>
             <p className="pl-2 text-red-600">{errors.fullname && "First name is required"} </p>
 
-            <div className="flex flex-raw relative items-center mx-2 mt-5">
+            <div className="relative flex items-center mx-2 mt-5 flex-raw">
               <BsTelephoneFill className="fill-[#CD212A] absolute ml-2" />
               <input
                 type="text"
                 // name="contactNumber"
                 {...register("contactNumber", { required: true })}
                 placeholder="Contact Number"
-                className="pl-8 py-2 w-full border border-gray-400 placeholder-gray-600"
+                className="w-full py-2 pl-8 placeholder-gray-600 border border-gray-400"
                 value={contactNumber}
                 onChange={(e) => setContactNumber(e.target.value)}
 
@@ -112,14 +112,14 @@ const Signup = ({shiftTab}:any) => {
             </div>
             <p className="pl-2 text-red-600">{errors.fullname && "Contact Number is required"} </p>
 
-            <div className="flex flex-raw relative items-center mx-2 mt-5">
+            <div className="relative flex items-center mx-2 mt-5 flex-raw">
               <MdEmail className="fill-[#CD212A] absolute ml-2" />
               <input
                 type="email"
                 // name="email"
                 {...register("email", { required: true })}
                 placeholder="Email"
-                className="pl-8 py-2 w-full border border-gray-400 placeholder-gray-600"
+                className="w-full py-2 pl-8 placeholder-gray-600 border border-gray-400"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
 
@@ -127,14 +127,14 @@ const Signup = ({shiftTab}:any) => {
             </div>
             <p className="pl-2 text-red-600">{errors.fullname && "Email is required"} </p>
 
-            <div className="flex flex-raw relative items-center mx-2 mt-5">
+            <div className="relative flex items-center mx-2 mt-5 flex-raw">
               <BsFillPersonFill className="fill-[#CD212A] absolute ml-2" />
               <input
                 type="text"
                 // name="username"
                 {...register("username", { required: true })}
                 placeholder="Username"
-                className="pl-8 py-2 w-full border border-gray-400 placeholder-gray-600"
+                className="w-full py-2 pl-8 placeholder-gray-600 border border-gray-400"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
 
@@ -142,14 +142,14 @@ const Signup = ({shiftTab}:any) => {
             </div>
             <p className="pl-2 text-red-600">{errors.fullname && "Username is required"} </p>
 
-            <div className="flex flex-raw relative items-center mx-2 mt-5">
+            <div className="relative flex items-center mx-2 mt-5 flex-raw">
               <BsFillLockFill className="fill-[#CD212A] absolute ml-2" />
               <input
                 type="password"
                 // name="password"
                 {...register("password", { required: true })}
                 placeholder="Password"
-                className="pl-8 py-2 w-full border border-gray-400 placeholder-gray-600"
+                className="w-full py-2 pl-8 placeholder-gray-600 border border-gray-400"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
 
@@ -157,14 +157,14 @@ const Signup = ({shiftTab}:any) => {
             </div>
             <p className="pl-2 text-red-600">{errors.fullname && "Password is required"} </p>
 
-            <div className="flex flex-raw relative items-center mx-2 mt-5">
+            <div className="relative flex items-center mx-2 mt-5 flex-raw">
               <BsFillLockFill className="fill-[#CD212A] absolute ml-2" />
               <input
                 type="password"
                 // name="confirmPassword"
                 {...register("confirmPassword", { required: true })}
                 placeholder="Confirm Password"
-                className="pl-8 py-2 w-full border border-gray-400 placeholder-gray-600"
+                className="w-full py-2 pl-8 placeholder-gray-600 border border-gray-400"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
 
@@ -186,12 +186,12 @@ const Signup = ({shiftTab}:any) => {
         
       </form>
 
-      <p className="text-xs mx-2 mt-10">
+      <p className="mx-2 mt-10 text-xs">
               By clicking the `Sign Up` button you will agree to our terms and
               conditions
       </p>
 
-        <div className="absolute bottom-10 left-0 right-0 px-4 mx-auto w-full">
+        <div className="absolute left-0 right-0 w-full px-4 mx-auto bottom-10">
               {/* <button type="submit" className="bg-[#8DC14F] text-white w-[305px] xxl:w-[390px] xxxl:w-[470px] rounded-lg mx-2 py-2 mb-4 ">
                 Sign Up
               </button> */}

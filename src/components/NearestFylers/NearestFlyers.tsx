@@ -76,13 +76,14 @@ const NearestFlyers: React.FC<Props> = ({ catalogs }) => {
     }
 
   return (
-    <Card styleClass='rounded-md flex flex-col gap-4 h-[74vh] overflow-hidden'>
 
-        <div 
-        className='w-full h-[60vh] pr-2 grid grid-cols-2 gap-x-2 gap-y-5 justify-items-center
+   
+    <Card styleClass='rounded-md flex flex-col gap-4 h-[80vh] overflow-hidden w-full pb-16'>
+                 <div 
+        className='w-full h-[80vh] pr-2 grid grid-cols-2  gap-x-2 gap-y-5 justify-items-center
         overflow-y-scroll overflow-x-hidden 
         !scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-gray-400 sm:grid-cols-4 
-        xxl:grid-cols-4 shadow-inner'>
+        xxl:grid-cols-4 '>
 
             {catalogs.slice(0,visible).map((catelog, index) => (
                 <Link href={`/catalog-preview/${catelog._id}`} key={index}>
@@ -92,11 +93,14 @@ const NearestFlyers: React.FC<Props> = ({ catalogs }) => {
 
         </div>
 
-       
-        <Button styleClass='w-full bg-[#8DC14F] py-2 px-6 text-base font-medium text-white rounded-md hover:bg-[#8DC14F]/80 ' onClick={showMoreItem}>
+       <div className='lg:mb-5'>
+        <Button styleClass='w-full  bg-[#8DC14F] py-2 px-6 text-base font-medium text-white rounded-md hover:bg-[#8DC14F]/80 ' onClick={showMoreItem}>
             Load Nearest Flyers
         </Button>
+        </div>
+
     </Card>
+   
   )
 }
 

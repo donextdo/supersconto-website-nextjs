@@ -5,6 +5,9 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      'ff-headings' : ['Dosis', 'sans-serif']
+    },
     screens: {
       ssm: '376px',
       lsm: '450px',

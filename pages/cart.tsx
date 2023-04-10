@@ -84,10 +84,10 @@ const Cart = () => {
 
     return (
         <div className="fixed inset-0 z-50 grid place-items-center bg-slate-900 bg-opacity-10">
-            <div className="py-4 px-4 flex gap-6 flex-col relative bg-white shadow-md rounded-md w-11/12  md:w-9/12 lg:w-4/12 ">
+            <div className="relative flex flex-col w-11/12 gap-6 px-4 py-4 bg-white rounded-md shadow-md md:w-9/12 lg:w-4/12 ">
 
-                <div className="text-2xl border-b-2 pb-2">Your Cart</div>
-                <div className="flex justify-between items-end pb-3  border-b-2">
+                <div className="pb-2 text-2xl border-b-2">Your Cart</div>
+                <div className="flex items-end justify-between pb-3 border-b-2">
                     <div className="text-1xl">Grand Total $</div>
                     <div>{getTotalAmount()}</div>
                 </div>
@@ -95,8 +95,8 @@ const Cart = () => {
                 <div className="overflow-y-auto overflow-x-hidden h-[46vh] ">
                     {Object.keys(cartObj).map((shop) => (
                         <div key={`shop${shop}`} >
-                            <div className="flex justify-between px-2 border border-gray-200 bg-gray-200 py-2 items-center ">
-                                <div className="flex flex-raw gap-8 items-center relative rounded-lg">
+                            <div className="flex items-center justify-between px-2 py-2 bg-gray-200 border border-gray-200 ">
+                                <div className="relative flex items-center gap-8 rounded-lg flex-raw">
                                         <img src={cartObj[shop][0]?.shop_id?.logo_img} alt="fly" className="object-contain w-full h-8" />
                                 </div>
                                 <h6>{shop}</h6>
@@ -105,27 +105,27 @@ const Cart = () => {
 
                             {cartObj[shop].sort((a: any, b: any) => a.product_name.localeCompare(b.product_name)).map((item: any, index: string) => (
                                 <div key={`item${shop + index}`} className='grid grid-cols-8 gap-1 py-2'>
-                                    <div className="col-span-2 rounded-lg overflow-hidden">
+                                    <div className="col-span-2 overflow-hidden rounded-lg">
                                         <img src={item.product_image} alt="fly" className="object-contain w-full h-20" /></div>
                                     <div className="col-span-3">
-                                        <p className="bold text-lg">{item.product_name}</p>
+                                        <p className="text-lg bold">{item.product_name}</p>
                                         <p className="text-gray-400">${item.unit_price}</p>
                                     </div>
-                                    <div className="mx-auto flex items-end"><button><RiDeleteBinLine className="text-2xl text-red-400"/></button></div>
+                                    <div className="flex items-end mx-auto"><button><RiDeleteBinLine className="text-2xl text-red-400"/></button></div>
                                     <div className="col-span-2 text-right ">
                                         <p className="mb-4">${item.cartQuantity * item.unit_price}</p>
-                                        <div className="flex col-span-2 items-center justify-between border border-green-800 rounded-md">
+                                        <div className="flex items-center justify-between col-span-2 border border-green-800 rounded-md">
                                             <div className="flex items-center">
-                                                <button className="text-3xl text-green-800 pl-4"
+                                                <button className="pl-4 text-3xl text-green-800"
                                                     onClick={() => handleCart(item, '-', shop)}>
                                                     -
                                                 </button>
                                             </div>
                                             <div className="flex items-center">
-                                                <p className=" w-10 text-center">{item.cartQuantity}</p>
+                                                <p className="w-10 text-center ">{item.cartQuantity}</p>
                                             </div>
                                             <div className="flex items-center">
-                                                <button className="text-3xl text-green-800 pr-4 flex items-center"
+                                                <button className="flex items-center pr-4 text-3xl text-green-800"
                                                     onClick={() => handleCart(item, '+', shop)}>
                                                     +
                                                 </button>

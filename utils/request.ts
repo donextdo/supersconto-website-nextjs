@@ -1,6 +1,6 @@
 import axios from "axios";
-const BASE_URL = 'https://api.supersconto24.com/v1/api'
-// const BASE_URL = 'http://localhost:3000/v1/api'
+// const BASE_URL = 'https://api.supersconto24.com/v1/api'
+const BASE_URL = 'http://localhost:3000/v1/api'
 
 const requests = {
     fetchCatelogs: `${BASE_URL}/catelog/book`,
@@ -10,8 +10,8 @@ const requests = {
     allShops : `${BASE_URL}/shop`,
     findShopById : (id :string) => `${BASE_URL}/shop/find/${id}`,
     allNews : `${BASE_URL}/news`,
-    // allCategory : `${BASE_URL}/category/categories`,
-    allCategory : 'https://api.supersconto24.com/v1/api/category/categories',
+    allCategory : `${BASE_URL}/category/categories`,
+    // allCategory : 'https://api.supersconto24.com/v1/api/category/categories',
 
 
 }

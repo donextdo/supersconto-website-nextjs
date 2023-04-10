@@ -7,7 +7,7 @@ import flyer2 from '../../../assets/flyers/flyer_2.jpg'
 
 const AdCard = () => {
     return (
-        <div className="flex justify-between bg-white px-20 py-12 rounded-md ">
+        <div className="flex justify-between px-20 py-12 bg-white rounded-md ">
             <div className='w-[300px] min-w-[12.5rem] h-[340px] rounded-sm relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer '>
                 <Image
                     src={flyer1}
@@ -18,8 +18,8 @@ const AdCard = () => {
                     alt='flyer'
                 />
 
-                <div className='absolute bottom-0 w-full flex flex-col gap-1 p-2 bg-white bg-opacity-30 backdrop-blur-sm '>
-                    <h4 className='text-sm capitalize font-medium'>
+                <div className='absolute bottom-0 flex flex-col w-full gap-1 p-2 bg-white bg-opacity-30 backdrop-blur-sm '>
+                    <h4 className='text-sm font-medium capitalize'>
                         KREO BRICO AND CASA
                     </h4>
 
@@ -65,8 +65,8 @@ const AdCard = () => {
                     alt='flyer'
                 />
 
-                <div className='absolute bottom-0 w-full flex flex-col gap-1 p-2 bg-white bg-opacity-30 backdrop-blur-sm'>
-                    <h4 className='text-sm capitalize font-medium'>
+                <div className='absolute bottom-0 flex flex-col w-full gap-1 p-2 bg-white bg-opacity-30 backdrop-blur-sm'>
+                    <h4 className='text-sm font-medium capitalize'>
                         KREO BRICO AND CASA
                     </h4>
 

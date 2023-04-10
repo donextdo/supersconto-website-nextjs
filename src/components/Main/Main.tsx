@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect, use } from "react";
 import Card from "../Utils/Card";
 import Button from "../Utils/Button";
 import NearestFlyers from "../NearestFylers/NearestFlyers";
@@ -9,129 +9,175 @@ import Link from "next/link";
 import Signup from "../Signup/Signup";
 import { RiLoginCircleFill, RiShoppingCart2Fill } from "react-icons/ri";
 import MobileCartModal from "../Cart/MobileCartModal";
-import TextInput from '../Utils/TextInput'
-import { FaSearch, FaLocationArrow ,FaUserCircle} from "react-icons/fa";
+import TextInput from "../Utils/TextInput";
+import { FaSearch, FaLocationArrow, FaUserCircle } from "react-icons/fa";
+
+  // core version + navigation, pagination modules:
+  import Swiper, { Navigation, Pagination } from 'swiper';
+  // import Swiper and modules styles
+  import 'swiper/css';
+  import 'swiper/css/navigation';
+  import 'swiper/css/pagination';
 
 
 
 interface Props {
   catalogs: Catalog[];
+ 
+ 
 }
 
 const Main: React.FC<Props> = ({ catalogs }) => {
   const [login, setLogin] = useState(true);
+
   const [showCart, setShowCart] = useState(true);
   const [mobileShowCart, setMobileShowCart] = useState(false);
 
   const handleCart = () => {
-    setMobileShowCart(!mobileShowCart)
-  }
+    setMobileShowCart(!mobileShowCart);
+  };
 
-  const [query, setQuery] = useState<string>('')
+  const [query, setQuery] = useState<string>("");
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setQuery(e.target.value)
-    }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setQuery(e.target.value);
+  };
 
   return (
-    <main className="mt-24  px-10 mx-auto">
-
+    <main className="px-10 mx-auto mt-24 overflow-y-hidden">
+      
       {/* mobile cart button */}
-      <button className="fixed right-2 bottom-2  text-4xl p-2 z-50 bg-white hover:bg-gray-200 shadow-lg  rounded-full xl:hidden border border-green-800" onClick={handleCart} ><RiShoppingCart2Fill className='text-green-800' />
-      </button>
-      { 
-        mobileShowCart && <div>
-          <MobileCartModal setMobileShowCart={setMobileShowCart} />
+      <div className="relative ">
+        <div
+          onClick={() => handleCart()}
+          className={`fixed z-50 p-2 text-4xl bg-white border border-green-800 rounded-full shadow-lg right-2 bottom-2 hover:bg-gray-200 scroll-hidden ${ mobileShowCart ? 'scale-0 transition ease-in-out duration-300':'scale-100'}`}
+        >
+          <RiShoppingCart2Fill className="text-green-800" />
+        
+          </div>
         </div>
-      }
 
-     
-      <div className='w-full flex justify-between  md:hidden'>
-        <input className="w-full text-[#3D3B3B] text-sm font-light rounded-l-md px-5" type="text" placeholder="Search by Category or Items" value={query} onChange={handleChange}/>
-        <button >
-          <FaSearch className=' text-white bg-[#008C45] w-12 h-[40px] px-4  rounded-r-md' />
-        </button> 
+      {/* <div
+        onClick={() => handleCart()}
+        className="fixed z-50 p-2 text-4xl transition-transform duration-1000 transform bg-white border border-green-800 rounded-full shadow-lg right-2 bottom-2 hover:bg-gray-200 "
+      >
+        <RiShoppingCart2Fill className="text-green-800" />
+      </div> */}
+
+      {/* <div className="fixed z-50 p-2 text-4xl transition-transform duration-1000 transform bg-white border border-green-800 rounded-full shadow-lg right-2 bottom-2 hover:bg-gray-200 ">
+        <Link href="/SideBar">
+    
+        <RiShoppingCart2Fill className="text-green-800" />
+      </Link></div> */}
+
+      {mobileShowCart && (
+        <div>
+          <MobileCartModal setMobileShowCart={setMobileShowCart} mobileShowCart={mobileShowCart} />
+        </div>
+      )}
+
+      <div className="flex justify-between w-full md:hidden ">
+        <input
+          className="w-full text-[#3D3B3B] text-sm font-light rounded-l-md px-5"
+          type="text"
+          placeholder="Search by Category or Items"
+          value={query}
+          onChange={handleChange}
+        />
+        <button>
+          <FaSearch className=" text-white bg-[#008C45] w-12 h-[40px] px-4  rounded-r-md" />
+        </button>
       </div>
 
-      <div className='w-full flex justify-between mt-5 md:hidden'>
-        <input className="w-full text-[#3D3B3B] text-sm font-light rounded-l-md px-5" type="text" placeholder="Search by Location" value={query} onChange={handleChange}/>
-        <button >
-          <FaLocationArrow className=' text-white bg-blue-400 w-12 h-[40px] px-4  rounded-r-md' />
-        </button> 
+      <div className="flex justify-between w-full mt-5 md:hidden">
+        <input
+          className="w-full text-[#3D3B3B] text-sm font-light rounded-l-md px-5"
+          type="text"
+          placeholder="Search by Location"
+          value={query}
+          onChange={handleChange}
+        />
+        <button>
+          <FaLocationArrow className=" text-white bg-blue-400 w-12 h-[40px] px-4  rounded-r-md" />
+        </button>
       </div>
 
-      <h2 className='text-lg font-semibold mb-6 pt-4'>
-        NEAREST FLYERS
-      </h2>
-      <div className="grid grid-cols-7 gap-4 ">
-        <section className="w-full h-[74vh] col-span-7 xl:col-span-5 xxl:col-span-5 ">
+      <h2 className="pt-4 mb-6 text-lg font-semibold">NEAREST FLYERS</h2>
+      <div className="">
+        <section className="w-full h-[74vh] ">
           {/* Nearest Fylers Area  */}
           <NearestFlyers catalogs={catalogs} />
         </section>
 
-        <aside className="hidden xl:block w-full h-[74vh] col-span-2 relative ">
-         
+        {/* <aside className="hidden w-full h-[74vh] col-span-2 relative ">
           <div className="fixed shadow-2xl">
             <Card styleClass="rounded-md h-[74vh] relative ">
+              {showCart ? (
+                <>
+                  <button
+                    onClick={() => setShowCart(false)}
+                    className="absolute z-20 top-4 right-4"
+                  >
+                    <RiLoginCircleFill className="w-8 h-8 text-green-800" />
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={() => setShowCart(true)}
+                    className="absolute z-20 top-4 right-4"
+                  >
+                    <RiShoppingCart2Fill className="w-8 h-8 text-green-800" />
+                  </button>
+                </>
+              )}
 
-              {
-                showCart ?
-                  <>
+              {!showCart ? (
+                <>
+                  <div className="grid w-full grid-cols-2">
                     <button
-                      onClick={() => setShowCart(false)}
-                      className="absolute top-4 right-4 z-20">
-                      <RiLoginCircleFill className="w-8 h-8 text-green-800" />
+                      onClick={() => setLogin(true)}
+                      className="relative w-full py-3 text-base font-medium text-gray-800 border-r border-gray-600 hover:bg-gray-100"
+                    >
+                      <span>Sign In</span>
+                      {login && (
+                        <span className="absolute h-[4px] w-4/5 bottom-0 left-0 right-0 mx-auto bg-[#8DC14F] rounded-full"></span>
+                      )}
                     </button>
-                  </>
-                  :
-                  <>
+
                     <button
-                      onClick={() => setShowCart(true)}
-                      className="absolute top-4 right-4 z-20">
-                      <RiShoppingCart2Fill className="w-8 h-8 text-green-800" />
+                      onClick={() => setLogin(false)}
+                      className="relative w-full py-3 text-base font-medium text-gray-800 border-l border-gray-600 hover:bg-gray-100"
+                    >
+                      <span>Sign Up</span>
+                      {!login && (
+                        <span className="absolute h-[4px] w-4/5 bottom-0 left-0 right-0 mx-auto bg-[#8DC14F] rounded-full"></span>
+                      )}
                     </button>
-                  </>
-              }
-
-              {
-                !showCart ?
-                  <>
-                    <div className="w-full grid grid-cols-2">
-                      <button
-                        onClick={() => setLogin(true)}
-                        className="w-full py-3 border-r border-gray-600 text-base font-medium text-gray-800 hover:bg-gray-100 relative">
-                        <span>Sign In</span>
-                        {
-                          login &&
-                          <span className="absolute h-[4px] w-4/5 bottom-0 left-0 right-0 mx-auto bg-[#8DC14F] rounded-full"></span>
-                        }
-
-                      </button>
-
-                      <button
-                        onClick={() => setLogin(false)}
-                        className="w-full py-3 border-l border-gray-600 text-base font-medium text-gray-800 hover:bg-gray-100 relative">
-                        <span>Sign Up</span>
-                        {
-                          !login &&
-                          <span className="absolute h-[4px] w-4/5 bottom-0 left-0 right-0 mx-auto bg-[#8DC14F] rounded-full"></span>
-                        }
-                      </button>
-                    </div>
-                    {login ? <Signin showCart={()=>setShowCart(true)} /> : <Signup shiftTab={()=>setLogin(true)}/>}
-
-                  </>
-                  : <>
-                    <Cart />
-
-                  </>}
-
+                  </div>
+                  {login ? (
+                    <Signin showCart={() => setShowCart(true)} />
+                  ) : (
+                    <Signup shiftTab={() => setLogin(true)} />
+                  )}
+                </>
+              ) : (
+                <>
+                  <Cart />
+                </>
+              )}
             </Card>
           </div>
-        </aside>
+        </aside> */}
       </div>
-    </main>
+
+     
+
+      </main>
   );
 };
 
 export default Main;
+

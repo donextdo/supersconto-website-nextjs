@@ -16,7 +16,7 @@ const LatestFlyersCard: React.FC<Props>  = ({flyer,onClick}) => {
     return (  
         // <div className='w-full h-36  ssm:h-40  lsm:h-56  llsm:h-64  sm:h-44  md:h-52 xmd:h-60  lg:h-72 xlg:h-80  xl:h-64  xxl:h-80  xxxl:h-[360px] rounded-md relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer' onClick={onClick}>
     
-        <div className='w-[102px] h-36 ssm:w-32 ssm:h-40 lsm:w-[172px] lsm:h-56 llsm:w-52 llsm:h-64 sm:w-32 sm:h-44 md:w-full md:h-52 xmd:w-[182px] xmd:h-60 lg:w-56 lg:h-72 xlg:h-80 xlg:w-64 xl:w-52 xl:h-64 xxl:w-60 xxl:h-80 xxxl:w-[300px] xxxl:h-[360px] rounded-md relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer' onClick={onClick}>
+        <div className='w-[102px] h-36 ssm:w-32 ssm:h-40 lsm:w-[172px] lsm:h-56 llsm:w-52 llsm:h-64 sm:w-32 sm:h-44 md:w-32 md:h-52 xmd:w-[182px] xmd:h-60 lg:w-56 lg:h-72 xlg:h-80 xlg:w-64 xl:w-52 xl:h-64 xxl:w-60 xxl:h-80 xxxl:w-[300px] xxxl:h-[360px] rounded-md relative overflow-hidden shadow-sm transition duration-[0.4s] hover:scale-105 cursor-pointer' onClick={onClick}>
             <Image 
                 src={flyer.pages?.length && flyer.pages?.length > 0 ? flyer.pages[0]?.page_image : ''}
                 alt='flyer'
@@ -26,8 +26,8 @@ const LatestFlyersCard: React.FC<Props>  = ({flyer,onClick}) => {
                 height={400}
             />
     
-            <div className='absolute bottom-0 w-full flex flex-col gap-1 p-2  bg-opacity-30 backdrop-blur-sm hover:bg-white'>
-                <h4 className='text-sm capitalize font-medium'>
+            <div className='absolute bottom-0 flex flex-col w-full gap-1 p-2 bg-opacity-30 backdrop-blur-sm hover:bg-white'>
+                <h4 className='text-sm font-medium capitalize'>
                     { flyer.title }
                 </h4>
     
