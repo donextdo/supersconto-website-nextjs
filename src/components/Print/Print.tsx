@@ -112,12 +112,12 @@ const Print: React.FC<Props> = ({ setPrint }) => {
         // });
 
         try {
-            const canvas = await html2canvas(componentRef.current);
-            const imgData = canvas.toDataURL('image/png');
-            console.log(imgData)
-            const pdf = new jsPDF();
-            pdf.addImage(imgData, 'PNG', 0, 0);
-            pdf.save('download.pdf');
+            // const canvas = await html2canvas(componentRef.current);
+            // const imgData = canvas.toDataURL('image/png');
+            // console.log(imgData)
+            // const pdf = new jsPDF();
+            // pdf.addImage(imgData, 'PNG', 0, 0);
+            // pdf.save('download.pdf');
         } catch (error) {
             console.log(error);
         }
