@@ -16,13 +16,13 @@ const Address = () => {
     setModal(false);
   };
   return (
-    <div className="md:mx-5">
+    <div className="md:mx-5 ">
       <p>
         The following addresses will be used on the checkout page by default.
       </p>
 
-      <div className="grid gap-8 mt-4 sm:grid-cols-2">
-        <div>
+      <div className="grid gap-8 mt-4 sm:grid-cols-2 mx-40 ">
+        <div className="">
           <h2 className="mb-2 font-semibold">BILLING ADDRESS</h2>
           <hr />
           {/* <Link href="/bill"><h2 className="text-[#2bbef9] mt-4">Add</h2></Link>  */}

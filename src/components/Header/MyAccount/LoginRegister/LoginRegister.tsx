@@ -50,7 +50,8 @@ const LoginRegisterPage = () => {
         )}
         {activeTab === "tab2" && (
           <div>
-            <Register
+            <Register 
+            setActiveTab={setActiveTab}
               onSubmit={function (values: {
                 email: string;
                 password: string;

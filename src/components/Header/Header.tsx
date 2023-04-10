@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 // import { FaBars } from 'react-icons/fa'
 import Link from "next/link";
 import TextInput from "../Utils/TextInput";
@@ -10,11 +10,35 @@ import { TfiWorld } from "react-icons/tfi";
 import { useRouter } from "next/router";
 import Language from "../Language/Language";
 import { useTranslation } from "next-i18next";
+import UserProfile from "./UserProfile ";
 
 const Header = () => {
   const [query, setQuery] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [languagePopup, setLanguagePopup] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+ 
+
+  
+  const token = useMemo(() => {
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem('token');
+    }
+    return null;
+  }, []);
+  
+  const email = useMemo(() => {
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem('email');
+    }
+    return null;
+  }, []);
+  
+  useEffect(() => {
+      if (token) {
+        setIsLoggedIn(true);
+      }
+    }, []);
 
   const router = useRouter();
 
@@ -65,6 +89,15 @@ const Header = () => {
       router.push(`/search-results?query=${query}`);
 
       // Add your code here to handle the Enter key press
+    }
+  }
+
+  const handleProfile = () => {
+    if(token){
+      router.push('/account');
+    } else{
+      router.push('/LoginRegister');
+
     }
   }
 
@@ -147,11 +180,11 @@ const Header = () => {
           
           {/* Login Register */}
           <div>
-            <Link href="/LoginRegister">
-              <button className="p-2 ml-4 border border-green-700 rounded-full shadow-lg hover:bg-gray-200 lg:ml-8">
-                <SlUser className="fill-[#008C45] w-6 h-6" />
+              <button className="ml-4 border border-green-700 rounded-full shadow-lg hover:bg-gray-200 lg:ml-8" onClick={handleProfile}>
+            {isLoggedIn ? <UserProfile email={email} /> : <SlUser className="fill-[#008C45] w-6 h-6 m-2" /> }
+
+                {/* <SlUser className="fill-[#008C45] w-6 h-6" /> */}
               </button>
-            </Link>
           </div>
         </div>
       </div>

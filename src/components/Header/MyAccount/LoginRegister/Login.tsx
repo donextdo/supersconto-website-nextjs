@@ -1,5 +1,4 @@
 
-import Link from "next/link";
 import  { useRouter } from "next/router";
 import React, { useState } from "react";
 import { http } from "../../../../../utils/request";
@@ -25,20 +24,24 @@ const Login: React.FC<Props> = () => {
       password:password,
       
   }
+  
     try {
       const response = await http.post(`/users/login`, details);
-      console.log(response.data);
+      console.log(response);
+
       localStorage.setItem('token', response.data.token)
       localStorage.setItem('id', response.data._id)
+      localStorage.setItem('email', response.data.email)
 
 
       if(response.status==200){
-        // location.reload(); 
-        router.push('/');
+        //  location.reload(); 
+        router.push('/account');
       }
 
     } catch (error) {
       console.log(error);
+
     }
   };
   return (
@@ -92,14 +95,12 @@ const Login: React.FC<Props> = () => {
           </div>
 
           <div className="mx-2 mt-5 mb-10 ">
-          <Link href="/account">
             <button
               type="submit"
               className=" rounded-md w-full block bg-[#8DC14F] px-3.5 py-2.5 text-center text-sm font-semibold text-white"
             >
               Login
             </button>
-            </Link>
           </div>
         </form>
       </div>

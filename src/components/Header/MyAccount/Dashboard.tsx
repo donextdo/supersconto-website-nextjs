@@ -1,17 +1,30 @@
 import Link from "next/dist/client/link";
 import Orders from "./Orders";
+import { useRouter } from "next/router";
 
 const Dashboard = () => {
+  const router = useRouter();
+
+
+  const handleClick = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+    localStorage.removeItem("email");
+    router.push('/LoginRegister');
+
+}
   return (
     <div className="lg:ml-3">
       <p>
-        Hello <span className="font-semibold">Customer Name</span> (not{" "}
-        <span className="font-semibold">Customer Name?</span>
-        <span className="text-blue-400 underline underline-offset-1">
+          <span className="font-semibold">   </span>  {" "}
+        <span className="font-semibold">   </span>
+        <button onClick={handleClick}>
+        <span className="text-blue-400 underline underline-offset-1 text-xl">
           {" "}
           Log out
         </span>
-        )
+        </button>
+        
       </p>
 
       <p className="mt-4">

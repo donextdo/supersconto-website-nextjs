@@ -2,6 +2,11 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { http } from "../../../../../utils/request";
+import { useRouter } from "next/router";
+
+import { POSITION, position } from "html2canvas/dist/types/css/property-descriptors/position";
+import Swal from "sweetalert2";
+
 
 type FormValues = {
   email: string;
@@ -10,12 +15,14 @@ type FormValues = {
 
 type Props = {
   onSubmit: (values: FormValues) => void;
+  setActiveTab:any
 };
 
-const Register: React.FC<Props> = () => {
+const Register: React.FC<Props> = ({setActiveTab}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const router = useRouter();
+  
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = {
@@ -23,9 +30,23 @@ const Register: React.FC<Props> = () => {
       password: password,
       userName: email
     }
+   
     try {
       const response = await http.post(`/users/register`, data);
       console.log(response.data); // do something with the response data
+      if (response.status==201){
+        Swal.fire({
+          title: 'Success',
+          text: 'Congratulations, your account has been successfully created.',
+          icon: 'success',
+          confirmButtonText: 'Done',
+          confirmButtonColor: '#8DC14F',
+          
+        })
+
+      }
+      setActiveTab("tab1")
+
     } catch (error) {
       console.log(error); // handle the error
     }
