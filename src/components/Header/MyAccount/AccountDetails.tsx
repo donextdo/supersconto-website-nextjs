@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { http } from "../../../../utils/request";
 
 
@@ -12,8 +12,13 @@ const AccountDetails = () => {
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    let id = localStorage.getItem("id");
-    
+    // let id = localStorage.getItem("id");
+    const id = useMemo(() => {
+        if (typeof localStorage !== 'undefined') {
+          return localStorage.getItem('id');
+        }
+        return null;
+      }, []);
     useEffect(() => {
         
         fetchData()
@@ -23,7 +28,7 @@ const AccountDetails = () => {
 
       async function fetchData() {
         try {
-            const res = await http.get(`/users/64323c5d488614d8159547c6`); 
+            const res = await http.get(`/users/${id}`); 
            console.log(res.data)
            const data = res.data;
            setFirstName(data.firstName);
@@ -47,7 +52,7 @@ const AccountDetails = () => {
            
           }
           try {
-            const response = await http.patch(`/users/64323c5d488614d8159547c6`, data);
+            const response = await http.patch(`/users/${id}`, data);
             console.log(response.data); // do something with the response data
           } catch (error) {
             console.log(error); // handle the error
