@@ -180,11 +180,13 @@ const Header = () => {
           
           {/* Login Register */}
           <div>
-              <button className="ml-4 border border-green-700 rounded-full shadow-lg hover:bg-gray-200 lg:ml-8" onClick={handleProfile}>
-            {isLoggedIn ? <UserProfile email={email} /> : <SlUser className="fill-[#008C45] w-6 h-6 m-2" /> }
+              <button className="ml-4 lg:ml-8 border bg-green-700  border-green-700 rounded-full shadow-lg hover:bg-gray-200  w-10 h-10 flex items-center justify-center " onClick={handleProfile}>
+            {isLoggedIn ? <UserProfile email={email}/> : <SlUser className="fill-[#FFFFFF] w-6 h-6" /> }
 
                 {/* <SlUser className="fill-[#008C45] w-6 h-6" /> */}
               </button>
+              {/* <button className="ml-4 border border-green-700 rounded-full shadow-lg hover:bg-gray-200 lg:ml-8 w-10 h-10 flex items-center justify-center" >A
+                </button> */}
           </div>
         </div>
       </div>

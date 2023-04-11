@@ -78,8 +78,16 @@ const Bill = () => {
                 })
         
               }
-        } catch (error) {
+        } catch (error:any) {
             console.log(error); // handle the error
+            Swal.fire({
+                title: 'Error',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'Done',
+                confirmButtonColor: '#8DC14F',
+                
+              })
         }
     };
 

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
 import { http } from "../../../../utils/request";
+import Swal from "sweetalert2";
 
 
 const AccountDetails = () => {
@@ -54,8 +55,27 @@ const AccountDetails = () => {
           try {
             const response = await http.patch(`/users/${id}`, data);
             console.log(response.data); // do something with the response data
-          } catch (error) {
+            if (response.status==200){
+                Swal.fire({
+                  title: 'Success',
+                  text: 'Your shipping address has been updated successfully',
+                  icon: 'success',
+                  confirmButtonText: 'Done',
+                  confirmButtonColor: '#8DC14F',
+                  
+                })
+        
+              }
+          } catch (error:any) {
             console.log(error); // handle the error
+            Swal.fire({
+                title: 'Error',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'Done',
+                confirmButtonColor: '#8DC14F',
+                
+              })
           }
     };
 

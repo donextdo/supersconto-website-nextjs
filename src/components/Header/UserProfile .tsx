@@ -2,13 +2,16 @@
 const UserProfile = ({ email}:any) => {
     let initials = 'A'
   if (email){
-    initials = email?.charAt(0)
+    initials = email?.charAt(0).toUpperCase()
   }else{
 
   }
     return (
-      <div className="px-3 pb-1">
-        <span className="text-2xl text-green-700">{initials}</span>
+      <div className="text-xl font-semibold text-white">
+        {/* <span className="text-2xl font-semibold text-green-700"> */}
+        
+        {initials}
+        {/* </span> */}
       </div>
     )
   }
