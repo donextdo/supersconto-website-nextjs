@@ -2,6 +2,9 @@
 import  { useRouter } from "next/router";
 import React, { useState } from "react";
 import { http } from "../../../../../utils/request";
+import Swal from "sweetalert2";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 type FormValues = {
   usernameoremail: string;
@@ -35,13 +38,42 @@ const Login: React.FC<Props> = () => {
 
 
       if(response.status==200){
-        //  location.reload(); 
-        router.push('/account');
+        //  location.reload();
+        // toast.success('You have successfully logged in.', {
+        //   position: "top-right",
+        //   autoClose: 2000,
+        //   hideProgressBar: true,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+          
+        // });
+        // router.push('/account');
+        toast.success('You have successfully logged in.', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setTimeout(() => {
+          router.push('/account');
+        }, 2000);
       }
 
-    } catch (error) {
+    } catch (error:any) {
       console.log(error);
-
+      Swal.fire({
+        title: 'Error',
+        text: error.message,
+        icon: 'error',
+        confirmButtonText: 'Done',
+        confirmButtonColor: '#8DC14F',
+        
+      })
     }
   };
   return (
@@ -101,6 +133,7 @@ const Login: React.FC<Props> = () => {
             >
               Login
             </button>
+            <ToastContainer />
           </div>
         </form>
       </div>
