@@ -338,8 +338,8 @@ const handlePhoneChange = (e:any) => {
     return (
         <>
             <Header />
-
-        <div className="container mx-auto px-[15px] mt-24">
+            <div className="h-20"></div>
+        <div className="container mx-auto px-[15px] ">
 
             {/* <div className="border border-[#e4e5ee] rounded-md space-y-4 py-4 px-4 mt-2">
                 <p className="text-[13px]">
@@ -350,7 +350,7 @@ const handlePhoneChange = (e:any) => {
             </div> */}
 
             <section className=" my-5 flex justify-between">
-                <div className="border border-white px-7 py-3.5 rounded-md lg:px-10 ">
+                <div className="border border-white px-7 py-3.5 rounded-md lg:px-10 bg-white ">
                     <p className="border-b border-white py-3 font-semibold">BILLING DETAILS</p>
 
                     <div className="mt-3">
@@ -452,7 +452,7 @@ const handlePhoneChange = (e:any) => {
                 </div>
                 {/* sidebar checkout cart */}
                 <div>
-                    <div className="w-[400px] border-2 border-[#233a95] p-7 rounded-md ml-8 hidden xl:block">
+                    <div className="w-[400px] border-2 border-[#233a95] p-7 rounded-md ml-8 hidden xl:block bg-white">
                         <h2 className="font-semibold mb-3">YOUR ORDER</h2>
                         <hr />
                         <table className="w-full">
@@ -481,24 +481,24 @@ const handlePhoneChange = (e:any) => {
 
                                 </tr>
                                 <tr>
-                                    <td rowSpan={2} className="text-[13px] font-semibold border-b border-[#e4e5ee] text-[#71778e]">Shipping</td>
+                                    {/* <td rowSpan={2} className="text-[13px] font-semibold border-b border-[#e4e5ee] text-[#71778e]">Shipping</td>
                                     <td className="text-right text-[13px] py-3">Flat rate: <span className="inline-flex text-[#d51243] text-sm gap-2">$5.00<input type="radio" name="vendor" value="Vendor 1"
                                     //  onChange={handleCheckboxChange} 
                                     />
-                                    </span></td>
+                                    </span></td> */}
                                 </tr>
                                 <tr>
 
-                                    <td className="text-[13px] pb-5 text-right border-b border-[#e4e5ee]">
-                                        {/* <label className="inline-flex -gap-1"><span className="mr-2">Local pickup</span>
+                                    {/* <td className="text-[13px] pb-5 text-right border-b border-[#e4e5ee]">
+                                        <label className="inline-flex -gap-1"><span className="mr-2">Local pickup</span>
                                         <input
                                             type="radio"
                                             name="vendor"
                                             value="Vendor 1"
                                         // onChange={handleCheckboxChange}
                                         />
-                                    </label> */}
-                                    </td>
+                                    </label>
+                                    </td> */}
                                 </tr>
                                 <tr>
                                     <td className="border-b border-[#e4e5ee] text-[13px] font-semibold py-4 text-[#71778e]">Total</td>
