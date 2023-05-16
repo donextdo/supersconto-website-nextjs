@@ -20,6 +20,18 @@ const MyAccount = () => {
         setIsColor(id); 
     }
 
+    const handleOrderClick = () => {
+        setIsColor(2); // Switch to Order tab
+      };
+
+      const handleAccountDetailsClick = () => {
+        setIsColor(3); // Switch to Order tab
+      };
+
+      const handleAddressClick = () => {
+        setIsColor(4); // Switch to Order tab
+      };
+
     return (
         <div className='container mx-auto mb-36'>
             <div className='px-3 lg:hidden'>
@@ -31,13 +43,13 @@ const MyAccount = () => {
                 </div>
                 {
                     modal && (
-                        <div><MyAccountPopup selected={selected} setSelected={setSelected} setModal={setModal} /></div>
+                        <div><MyAccountPopup selected={selected} setSelected={setSelected} setModal={setModal} setIsColor={setIsColor} isColor={isColor}/></div>
                     )
                 }
 
                 <div className='mt-8'>
                     {selected === 1 ?
-                        <Dashboard />
+                        <Dashboard onButtonClick={handleOrderClick} handleAccountDetailsClick={handleAccountDetailsClick} handleAddressClick={handleAddressClick}/>
                         :
                         selected === 2 ?
                             <Orders /> :
@@ -63,7 +75,7 @@ const MyAccount = () => {
 
             <div className='mt-8'>
                     {isColor === 1 ?
-                        <Dashboard />
+                        <Dashboard onButtonClick={handleOrderClick} handleAccountDetailsClick={handleAccountDetailsClick} handleAddressClick={handleAddressClick}/>
                         :
                         isColor === 2 ?
                             <Orders /> :

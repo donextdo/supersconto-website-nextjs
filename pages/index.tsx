@@ -14,6 +14,8 @@ import React, {useEffect, useState} from 'react';
 import Ad from '../src/components/SpecialFlyers/Ad';
 import {useRouter} from "next/router";
 import { useTranslation } from 'next-i18next';
+import ProductList from '../src/features/product/ProductList';
+
 
 interface Props {
     catalogs: Catalog[]
@@ -71,6 +73,7 @@ const Home: React.FC<Props> = ({ catalogs, shops, items ,news, categories}) => {
                 <LatestFlyers catalogs={catalogs}/>
                 <Shops shops={shops}/>
                 <LatestItems items={items}/>
+                <ProductList />
                 <News allnews={news}/>
                 <Cities shops={shops} />
             </section>

@@ -61,6 +61,7 @@ const Ship = () => {
                shippingEmail: email,
             }
           };
+          console.log(data)
         try {
             const response = await http.patch(`/users/${id}`, data);
             console.log(response.data); // do something with the response data
