@@ -11,34 +11,43 @@ import { useRouter } from "next/router";
 import Language from "../Language/Language";
 import { useTranslation } from "next-i18next";
 import UserProfile from "./UserProfile ";
+import Script from "next/script";
+
+interface Prediction {
+  description: String;
+  place_id: string;
+}
 
 const Header = () => {
   const [query, setQuery] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [languagePopup, setLanguagePopup] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
- 
+  const [predictions, setPredictions] = useState([]);
+  const [hide, setHide] = useState(false);
+  const [latitude, setLatitude] = useState<number | null>(null);
+  const [longitude, setLongitude] = useState<number | null>(null);
+  const [formatAddress, setFormatAddress] = useState<string | null>(null);
 
-  
   const token = useMemo(() => {
-    if (typeof localStorage !== 'undefined') {
-      return localStorage.getItem('token');
+    if (typeof localStorage !== "undefined") {
+      return localStorage.getItem("token");
     }
     return null;
   }, []);
-  
+
   const email = useMemo(() => {
-    if (typeof localStorage !== 'undefined') {
-      return localStorage.getItem('email');
+    if (typeof localStorage !== "undefined") {
+      return localStorage.getItem("email");
     }
     return null;
   }, []);
-  
+
   useEffect(() => {
-      if (token) {
-        setIsLoggedIn(true);
-      }
-    }, []);
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const router = useRouter();
 
@@ -48,28 +57,110 @@ const Header = () => {
     setQuery(e.target.value);
   };
 
-  const handleLocationChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setLocation(e.target.value);
+  // const handleLocationChange = (
+  //   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  // ) => {
+  //   setLocation(e.target.value);
+  // };
+
+  const handleLocationChange = (event: any) => {
+    setLocation(event.target.value);
+    const location = event.target.value;
+    const autocompleteService = new google.maps.places.AutocompleteService();
+    autocompleteService.getPlacePredictions(
+      {
+        input: location,
+        types: ["geocode"],
+      },
+      handleAutocompleteResults
+    );
   };
+
+  const handleAutocompleteResults = (predictions: any, status: any) => {
+    setHide(false);
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      setPredictions(predictions);
+      console.log("prediction : ", predictions);
+    }
+  };
+
+  function handlePredictionClick(place_id: any): void {
+    setHide(false);
+    console.log("place_id: ", place_id);
+    const placeService = new google.maps.places.PlacesService(
+      document.createElement("div")
+    );
+    console.log("placeService: ", placeService);
+
+    placeService.getDetails(
+      { placeId: place_id },
+      (
+        placeResult: google.maps.places.PlaceResult | null,
+        placeStatus: google.maps.places.PlacesServiceStatus
+      ) => {
+        console.log("placeResult: ", placeResult);
+
+        if (
+          placeStatus === google.maps.places.PlacesServiceStatus.OK &&
+          placeResult
+        ) {
+          const lat = placeResult.geometry?.location?.lat();
+          const lng = placeResult.geometry?.location?.lng();
+          const formattedAddress = placeResult.formatted_address;
+          console.log("Formatted Address: ", formattedAddress);
+          setLatitude(lat as number | null);
+          setLongitude(lng as number | null);
+          setLocation(formattedAddress as string);
+          setFormatAddress(location);
+        }
+      }
+    );
+  }
 
   const handleSearch = (): void => {
     router.push(`/search-results?query=${query}`);
   };
-  const handleLocationSearch = (): void => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const lat = position.coords.latitude;
-        const long = position.coords.longitude;
 
-        setLocation(`${lat}, ${long}`);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+  const handleLocationSearch = (): void => {
+    console.log("location empty : ", location);
+    if (!location) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          console.log("position : ", position);
+          // setLocation(`${lat}, ${lng}`);
+          getAddressFromCoordinates(lat, lng);
+          setHide(true);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    } else {
+      getAddressFromCoordinates(Number(latitude), Number(longitude));
+      setHide(true);
+    }
   };
+
+  function getAddressFromCoordinates(lat: number, lng: number): void {
+    const geocoder = new google.maps.Geocoder();
+    const latLng = new google.maps.LatLng(lat, lng);
+
+    geocoder.geocode({ location: latLng }, (results, status) => {
+      if (
+        status === google.maps.GeocoderStatus.OK &&
+        results &&
+        results.length > 0
+      ) {
+        const formattedAddress = results[0].formatted_address;
+        console.log("Formatted Address: ", formattedAddress);
+
+        // Use the formatted address as needed
+        setLocation(formattedAddress);
+      }
+    });
+  }
 
   const { i18n } = useTranslation();
 
@@ -93,13 +184,12 @@ const Header = () => {
   }
 
   const handleProfile = () => {
-    if(token){
-      router.push('/account');
-    } else{
-      router.push('/LoginRegister');
-
+    if (token) {
+      router.push("/account");
+    } else {
+      router.push("/LoginRegister");
     }
-  }
+  };
 
   return (
     <header>
@@ -136,15 +226,39 @@ const Header = () => {
 
           <section className="hidden md:block">
             <div className="flex items-center ml-8 flex-raw lg:ml-20">
-              <TextInput
-                value={location}
-                onChange={handleLocationChange}
-                Styles="bg-[#EDEDED] text-[#3D3B3B] text-sm font-light md:w-48 lg:w-60 xl:w-96 rounded-l-md h-[40px]"
-                placeholder="Search by Location"
+              <Script
+                src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyALJN3bDbGEk8ppXieiWNnwHVYM_8ntKng&libraries=places`}
+                onLoad={() => console.log("Google Maps API script loaded")}
               />
-              <button onClick={handleLocationSearch} className="relative">
-                <FaLocationArrow className="absolute text-white bg-blue-400 w-12 h-[40px] px-4 -left-8 -bottom-[20px] rounded-r-md" />
-              </button>
+              <div className="relative w-full">
+                <TextInput
+                  value={location}
+                  onChange={handleLocationChange}
+                  Styles="bg-[#EDEDED] text-[#3D3B3B] text-sm font-light md:w-48 lg:w-60 xl:w-96 rounded-l-md h-[40px]"
+                  placeholder="Search by Location"
+                />
+                {predictions.length > 0 && !hide && (
+                  <ul className="absolute top-full left-0 w-full bg-white z-10 border border-gray-300 rounded-md shadow-lg">
+                    {predictions.map((prediction: Prediction) => (
+                      <li
+                        key={prediction.place_id}
+                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer w-full text-left"
+                        onClick={() =>
+                          handlePredictionClick(prediction.place_id)
+                        }
+                      >
+                        {prediction.description}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <button
+                  className="absolute right-0 top-0 bottom-0"
+                  onClick={handleLocationSearch}
+                >
+                  <FaLocationArrow className="text-white bg-blue-400 w-12 h-[40px] px-4 rounded-r-md" />
+                </button>
+              </div>
             </div>
           </section>
 
@@ -177,15 +291,22 @@ const Header = () => {
               </button>
             </Link>
           </div> */}
-          
+
           {/* Login Register */}
           <div>
-              <button className="ml-4 lg:ml-8 border bg-green-700  border-green-700 rounded-full shadow-lg hover:bg-gray-200  w-10 h-10 flex items-center justify-center " onClick={handleProfile}>
-            {isLoggedIn ? <UserProfile email={email}/> : <SlUser className="fill-[#FFFFFF] w-6 h-6" /> }
+            <button
+              className="ml-4 lg:ml-8 border bg-green-700  border-green-700 rounded-full shadow-lg hover:bg-gray-200  w-10 h-10 flex items-center justify-center "
+              onClick={handleProfile}
+            >
+              {isLoggedIn ? (
+                <UserProfile email={email} />
+              ) : (
+                <SlUser className="fill-[#FFFFFF] w-6 h-6" />
+              )}
 
-                {/* <SlUser className="fill-[#008C45] w-6 h-6" /> */}
-              </button>
-              {/* <button className="ml-4 border border-green-700 rounded-full shadow-lg hover:bg-gray-200 lg:ml-8 w-10 h-10 flex items-center justify-center" >A
+              {/* <SlUser className="fill-[#008C45] w-6 h-6" /> */}
+            </button>
+            {/* <button className="ml-4 border border-green-700 rounded-full shadow-lg hover:bg-gray-200 lg:ml-8 w-10 h-10 flex items-center justify-center" >A
                 </button> */}
           </div>
         </div>
