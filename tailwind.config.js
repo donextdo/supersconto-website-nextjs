@@ -8,24 +8,19 @@ module.exports = {
     fontFamily: {
       'ff-headings' : ['Dosis', 'sans-serif']
     },
-    screens: {
-      ssm: '376px',
-      lsm: '450px',
-      llsm: '520px',
-      sm: '640px',
-      md: '768px',
-      xmd: '850px',
-      lg: '1024px',
-      xlg: '1160px',
-      xl: '1280px',
-      axl: '1400px',
-      xxl: '1536px',
-      xxxl: '1920px'
+    extend: {
+      gridTemplateColumns: {
+        '2': 'repeat(2, minmax(0, 1fr))',
+        '6': 'repeat(6, minmax(0, 1fr))',
+        '8': 'repeat(8, minmax(0, 1fr))',
+        '4': 'repeat(4, minmax(0, 1fr))',
+      },
     },
-    extend: {},
   },
   plugins: [
     require('tailwind-scrollbar-hide'),
     require('tailwind-scrollbar')
+
   ],
 }
+

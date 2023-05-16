@@ -18,4 +18,18 @@ const nextConfig = {
     output: "standalone"
 }
 
-module.exports = nextConfig
+module.exports = {
+  images: {
+    domains: [
+      "target.scene7.com",
+      "m.media-amazon.com",
+      "i5.walmartimages.com",
+      "sangabrielcomidas.com",
+      "spoonfulapp.com",
+      "klbtheme.com",
+      "ongolemart.com",
+    ],
+  },
+  
+};
+// module.exports = nextConfig

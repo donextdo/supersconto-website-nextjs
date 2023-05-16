@@ -2,7 +2,7 @@ import Link from "next/dist/client/link";
 import Orders from "./Orders";
 import { useRouter } from "next/router";
 
-const Dashboard = () => {
+const Dashboard = ({onButtonClick, handleAddressClick, handleAccountDetailsClick}:any) => {
   const router = useRouter();
 
 
@@ -27,27 +27,7 @@ const Dashboard = () => {
         
       </p>
 
-      <p className="mt-4">
-        From your account dashboard you can view your{" "}
-        <Link href="/RecentOrders">
-        <span className="text-blue-400 underline underline-offset-1">
-          recent orders
-        </span>
-        </Link>
-        , manage your{" "}
-        <Link href="/Ship_Bill_Address">
-        <span className="text-blue-400 underline underline-offset-1">
-          shipping and billing addresses
-        </span>
-        </Link>
-        , and{" "}
-        <Link href="/Edit_Account_Details">
-        <span className="text-blue-400 underline underline-offset-1">
-          edit your password and account details
-        </span>
-        </Link>
-        .
-      </p>
+      <p className="mt-4 text-sm">From your account dashboard you can view your <button onClick={onButtonClick}><span className="text-[#2bbef9] underline underline-offset-1">recent orders</span></button>, manage your <button onClick={handleAddressClick}><span className="text-[#2bbef9] underline underline-offset-1">shipping and billing addresses</span></button>, and <button onClick={handleAccountDetailsClick}><span className="text-[#2bbef9] underline underline-offset-1">edit your password and account details</span></button>.</p>
     </div>
   );
 };

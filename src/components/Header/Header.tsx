@@ -5,19 +5,27 @@ import TextInput from "../Utils/TextInput";
 import logo from "../../../assets/logo/logo.png";
 import Image from "next/image";
 import { FaSearch, FaLocationArrow, FaUserCircle } from "react-icons/fa";
-import { SlUser } from "react-icons/sl";
+import { SlHandbag, SlUser } from "react-icons/sl";
 import { TfiWorld } from "react-icons/tfi";
 import { useRouter } from "next/router";
 import Language from "../Language/Language";
 import { useTranslation } from "next-i18next";
 import UserProfile from "./UserProfile ";
+import CartPopup from "../../features/cart/popup-cart/CartPopup";
+import { RootState } from "../../redux/store";
+import { useSelector } from "react-redux";
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+
 
 const Header = () => {
   const [query, setQuery] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [languagePopup, setLanguagePopup] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
- 
+  const [cart, setCart] = useState(false);
+  const totalCount = useSelector((state: RootState) => state.cart.totalCount);
+
 
   
   const token = useMemo(() => {
@@ -101,6 +109,16 @@ const Header = () => {
     }
   }
 
+  const handleClick = () => {
+    // setCart(!cart)
+  };
+  const hnadleEnter = () => {
+    setCart(true);
+  };
+  const handleLeave = () => {
+    setCart(false);
+  };
+
   return (
     <header>
       <div className="flex items-center w-full px-10 ">
@@ -168,6 +186,25 @@ const Header = () => {
               handleChangeLanguage={handleChangeLanguage}
             />
           )}
+            <div
+            className="relative"
+            onMouseEnter={hnadleEnter}
+            onMouseLeave={handleLeave}
+          >
+            <button
+              className="border border-[#fff1ee] bg-[#fff1ee] rounded-full p-2"
+              onClick={handleClick}
+            >
+              <SlHandbag className="text-2xl text-[#ea2b0f]" />
+            </button>
+
+            {cart && <CartPopup setCart={setCart} />}
+            {totalCount > 0 && (
+              <div className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full h-5 w-5 flex items-center justify-center">
+                {totalCount}
+              </div>
+            )}
+          </div>
 
           {/* Account */}
           {/* <div>
