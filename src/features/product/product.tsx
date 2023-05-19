@@ -23,6 +23,11 @@ export interface Product {
   review: number;
   mfgDate:string;
   life:string;
+  product_name:string;
+  product_description:string;
+  unit_price:number;
+  product_image:string;
+
   // category:string;
   // tags:string;
 }

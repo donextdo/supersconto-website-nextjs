@@ -3,8 +3,24 @@ const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
     images: {
-        domains: ['api.supersconto24.com', 'localhost']
-        // domains: ['http://localhost:3000/','localhost']
+        domains: ['api.supersconto24.com', 'localhost',
+        "target.scene7.com",
+      "m.media-amazon.com",
+      "i5.walmartimages.com",
+      "sangabrielcomidas.com",
+      "spoonfulapp.com",
+      "klbtheme.com",
+      "ongolemart.com",
+      ]
+      //   domains: ['http://localhost:3000/','localhost',
+      //   "target.scene7.com",
+      //   "m.media-amazon.com",
+      //   "i5.walmartimages.com",
+      //   "sangabrielcomidas.com",
+      //   "spoonfulapp.com",
+      //   "klbtheme.com",
+      //   "ongolemart.com",
+      // ]
     },
     head: {
         link: [
@@ -18,18 +34,4 @@ const nextConfig = {
     output: "standalone"
 }
 
-module.exports = {
-  images: {
-    domains: [
-      "target.scene7.com",
-      "m.media-amazon.com",
-      "i5.walmartimages.com",
-      "sangabrielcomidas.com",
-      "spoonfulapp.com",
-      "klbtheme.com",
-      "ongolemart.com",
-    ],
-  },
-  
-};
-// module.exports = nextConfig
+module.exports = nextConfig

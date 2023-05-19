@@ -15,8 +15,8 @@ interface Order {
   status: string;
   items: {
     productDetails: {
-      name: string;
-      price: number;
+      product_name: string;
+      unit_price: number;
       brand: string;
       description: string;
       front: string
@@ -68,10 +68,10 @@ const OrderMessage = () => {
         productId: 0,
         orderquantity: 1,
         productDetails: {
-          name: "",
+          product_name: "",
           brand: "",
           description: "",
-          price: 0,
+          unit_price: 0,
           front: ""
         }
       }
@@ -184,8 +184,8 @@ const OrderMessage = () => {
         </table>
         {order?.items.map((item, index) => (
           <div className="flex border border-gray-300 bg-white " key={index}>
-            <div className="w-2/3 px-2 py-2">{item.productDetails?.name}</div>
-            <div className="w-1/3 py-2">{item.productDetails?.price}</div>
+            <div className="w-2/3 px-2 py-2">{item.productDetails?.product_name}</div>
+            <div className="w-1/3 py-2">{item.productDetails?.unit_price}</div>
           </div>
         ))}
         <div className="flex border border-gray-300 bg-white ">

@@ -51,15 +51,15 @@ const CartCard = ({item, index,totalAmount}:any) => {
  
 
  let discountprice;
- discountprice = item.price * (item.discount/100)
-let newprice=item.price-discountprice
+ discountprice = item.unit_price * (item.discount/100)
+let newprice=item.unit_price-discountprice
 
 let subtotal = (item.count) * (newprice)
     return ( 
-        <div className="grid grid-cols-4 sm:grid-cols-12 grid-2 gap-1 border-b border-white py-3 h-28 items-center relative" key={index}>
+        <div className="grid grid-cols-4 sm:grid-cols-12 grid-2 gap-1 border-b border-[#71778e] py-3 h-28 items-center relative bg-white" key={index} >
                                     <div className="h-[95px] sm:col-span-2">
                                         <Image
-                                            src={item.front}
+                                            src={item.product_image}
                                             alt="item1"
                                             style={{
                                                 objectFit: "contain",
@@ -77,12 +77,12 @@ let subtotal = (item.count) * (newprice)
                                     </div>
                                     <div className="col-span-1 hidden sm:block">{newprice.toFixed(2)}</div>
                                     <div className="flex sm:col-span-2">
-                                        <button className="p-2.5 bg-[#edeef5] rounded-full w-[30px] flex items-center" onClick={()=>handleDecrement(item)}>
+                                        <button className="p-2 bg-[#008C45] rounded-full w-[30px] flex items-center" onClick={()=>handleDecrement(item)}>
                                             <FaMinus className="text-xs" />
                                         </button>
-                                        <p className="text-sm flex items-center justify-center w-7">{item.count 
+                                        <p className="text-sm flex items-center justify-center w-7 mx-1">{item.count 
                                         || 0}</p>
-                                        <button className="p-2.5 bg-[#edeef5] rounded-full w-[30px] flex items-center" onClick={()=>handleIncrement(item)}>
+                                        <button className="p-2 bg-[#008C45] rounded-full w-[30px] flex items-center" onClick={()=>handleIncrement(item)}>
                                             <FaPlus className="text-xs " />
                                         </button>
                                     </div>
