@@ -110,9 +110,12 @@ const Orders = () => {
     const router = useRouter();
 
     let id: string | null;
-    if (localStorage.getItem('id') !== null) {
-        id = localStorage.getItem('id');
-    } else { }
+if (typeof localStorage !== 'undefined' && localStorage.getItem('id') !== null) {
+    id = localStorage.getItem('id');
+} else {
+    // Handle the case where localStorage is not available or 'id' is not set.
+}
+    
 
     useEffect(() => {
         dispatch(getOrdersByUserIdAsync(id!));
