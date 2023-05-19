@@ -211,7 +211,7 @@ const handlePhoneChange = (e:any) => {
     let totalAmount = 0
     for (let i = 0; i < cartItems.length; i++) {
         let item = cartItems[i];
-        let subtotal = item.count * (item.price - (item.price * (item.discount/100)));
+        let subtotal = item.count * (item.unit_price - (item.unit_price * (item.discount/100)));
         totalAmount += subtotal;
     }
 

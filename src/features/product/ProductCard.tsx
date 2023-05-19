@@ -91,8 +91,8 @@ if (typeof localStorage !== "undefined") {
   ));
 
   let discountprice;
-  discountprice = product.price * (product.discount/100)
-let newprice=product.price-discountprice
+  discountprice = product.unit_price * (product.discount/100)
+let newprice=product.unit_price-discountprice
 
 const handleWishlist = async (product: any) => {
   // const wishlist = JSON.parse(localStorage.getItem('wishlist'));
@@ -107,7 +107,7 @@ const handleWishlist = async (product: any) => {
       productId: product._id,
       front: product.front,
       title: product.title,
-      price: product.price,
+      price: product.unit_price,
       date: new Date().toLocaleDateString("en-US", {
           month: "long",
           day: "numeric",
@@ -200,7 +200,7 @@ for (let i = 1; i <= (5-product.review); i++) {
           width={172.95}
           height={154.95}
           //src={product.front as string}
-          src={product.front}
+          src={product.product_image}
           alt={product.title}
           //alt="Man looking at item at a store"
         />
@@ -211,7 +211,7 @@ for (let i = 1; i <= (5-product.review); i++) {
         <div className="text-sm font-medium text-black hover:text-indigo-400  capitalize leading-tight hover:cursor-pointer line-clamp-2">
       <Link href={`/item-preview/${product._id}`}>  
 
-          {product.title}
+          {product.product_name}
           </Link>
 
         </div>
@@ -226,7 +226,7 @@ for (let i = 1; i <= (5-product.review); i++) {
         <div className=" flex flex-row items-center">
           {isDiscount && (
             <span className="text-gray-400 text-sm line-through mr-2 my-1 font-[1.125rem]">
-              ${product.price.toFixed(2) as unknown as ReactElement}
+              ${product.unit_price.toFixed(2) as unknown as ReactElement}
             </span>
           )}
           <span className="my-1 text-red-700 text-lg font-semibold">
@@ -238,7 +238,7 @@ for (let i = 1; i <= (5-product.review); i++) {
         { (product.count ==undefined || product.count<1) && (
           <button
             type="button"
-            className=" bg-blue-900 text-white min-h-[34px]  rounded-full w-full "
+            className=" bg-blue-900 text-white h-8  rounded-full w-full "
             onClick={() => handleaddToCart(product)}
           >
             Add to cart

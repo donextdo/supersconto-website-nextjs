@@ -95,7 +95,7 @@ const Cart: FC<CartType> = () => {
     let totalAmount = 0
     for (let i = 0; i < cartItems.length; i++) {
       let item = cartItems[i];
-      let subtotal = item.count * (item.price - item.price * (item.discount / 100));
+      let subtotal = item.count * (item.unit_price - item.unit_price * (item.discount / 100));
       totalAmount += subtotal;
     }
     useEffect(() => {
@@ -170,18 +170,18 @@ const Cart: FC<CartType> = () => {
         <div className="px-3.5 container mx-auto mt-24 mb-20">
             <div>
                 <section className="flex justify-between h-full">
-                    <div className="w-full h-full pb-10">
-                        <div className="border border-white rounded-md space-y-4 py-4 px-4">
+                    <div className="w-full h-full pb-10 bg-white py-2 px-4">
+                        {/* <div className="border border-white rounded-md space-y-4 py-4 px-4 bg-white">
                             <p className="text-sm">
                                 Add <span className="text-[#ed174a] font-semibold">$15.93</span> to
                                 cart and get free shipping!
                             </p>
                             <hr className="h-2 rounded-md bg-[#ed174a]" />
-                        </div>
+                        </div> */}
 
                         <div className="mt-8">
                             {/* header */}
-                            <div className="grid grid-cols-4 sm:grid-cols-12 gap-2 border-b border-white pb-3">
+                            <div className="grid grid-cols-4 sm:grid-cols-12 gap-2 border-b border-[#71778e] pb-3">
                                 <div className="text-xs sm:col-span-2"></div>
                                 <div className="col-span-2 sm:col-span-4 text-xs text-[#71778e] font-semibold">Product</div>
                                 <div className="text-xs text-[#71778e] font-semibold hidden sm:block">Price</div>
@@ -213,7 +213,7 @@ const Cart: FC<CartType> = () => {
                     </div>
                     <div>
                         {/* sidebar cart totals */}
-                        <div className="w-80 border border-white p-4 rounded-md h-full hidden xl:block ml-8">
+                        <div className="w-80 border border-white p-4 rounded-md h-full hidden xl:block ml-8 bg-white">
                             <h2 className="font-semibold mb-3">CART TOTALS</h2>
                             <hr />
                             <table className="w-full">
