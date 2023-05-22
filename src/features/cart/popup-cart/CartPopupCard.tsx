@@ -30,7 +30,7 @@ const CartPopupCard = ({ item }: any) => {
                 />
             </div>
             <div className="col-span-2 text-left py-2 h-20 border-b border-[#e3e4e6]">
-                <p className="text-xs ">{item.title}</p>
+                <p className="text-xs ">{item.product_name}</p>
                 <p className="text-xs mt-2">{item.count || 0} × <span className="text-[#008C45]"> {newprice.toFixed(2)}</span></p>
             </div>
             <button className="absolute bg-[#008C45] rounded-full p-0.5 text-white left-4 top-4" onClick={() =>handleRemove(item._id)}><IoClose className="text-white text-xs" /></button>

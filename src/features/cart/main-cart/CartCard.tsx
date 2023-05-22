@@ -73,7 +73,7 @@ let subtotal = (item.count) * (newprice)
 
                                     </div>
                                     <div className="col-span-2 sm:col-span-4 text-sm  ">
-                                        {item.title}
+                                        {item.product_name}
                                     </div>
                                     <div className="col-span-1 hidden sm:block">{newprice.toFixed(2)}</div>
                                     <div className="flex sm:col-span-2">
