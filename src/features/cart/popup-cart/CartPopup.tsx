@@ -6,17 +6,20 @@ import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { calSubTotal, fetchCart } from "../cartSlice";
 import cart from "../../../../assets/cart/Untitled.jpg"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CartPopupCard from "./CartPopupCard";
+import requests from "../../../../utils/request";
 
 const CartPopup = ({ setCart, }: any) => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   let totalAmount1 = useSelector((state: RootState) => state.cart.totalAmount);
+  const [cartObj, setCartObj] = useState<any>([]);
 
 
   console.log(cartItems)
   const dispatch = useDispatch();
 
+  
   let totalSubtotal = 0;
   // cartItems.forEach(price  =>{
   //     totalSubtotal += price.subtotal
@@ -27,7 +30,7 @@ const CartPopup = ({ setCart, }: any) => {
   let totalAmount = 0
   for (let i = 0; i < cartItems.length; i++) {
     let item = cartItems[i];
-    let subtotal = item.count * (item.price - item.price * (item.discount / 100));
+    let subtotal = item.count * (item.unit_price - item.unit_price * (item.discount / 100));
     totalAmount += subtotal;
   }
   useEffect(() => {

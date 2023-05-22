@@ -15,8 +15,8 @@ interface Order {
   status: string;
   items: {
     productDetails: {
-      name: string;
-      price: number;
+      product_name: string;
+      unit_price: number;
       brand: string;
       description: string;
       front: string
@@ -68,10 +68,10 @@ const OrderMessage = () => {
         productId: 0,
         orderquantity: 1,
         productDetails: {
-          name: "",
+          product_name: "",
           brand: "",
           description: "",
-          price: 0,
+          unit_price: 0,
           front: ""
         }
       }
@@ -144,10 +144,10 @@ const OrderMessage = () => {
   return (
 
     <div className="mx-4">
-      <div className="w-full border-2 border-dashed border-[#00b853] text-lg md:text-2xl leading-5 md:leading-6 py-3 md:py-8 px-3 md:px-10 my-20 text-center font-medium" style={{ color: '#00b853' }}>
+      <div className="w-full border-2 border-dashed border-[#00b853] text-lg md:text-2xl leading-5 md:leading-6 py-3 md:py-8 px-3 md:px-10 my-20 text-center font-medium bg-white" style={{ color: '#00b853' }}>
         Thank you. Your order has been received.
       </div>
-      <div className="border shadow-md p-5 grid grid-cols-5">
+      <div className="border shadow-md p-5 grid grid-cols-5 bg-white">
         <div>
           <h1 className="text-sm font-semibold">Order Number</h1>
           <p className="text-[13px] text-[#2bbef9]">#{order?.orderId}</p>
@@ -172,7 +172,7 @@ const OrderMessage = () => {
 
       <h2 className="font-semibold  mt-4 mb-2">ORDER DETAILS</h2>
       <div className="mb-4 w-full">
-        <table className="w-full border-collapse border-t border-gray-400">
+        <table className="w-full border-collapse border-t border-gray-400 bg-white">
           <thead>
             <tr>
               <th className="border border-gray-400 px-4 py-2">Product</th>
@@ -183,20 +183,20 @@ const OrderMessage = () => {
           </tbody>
         </table>
         {order?.items.map((item, index) => (
-          <div className="flex border border-gray-300 " key={index}>
-            <div className="w-2/3 px-2 py-2">{item.productDetails?.name}</div>
-            <div className="w-1/3 py-2">{item.productDetails?.price}</div>
+          <div className="flex border border-gray-300 bg-white " key={index}>
+            <div className="w-2/3 px-2 py-2">{item.productDetails?.product_name}</div>
+            <div className="w-1/3 py-2">{item.productDetails?.unit_price}</div>
           </div>
         ))}
-        <div className="flex border border-gray-300 ">
+        <div className="flex border border-gray-300 bg-white ">
           <div className="w-2/3 px-2 py-2">Subtotal:</div>
           <div className="w-1/3 py-2">{order?.totalprice.toFixed(2)}</div>
         </div>
-        <div className="flex border border-gray-300 ">
+        <div className="flex border border-gray-300 bg-white ">
           <div className="w-2/3 px-2 py-2">Payment method:</div>
           <div className="w-1/3 py-2">Direct bank transfer</div>
         </div>
-        <div className="flex border border-gray-300 ">
+        <div className="flex border border-gray-300 bg-white ">
           <div className="w-2/3 px-2 py-2">Total:</div>
           <div className="w-1/3 py-2">{order?.totalprice.toFixed(2)}</div>
         </div>
