@@ -222,10 +222,10 @@ const Cart: FC<CartType> = () => {
                                         <td className="border-b border-white py-3 font-semibold text-[13px]">Subtotal</td>
                                         <td className="border-b border-white py-3 text-[15px] text-right">${totalAmount.toFixed(2)}</td>
                                     </tr>
-                                    <tr>
+                                    {/* <tr>
                                         <td className="border-b border-white py-3 font-semibold text-[13px]">Coupon</td>
                                         <td className="border-b border-white py-3 text-[15px] text-right">-$10</td>
-                                    </tr>
+                                    </tr> */}
                                     <tr>
                                         <td rowSpan={4} className="text-[13px] font-semibold ">Shipping</td>
                                         <td className="text-right text-[13px] py-3">
