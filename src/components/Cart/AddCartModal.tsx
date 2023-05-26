@@ -43,13 +43,16 @@ interface Item {
 interface Props {
     item: Item,
     handler: MouseEventHandler<HTMLButtonElement>
+    setChangecolor : any
+    
 }
 
-const AddToCartModal: React.FC<Props> = ({ item, handler }) => {
+const AddToCartModal: React.FC<Props> = ({ item, handler, setChangecolor }) => {
     // const [count, setCount] = useState(1);
     const dispatch = useDispatch();
     const products = useSelector((state: RootState) => state.product.products) as Product[];
 
+    
 
     // useEffect(() => {
     //     const cartItems: [any] = JSON.parse(localStorage.getItem("cartItems")!) ?? []
@@ -59,11 +62,13 @@ const AddToCartModal: React.FC<Props> = ({ item, handler }) => {
     //         setCount(product.quantity >= item.quantity ? item.quantity : product.quantity)
     //     }
     // }, [item])
-    const prodcutone:any = products.find((item) => item._id === item._id);
+   const prodcutone:any = products.find((product) => product._id === item._id);
+    console.log(products)
+
 
 
     useEffect(()=>{
-        console.log(item)
+        
     })
 
     const decreaseClick = () => {
@@ -90,7 +95,7 @@ const AddToCartModal: React.FC<Props> = ({ item, handler }) => {
         //     }
         //     return prevState + 1
         // });
-        const newQuantity = (prodcutone .count || 0) + 1;
+        const newQuantity = (prodcutone.count || 0) + 1;
         dispatch(updateItemQuantity({ itemId: item._id, count: newQuantity }));
         dispatch(
             updateProductQuantity({ productId: item._id, count: newQuantity })
@@ -184,6 +189,18 @@ const AddToCartModal: React.FC<Props> = ({ item, handler }) => {
                                 dispatch(
                                     updateProductQuantity({ productId: item._id, count: newQuantity })
                                 );
+                                console.log(prodcutone.count)
+
+                                setChangecolor(true)
+                                const map = new Map();
+    map.set('product_id', prodcutone._id);
+    map.set('isClicked', true);
+
+    // Convert the map to a string using JSON serialization
+    const mapString = JSON.stringify(Array.from(map.entries()));
+
+    // Save the map string in the session storage
+    sessionStorage.setItem('mapData', mapString);
                             }}>
                                 Add to cart
                             </button>

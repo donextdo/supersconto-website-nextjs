@@ -3,7 +3,7 @@ import {NextArrowCircle, PrevArrowCircle} from "../../../pages/catalog-preview/[
 import SingleItemPreview from "../Catalog/SingleItemPreview";
 import {log} from "util";
 
-function Draggable({pages, setShowModal}: any) {
+function Draggable({pages, setShowModal, changecolor, item}: any) {
     const [isDragging, setIsDragging] = useState(false);
     const [dragStartX, setDragStartX] = useState(0);
     const [scrollLeft, setScrollLeft] = useState(0);
@@ -121,6 +121,8 @@ function Draggable({pages, setShowModal}: any) {
                                     }}
                                     imageHeight={item?.items[0]?.coordinates?.imageHeight}
                                     imageWidth={item?.items[0]?.coordinates?.imageWidth}
+                                    changecolor={changecolor}
+                                    
                                 />
                             }
                         </div>

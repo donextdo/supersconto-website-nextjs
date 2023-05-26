@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import item1 from "../../../assets/item/item1.jpg";
 import { GrFormClose } from "react-icons/gr";
 import { IoCloseSharp, IoClose } from "react-icons/io5";
@@ -12,6 +12,14 @@ import axios from "axios";
 // import baseUrl from "../../../../utils/baseUrl";
 import { useRouter } from "next/router";
 import { http } from "../../../../utils/request";
+import { useReactToPrint } from 'react-to-print';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+
+// import { PDFDocument, StandardFonts } from 'pdf-lib';
+// import fs from 'fs';
+
+
 
 
 interface CartType {
@@ -45,6 +53,7 @@ const Cart: FC<CartType> = () => {
     const router = useRouter();
     const [coupon, setCoupon] = useState('');
     
+    
     const [shippingObj, setShippingObj] = useState({
         cartshippingFirstName: "",
         cartshippingLastName: "",
@@ -73,6 +82,7 @@ const Cart: FC<CartType> = () => {
             const res = await http.get(`/users/${id}`);
             console.log(res.data)
             const data = res.data;
+
             setFirstName(data.shippingAddress.shippingFirstName);
             setLastName(data.shippingAddress.shippingLastName);
             setCompanyName(data.shippingAddress.shippingCompanyName);
@@ -166,6 +176,24 @@ const Cart: FC<CartType> = () => {
 
    }
 
+   const componentRef = useRef(null);
+   const handlePrint = useReactToPrint({
+     content: () => componentRef.current,
+   });
+
+   const handleDownload = async () => {
+
+
+    // const divElement = componentRef.current;
+
+    // html2canvas(divElement).then((canvas:any) => {
+    //   const imageData = canvas.toDataURL('image/png');
+    //   const pdf = new jsPDF();
+    //   pdf.addImage(imageData, 'PNG', 0, 0);
+    //   pdf.save('My Shopping List.pdf');
+    // });
+  };
+
     return (
         <div className="px-3.5 container mx-auto mt-24 mb-20">
             <div>
@@ -179,7 +207,7 @@ const Cart: FC<CartType> = () => {
                             <hr className="h-2 rounded-md bg-[#ed174a]" />
                         </div> */}
 
-                        <div className="mt-8">
+                        <div className="mt-8" ref={componentRef}>
                             {/* header */}
                             <div className="grid grid-cols-4 sm:grid-cols-12 gap-2 border-b border-[#71778e] pb-3">
                                 <div className="text-xs sm:col-span-2"></div>
@@ -208,7 +236,11 @@ const Cart: FC<CartType> = () => {
                                 <button className="bg-[#233a95] text-white py-2.5 px-4 rounded-md text-xs h-11 w-40" onClick={handlecoupon}>Apply coupon</button>
                             </div>
 
-                            <div><button className="bg-[#233a95] text-white py-2.5 px-4 rounded-md text-xs h-11 w-[104px] hidden md:block" onClick={handleClear}>Remove All</button></div>
+                            <div className="inline-flex gap-2">
+                            <button className="bg-[#233a95] text-white py-2.5 px-4 rounded-md text-xs h-11" onClick={handleDownload}>Download</button>
+                            <button className="bg-[#233a95] text-white py-2.5 px-4 rounded-md text-xs h-11" onClick={handlePrint}>Print</button>
+                                <button className="bg-[#233a95] text-white py-2.5 px-4 rounded-md text-xs h-11 w-[104px] hidden md:block" onClick={handleClear}>Remove All</button>
+                            </div>
                         </section>
                     </div>
                     <div>
@@ -336,6 +368,7 @@ const Cart: FC<CartType> = () => {
 
                 </div>
             </div>
+            
 
         </div>
     );

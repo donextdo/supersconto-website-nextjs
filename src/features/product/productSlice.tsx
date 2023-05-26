@@ -9,12 +9,14 @@ interface ProductsState {
   products: Product[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
+  cnt: number;
 }
 
 const initialState: ProductsState = {
   products: [],
   status: "idle",
   error: null,
+  cnt: 2
 };
 const PRODUCTS_URL = `/product/getAll/`;
 
@@ -43,7 +45,9 @@ export const productSlice = createSlice({
       );
       if (product) {
         product.count = action.payload.count;
+console.log(state.products)
       }
+
     },
   },
   extraReducers: (builder) => {

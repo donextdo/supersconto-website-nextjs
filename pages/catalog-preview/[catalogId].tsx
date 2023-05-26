@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import requests from "../../utils/request";
 import SingleItemPreview from "../../src/components/Catalog/SingleItemPreview";
 import Slider from "react-slick";
@@ -14,6 +14,10 @@ import Draggable from "../../src/components/Draggable/Draggable";
 import { RiShoppingCart2Fill } from "react-icons/ri";
 import logo from '../../assets//logo/logo.png'
 import NavbarCartModal from '../../src/components/Cart/NavbarCartModal';
+import { SlHandbag } from 'react-icons/sl';
+import CartPopup from '../../src/features/cart/popup-cart/CartPopup';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../src/redux/store';
 
 
 
@@ -36,6 +40,9 @@ const CatalogCarousel: React.FC<Props> = ({ catalog }) => {
     const [windowInfo, setWindowInfo] = useState({ width: 0, height: 0 })
     const [showCart, setShowCart] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
+    const [changecolor, setChangecolor] = useState(false)
+    const [cart, setCart] = useState(false);
+    const totalCount = useSelector((state: RootState) => state.cart.totalCount);
 
 
 
@@ -53,19 +60,19 @@ const CatalogCarousel: React.FC<Props> = ({ catalog }) => {
     }, [catalog])
 
     useEffect(() => {
-        function handleClickOutside(event:any) {
-          if (ref.current && !ref.current.contains(event.target)) {
-            setShowCart(false);
-          }
+        function handleClickOutside(event: any) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                setShowCart(false);
+            }
         }
-      
+
         document.addEventListener("mousedown", handleClickOutside);
-      
+
         return () => {
-          document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("mousedown", handleClickOutside);
         };
-      }, [ref]);
-     
+    }, [ref]);
+
     //   const getItemCount = () => {
     //     let count = 0
     //     let totol = 0
@@ -90,6 +97,15 @@ const CatalogCarousel: React.FC<Props> = ({ catalog }) => {
 
     console.log(windowInfo)
 
+    const handleClick = () => {
+        // setCart(!cart)
+    };
+    const hnadleEnter = () => {
+        setCart(true);
+    };
+    const handleLeave = () => {
+        setCart(false);
+    };
     return (
         <div className="catalog-page">
             <div className="catalog-header">
@@ -99,15 +115,30 @@ const CatalogCarousel: React.FC<Props> = ({ catalog }) => {
                         <p>{catalog[0].title}</p>
                         <p>Expire Date -{formattedDate}</p>
                     </div>
-                    <div>
-                        <button className="text-4xl" onClick={handleCart} ><RiShoppingCart2Fill className='text-green-800' /></button>
-                        {/* <b>{getItemCount()}</b> */}
-                    </div >
-                    
-                    {showCart && 
+                    <div
+                        className="relative mr-2"
+                        onMouseEnter={hnadleEnter}
+                        onMouseLeave={handleLeave}
+                    >
+                        <button
+                            className="border border-[#fff1ee] bg-[#fff1ee] rounded-full p-2"
+                            onClick={handleClick}
+                        >
+                            <SlHandbag className="text-2xl text-[#ea2b0f]" />
+                        </button>
+
+                        {cart && <CartPopup setCart={setCart} />}
+                        {totalCount > 0 && (
+                            <div className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full h-5 w-5 flex items-center justify-center">
+                                {totalCount}
+                            </div>
+                        )}
+                    </div>
+
+                    {showCart &&
                         <NavbarCartModal ref={ref} />
                     }
-                    
+
                 </div>
             </div>
             <div className="catalog-component">
@@ -142,9 +173,9 @@ const CatalogCarousel: React.FC<Props> = ({ catalog }) => {
                     ))
                 }
             </Slider>*/}
-                <Draggable pages={pages} setShowModal={setShowModal} />
+                <Draggable pages={pages} setShowModal={setShowModal} changecolor={changecolor} />
 
-                {showModal.show && showModal.item && <AddToCartModal item={showModal.item}
+                {showModal.show && showModal.item && <AddToCartModal item={showModal.item} setChangecolor={setChangecolor}
                     handler={() => setShowModal(prevState => ({
                         ...prevState,
                         show: false
