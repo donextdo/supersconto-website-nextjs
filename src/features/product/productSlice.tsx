@@ -9,21 +9,19 @@ interface ProductsState {
   products: Product[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
-  cnt: number;
 }
 
 const initialState: ProductsState = {
   products: [],
   status: "idle",
   error: null,
-  cnt: 2
 };
 const PRODUCTS_URL = `/product/getAll/`;
 
 export const fetchProducts = createAsyncThunk(
   "product/fetchProducts",
   async () => {
-    const response = await http.get("http://localhost:3000/v1/api/catelog/item");
+    const response = await http.get("/catelog/item");
     console.log(response.data)
     return response.data;
   }
@@ -45,7 +43,7 @@ export const productSlice = createSlice({
       );
       if (product) {
         product.count = action.payload.count;
-console.log(state.products)
+
       }
 
     },
