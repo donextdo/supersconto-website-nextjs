@@ -16,8 +16,13 @@ const CartPopupCard = ({ item }: any) => {
     }
     
     let discountprice;
-    discountprice = item.unit_price * (item.discount/100)
+    if (typeof item.discount === 'undefined') {
+        discountprice = 0;
+      } else {
+        discountprice = item.unit_price * (item.discount / 100);
+      }
   let newprice=item.unit_price-discountprice
+  console.log(item.discount)
     return (
         <div className=" grid grid-cols-3 w-[258px] mb-4 pt-2 relative">
             <div className="text-left h-20  border-b border-[#e3e4e6] ">

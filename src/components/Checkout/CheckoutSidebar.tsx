@@ -1,6 +1,10 @@
 const CheckoutSidebar = ({item}:any) => {
     let discountprice;
-    discountprice = item.unit_price * (item.discount/100)
+    if (typeof item.discount === 'undefined') {
+        discountprice = 0;
+      } else {
+        discountprice = item.unit_price * (item.discount / 100);
+      }
   let newprice=item.unit_price-discountprice
 
  let subtotal = (item.count) * (newprice)
