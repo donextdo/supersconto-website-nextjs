@@ -209,9 +209,16 @@ const handlePhoneChange = (e:any) => {
 // };
 
     let totalAmount = 0
+    let subtotal = 0
     for (let i = 0; i < cartItems.length; i++) {
         let item = cartItems[i];
-        let subtotal = item.count * (item.unit_price - (item.unit_price * (item.discount/100)));
+        if (typeof item.discount === 'undefined') {
+            subtotal = item.count * (item.unit_price - item.unit_price * (0 / 100));
+     
+         } else {
+            subtotal = item.count * (item.unit_price - item.unit_price * (item.discount / 100));
+           ;
+         }
         totalAmount += subtotal;
     }
 

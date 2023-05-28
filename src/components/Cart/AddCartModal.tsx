@@ -43,13 +43,16 @@ interface Item {
 interface Props {
     item: Item,
     handler: MouseEventHandler<HTMLButtonElement>
+    setChangecolor : any
+    
 }
 
-const AddToCartModal: React.FC<Props> = ({ item, handler }) => {
+const AddToCartModal: React.FC<Props> = ({ item, handler, setChangecolor }) => {
     // const [count, setCount] = useState(1);
     const dispatch = useDispatch();
     const products = useSelector((state: RootState) => state.product.products) as Product[];
 
+    
 
     // useEffect(() => {
     //     const cartItems: [any] = JSON.parse(localStorage.getItem("cartItems")!) ?? []
@@ -59,11 +62,15 @@ const AddToCartModal: React.FC<Props> = ({ item, handler }) => {
     //         setCount(product.quantity >= item.quantity ? item.quantity : product.quantity)
     //     }
     // }, [item])
-    const prodcutone:any = products.find((item) => item._id === item._id);
+    console.log(item)
+
+   const prodcutone:any = products.find((product) => product._id === item._id);
+    console.log(prodcutone)
+
 
 
     useEffect(()=>{
-        console.log(item)
+        
     })
 
     const decreaseClick = () => {
@@ -72,7 +79,7 @@ const AddToCartModal: React.FC<Props> = ({ item, handler }) => {
         // } else {
         //     setCount(0);
         // }
-        const newQuantity = Math.max((prodcutone.count || 0) - 1, 0);
+        const newQuantity = Math.max((prodcutone?.count || 0) - 1, 0);
         dispatch(updateItemQuantity({ itemId: item._id, count: newQuantity }));
         dispatch(
             updateProductQuantity({ productId: item._id, count: newQuantity })
@@ -90,7 +97,7 @@ const AddToCartModal: React.FC<Props> = ({ item, handler }) => {
         //     }
         //     return prevState + 1
         // });
-        const newQuantity = (prodcutone .count || 0) + 1;
+        const newQuantity = (prodcutone?.count || 0) + 1;
         dispatch(updateItemQuantity({ itemId: item._id, count: newQuantity }));
         dispatch(
             updateProductQuantity({ productId: item._id, count: newQuantity })
@@ -145,7 +152,7 @@ const AddToCartModal: React.FC<Props> = ({ item, handler }) => {
                             </div> */}
                         </div>
 
-                        <div className="mt-5 text-lg ">${item.unit_price * prodcutone.count || 0}</div>
+                        <div className="mt-5 text-lg ">${item.unit_price * prodcutone?.count || 0}</div>
 
                         <div className=" mt-10 mb-5 md:mt-10 md:mb-0">
                         {/* { (item.count ==undefined || item.count<1) && (
@@ -168,7 +175,7 @@ const AddToCartModal: React.FC<Props> = ({ item, handler }) => {
                                 Add to cart
                             </button>
                             )} */}
-                             { (prodcutone.count ==undefined || prodcutone.count<1) && (
+                             { (prodcutone?.count ==undefined || prodcutone?.count<1) && (
                             <button  className="disabled:opacity-50 bg-[#8DC14F]  px-2 py-[8px] rounded w-full" onClick={(e) => {
                                 // const cartItems: [any] = JSON.parse(localStorage.getItem("cartItems")!) ?? []
                                 // const product = cartItems.find(it => it._id === item._id)
@@ -180,15 +187,27 @@ const AddToCartModal: React.FC<Props> = ({ item, handler }) => {
                                 // localStorage.setItem("cartItems", JSON.stringify(cartItems))
                                 // handler(e);
                                 dispatch(addItem(item));
-                                const newQuantity = (prodcutone.count || 0) + 1;
+                                const newQuantity = (prodcutone?.count || 0) + 1;
                                 dispatch(
                                     updateProductQuantity({ productId: item._id, count: newQuantity })
                                 );
+                                console.log(prodcutone?.count)
+
+                                setChangecolor(true)
+                                const map = new Map();
+    map.set('product_id', prodcutone?._id);
+    map.set('isClicked', true);
+
+    // Convert the map to a string using JSON serialization
+    const mapString = JSON.stringify(Array.from(map.entries()));
+
+    // Save the map string in the session storage
+    sessionStorage.setItem('mapData', mapString);
                             }}>
                                 Add to cart
                             </button>
                             )}
-                            {prodcutone.count >= 1 && (
+                            {prodcutone?.count >= 1 && (
                             <div className="flex flex-raw ">
                                 <div>
                                     <button
@@ -199,7 +218,7 @@ const AddToCartModal: React.FC<Props> = ({ item, handler }) => {
                                     </button>
                                 </div>
                                 <div>
-                                    <p className="w-10 text-lg text-center bg-gray-300">{prodcutone.count}</p>
+                                    <p className="w-10 text-lg text-center bg-gray-300">{prodcutone?.count}</p>
                                 </div>
                                 <div>
                                     <button

@@ -21,7 +21,7 @@ const PRODUCTS_URL = `/product/getAll/`;
 export const fetchProducts = createAsyncThunk(
   "product/fetchProducts",
   async () => {
-    const response = await http.get("http://localhost:3000/v1/api/catelog/item");
+    const response = await http.get("/catelog/item");
     console.log(response.data)
     return response.data;
   }
@@ -43,7 +43,9 @@ export const productSlice = createSlice({
       );
       if (product) {
         product.count = action.payload.count;
+
       }
+
     },
   },
   extraReducers: (builder) => {

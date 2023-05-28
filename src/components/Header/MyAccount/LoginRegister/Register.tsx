@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { http } from "../../../../../utils/request";
 import { useRouter } from "next/router";
 
-import {
-  POSITION,
-  position,
-} from "html2canvas/dist/types/css/property-descriptors/position";
+// import {
+//   POSITION,
+//   position,
+// } from "html2canvas/dist/types/css/property-descriptors/position";
 import Swal from "sweetalert2";
 
 type FormValues = {

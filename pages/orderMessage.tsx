@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useRouter } from 'next/router';
 import { http } from "../utils/request";
+import Header from "../src/components/Header/Header";
 
 interface Order {
   orderId: string;
@@ -142,9 +143,10 @@ const OrderMessage = () => {
   }
 
   return (
-
-    <div className="mx-4">
-      <div className="w-full border-2 border-dashed border-[#00b853] text-lg md:text-2xl leading-5 md:leading-6 py-3 md:py-8 px-3 md:px-10 my-20 text-center font-medium bg-white" style={{ color: '#00b853' }}>
+    <>
+    <Header />
+    <div className="mx-16"> 
+      <div className="w-full mt-24 border-2 border-dashed border-[#00b853] text-lg md:text-2xl leading-5 md:leading-6 py-3 md:py-8 px-3 md:px-10 my-20 text-center font-medium bg-white" style={{ color: '#00b853' }}>
         Thank you. Your order has been received.
       </div>
       <div className="border shadow-md p-5 grid grid-cols-5 bg-white">
@@ -233,6 +235,7 @@ const OrderMessage = () => {
       {/* )} */}
 
     </div>
+    </>
   );
 }
 
