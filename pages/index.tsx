@@ -62,7 +62,7 @@ const Home: React.FC<Props> = ({ catalogs, shops, items ,news, categories}) => {
     // console.log(shops)
     return (
 
-        <div>
+        <div className="container mx-auto">
             <Header/>
             <Main catalogs={catalogs}/>
             <Ad />

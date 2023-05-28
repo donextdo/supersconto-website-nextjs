@@ -13,17 +13,21 @@ const ProductList = () => {
   ) as Product[];
   useEffect(() => {
     dispatch(fetchProducts());
-
-    console.log("data ", products);
-    console.log(products);
   }, [dispatch]);
   return ( 
+    
       <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
-            {products.map((product)=>(
-                <ProductCard key={product._id} product={product}/>
+            {products.slice(0, 10).map((product)=>(
+              
+
+             
+                <ProductCard key={product._id} product={product}/> 
+
+
             ))}
 
         </div>
+ 
    );
 }
  
